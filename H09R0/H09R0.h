@@ -83,7 +83,8 @@ typedef enum
 {
   H09R0_OK = 0,
 	H09R0_ERR_UnknownMessage = 1,
-} H09R0_Status;
+	H09R0_ERROR = 255
+} Module_Status;
 
 /* Indicator LED */
 #define _IND_LED_PORT		GPIOC
@@ -119,11 +120,9 @@ extern uint8_t SSR_State, SSRindMode;
    ----------------------------------------------------------------------- 
 */
 
-extern void H09R0_Init(void);
-extern H09R0_Status H09R0_MessagingTask(uint16_t code, uint8_t port, uint8_t src, uint8_t dst);
-extern H09R0_Status SSR_on(uint32_t timeout);
-extern H09R0_Status SSR_off(void);
-extern H09R0_Status SSR_toggle(void);
+extern Module_Status SSR_on(uint32_t timeout);
+extern Module_Status SSR_off(void);
+extern Module_Status SSR_toggle(void);
 
 
 /* -----------------------------------------------------------------------

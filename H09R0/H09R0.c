@@ -82,11 +82,30 @@ const CLI_Command_Definition_t ledModeCommandDefinition =
    ----------------------------------------------------------------------- 
 */
 
+/* --- H09R0 module initialization --- 
+*/
+void Module_Init(void)
+{	
+	
+	/* Array ports */
+  MX_USART1_UART_Init();
+  MX_USART2_UART_Init();
+  MX_USART3_UART_Init();
+  MX_USART5_UART_Init();
+	MX_USART6_UART_Init();
+	
+	/* SSR GPIO */
+	SSR_Init();
+  
+}
+
+/*-----------------------------------------------------------*/
+
 /* --- H09R0 message processing task. 
 */
-H09R0_Status H09R0_MessagingTask(uint16_t code, uint8_t port, uint8_t src, uint8_t dst)
+Module_Status Module_MessagingTask(uint16_t code, uint8_t port, uint8_t src, uint8_t dst)
 {
-	H09R0_Status result = H09R0_OK;
+	Module_Status result = H09R0_OK;
 	
 	switch (code)
 	{
@@ -97,6 +116,26 @@ H09R0_Status H09R0_MessagingTask(uint16_t code, uint8_t port, uint8_t src, uint8
 	}			
 
 	return result;	
+}
+
+/*-----------------------------------------------------------*/
+
+/* --- Get the port for a given UART. 
+*/
+uint8_t GetPort(UART_HandleTypeDef *huart)
+{
+	if (huart->Instance == USART5)
+			return P1;
+	else if (huart->Instance == USART2)
+			return P2;
+	else if (huart->Instance == USART6)
+			return P3;
+	else if (huart->Instance == USART3)
+			return P4;
+	else if (huart->Instance == USART1)
+			return P5;
+		
+	return 0;
 }
 
 /*-----------------------------------------------------------*/
@@ -116,30 +155,11 @@ void SSRTimerCallback( TimerHandle_t xTimer )
    ----------------------------------------------------------------------- 
 */
 
-/* --- H09R0 module initialization --- 
-*/
-void H09R0_Init(void)
-{	
-	
-	/* Array ports */
-  MX_USART1_UART_Init();
-  MX_USART2_UART_Init();
-  MX_USART3_UART_Init();
-  MX_USART5_UART_Init();
-	MX_USART6_UART_Init();
-	
-	/* SSR GPIO */
-	SSR_Init();
-  
-}
-
-/*-----------------------------------------------------------*/
-
 /* --- Turn on the solid state relay ---
 */
-H09R0_Status SSR_on(uint32_t timeout)
+Module_Status SSR_on(uint32_t timeout)
 {	
-	H09R0_Status result = H09R0_OK;	
+	Module_Status result = H09R0_OK;	
 	TimerHandle_t xTimer = NULL;
 	
 	HAL_GPIO_WritePin(_SSR_PORT,_SSR_PIN,GPIO_PIN_SET);
@@ -167,9 +187,9 @@ H09R0_Status SSR_on(uint32_t timeout)
 
 /* --- Turn off the solid state relay ---
 */
-H09R0_Status SSR_off(void)
+Module_Status SSR_off(void)
 {	
-	H09R0_Status result = H09R0_OK;	
+	Module_Status result = H09R0_OK;	
 	
 	HAL_GPIO_WritePin(_SSR_PORT,_SSR_PIN,GPIO_PIN_RESET);
 	
@@ -188,9 +208,9 @@ H09R0_Status SSR_off(void)
 
 /* --- Toggle the solid state relay ---
 */
-H09R0_Status SSR_toggle(void)
+Module_Status SSR_toggle(void)
 {	
-	H09R0_Status result = H09R0_OK;	
+	Module_Status result = H09R0_OK;	
 	
 	if (SSR_State) 
 		result = SSR_off();
@@ -209,7 +229,7 @@ H09R0_Status SSR_toggle(void)
 
 portBASE_TYPE onCommand( int8_t *pcWriteBuffer, size_t xWriteBufferLen, const int8_t *pcCommandString )
 {
-	H09R0_Status result = H09R0_OK;
+	Module_Status result = H09R0_OK;
 	
 	int8_t *pcParameterString1; portBASE_TYPE xParameterStringLength1 = 0; 
 	uint32_t timeout = 0;
@@ -251,7 +271,7 @@ portBASE_TYPE onCommand( int8_t *pcWriteBuffer, size_t xWriteBufferLen, const in
 
 portBASE_TYPE offCommand( int8_t *pcWriteBuffer, size_t xWriteBufferLen, const int8_t *pcCommandString )
 {
-	H09R0_Status result = H09R0_OK;
+	Module_Status result = H09R0_OK;
 	
 	static const int8_t *pcMessage = ( int8_t * ) "Solid state relay is turned off\r\n";
 	
@@ -278,7 +298,7 @@ portBASE_TYPE offCommand( int8_t *pcWriteBuffer, size_t xWriteBufferLen, const i
 
 portBASE_TYPE toggleCommand( int8_t *pcWriteBuffer, size_t xWriteBufferLen, const int8_t *pcCommandString )
 {
-	H09R0_Status result = H09R0_OK;
+	Module_Status result = H09R0_OK;
 	
 	static const int8_t *pcOK1Message = ( int8_t * ) "Solid state relay is turned on\r\n";
 	static const int8_t *pcOK0Message = ( int8_t * ) "Solid state relay is turned off\r\n";
