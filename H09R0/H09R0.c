@@ -44,7 +44,7 @@ portBASE_TYPE ledModeCommand( int8_t *pcWriteBuffer, size_t xWriteBufferLen, con
 const CLI_Command_Definition_t onCommandDefinition =
 {
 	( const int8_t * ) "on", /* The command string to type. */
-	( const int8_t * ) "(H09R0) on:\r\n Turn solid state relay on with a timeout (ms) (1st par.)\r\n\r\n",
+	( const int8_t * ) "(H09R0) on:\r\n Turn solid state relay on with a timeout (ms) (1st par.). Use 'inf' to turn on constantly\r\n\r\n",
 	onCommand, /* The function to run. */
 	1 /* One parameter is expected. */
 };
@@ -249,7 +249,11 @@ portBASE_TYPE onCommand( int8_t *pcWriteBuffer, size_t xWriteBufferLen, const in
 									1,						/* Return the first parameter. */
 									&xParameterStringLength1	/* Store the parameter string length. */
 								);
-	timeout = ( uint32_t ) atol( ( char * ) pcParameterString1 );
+	
+	if (!strcmp( ( char * ) pcParameterString1, "inf") || !strcmp( ( char * ) pcParameterString1, "INF"))
+		timeout = portMAX_DELAY;
+	else
+		timeout = ( uint32_t ) atol( ( char * ) pcParameterString1 );
 	
 	result = SSR_on(timeout);	
 	

@@ -13,7 +13,11 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "BOS.h"
-
+#include "H09R0_uart.h"	
+#include "H09R0_gpio.h"	
+#include "H09R0_dma.h"	
+	
+	
 /* Exported definitions -------------------------------------------------------*/
 
 #define	modulePN		_H09R0
@@ -88,7 +92,7 @@ typedef enum
 
 /* Indicator LED */
 #define _IND_LED_PORT		GPIOC
-#define _IND_LED_PIN		GPIO_PIN_15
+#define _IND_LED_PIN		GPIO_PIN_14
 
 
 /* Export UART variables */
