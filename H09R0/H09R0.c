@@ -166,7 +166,7 @@ Module_Status SSR_on(uint32_t timeout)
 	
 	/* Indicator LED */
 	if (SSRindMode) {
-		IND_on();
+		IND_ON();
 	}
 	
 	/* Timeout */
