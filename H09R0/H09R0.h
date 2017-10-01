@@ -116,6 +116,9 @@ extern uint8_t SSR_State, SSRindMode;
    ----------------------------------------------------------------------- 
 */
 
+#define	CODE_H09R0_ON							900
+#define	CODE_H09R0_OFF						901
+#define	CODE_H09R0_TOGGLE					902
 
 
 	

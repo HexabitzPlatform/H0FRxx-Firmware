@@ -25,7 +25,7 @@ UART_HandleTypeDef huart5;
 UART_HandleTypeDef huart6;
 
 uint8_t SSR_State = 0, SSRindMode = 0;
-
+uint32_t temp32;
 
 /* Private variables ---------------------------------------------------------*/
 
@@ -105,11 +105,23 @@ void Module_Init(void)
 */
 Module_Status Module_MessagingTask(uint16_t code, uint8_t port, uint8_t src, uint8_t dst)
 {
-	Module_Status result = H09R0_OK;
+	Module_Status result = H09R0_OK; 
 	
 	switch (code)
 	{
-
+		case CODE_H09R0_ON :
+			temp32 = ( (uint32_t) cMessage[port-1][4] << 24 ) + ( (uint32_t) cMessage[port-1][5] << 16 ) + ( (uint32_t) cMessage[port-1][6] << 8 ) + cMessage[port-1][7];						
+			SSR_on(temp32);
+			break;
+		
+		case CODE_H09R0_OFF :
+			SSR_off();
+			break;
+		
+		case CODE_H09R0_TOGGLE :
+			SSR_toggle();
+			break;
+			
 		default:
 			result = H09R0_ERR_UnknownMessage;
 			break;
