@@ -79,14 +79,22 @@
 #define	USART6_AF				GPIO_AF5_USART6
 
 /* Module-specific Definitions */
-#define	_SSR_PIN			GPIO_PIN_0
-#define	_SSR_PORT			GPIOB
+#define	_SSR_PIN						GPIO_PIN_0
+#define	_SSR_PORT						GPIOB
+#define _SSR_TIM_CH					TIM_CHANNEL_3
+#define _SSR_GPIO_CLK()			__GPIOB_CLK_ENABLE();
+#define PWM_TIMER_CLOCK			16000000
+#define SSR_PWM_DEF_FREQ				24000
+#define SSR_PWM_DEF_PERIOD			((float) (1/SSR_PWM_FREQ) )
+	
+typedef enum  { STATE_OFF, STATE_ON, STATE_PWM } SSR_state_t; 
 
 /* H01R0_Status Type Definition */  
 typedef enum 
 {
   H09R0_OK = 0,
 	H09R0_ERR_UnknownMessage = 1,
+	H09R0_ERR_Wrong_Value = 2,
 	H09R0_ERROR = 255
 } Module_Status;
 
@@ -109,7 +117,8 @@ extern void MX_USART3_UART_Init(void);
 extern void MX_USART5_UART_Init(void);
 extern void MX_USART6_UART_Init(void);
 
-extern uint8_t SSR_State, SSRindMode;
+extern SSR_state_t SSR_State; 
+extern uint8_t SSRindMode;
 
 /* -----------------------------------------------------------------------
 	|														Message Codes	 														 	|
@@ -130,7 +139,7 @@ extern uint8_t SSR_State, SSRindMode;
 extern Module_Status SSR_on(uint32_t timeout);
 extern Module_Status SSR_off(void);
 extern Module_Status SSR_toggle(void);
-
+extern Module_Status SSR_PWM(float dutyCycle);
 
 /* -----------------------------------------------------------------------
 	|															Commands																 	|

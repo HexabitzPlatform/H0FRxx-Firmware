@@ -92,11 +92,17 @@ int main(void)
 /* FrontEndTask function */
 void FrontEndTask(void * argument)
 {
+	float dc = 0;
 	
   /* Infinite loop */
   for(;;)
   {
-
+		
+		SSR_PWM(dc++);
+		
+		if (dc > 100)	dc = 0;
+		
+		Delay_ms(30);
   }	
 
 }

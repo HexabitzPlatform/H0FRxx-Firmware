@@ -9,7 +9,8 @@
 		Required MCU resources : 
 		
 			>> USARTs 1,2,3,5,6 for module ports.
-			>> PB0 for AQH3213A.
+			>> Timer 3 (Ch3) for SSR PWM.
+			>> GPIOB 0 for SSR.
 			
 */
 	
@@ -24,14 +25,19 @@ UART_HandleTypeDef huart3;
 UART_HandleTypeDef huart5;
 UART_HandleTypeDef huart6;
 
-uint8_t SSR_State = 0, SSRindMode = 0;
-uint32_t temp32;
+TIM_HandleTypeDef htim3;
+
+SSR_state_t SSR_State = STATE_OFF, SSR_OldState = STATE_OFF; uint8_t SSRindMode = 0;
+uint32_t temp32; float SSR_OldDC;
 
 /* Private variables ---------------------------------------------------------*/
 
 
 /* Private function prototypes -----------------------------------------------*/	
 void SSRTimerCallback( TimerHandle_t xTimer );
+Module_Status Set_SSR_PWM(uint32_t freq, float dutycycle);
+void TIM3_Init(void);
+void TIM3_DeInit(void);
 
 /* Create CLI commands --------------------------------------------------------*/
 
@@ -93,6 +99,9 @@ void Module_Init(void)
   MX_USART3_UART_Init();
   MX_USART5_UART_Init();
 	MX_USART6_UART_Init();
+	
+	/* SSR PWM Timer - define in Set_SSR_PWM */
+	//TIM3_Init();
 	
 	/* SSR GPIO */
 	SSR_Init();
@@ -161,6 +170,93 @@ void SSRTimerCallback( TimerHandle_t xTimer )
 
 /*-----------------------------------------------------------*/	
 
+/* TIM3 init function - SSR PWM Timer 16-bit 
+*/
+void TIM3_Init(void)
+{
+	GPIO_InitTypeDef GPIO_InitStruct;
+  TIM_ClockConfigTypeDef sClockSourceConfig;
+  TIM_MasterConfigTypeDef sMasterConfig;
+  TIM_OC_InitTypeDef sConfigOC;
+	
+	/* Peripheral clock enable */
+  __TIM3_CLK_ENABLE();
+	
+	/**TIM3 GPIO Configuration    
+	*/
+	GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+	GPIO_InitStruct.Pull = GPIO_NOPULL;
+	GPIO_InitStruct.Speed = GPIO_SPEED_HIGH;
+	GPIO_InitStruct.Pin = _SSR_PIN;
+	GPIO_InitStruct.Alternate = GPIO_AF1_TIM3;
+	HAL_GPIO_Init(_SSR_PORT, &GPIO_InitStruct);
+	
+	/* Peripheral interrupt init */
+	HAL_NVIC_SetPriority(TIM3_IRQn, 0, 0);
+	HAL_NVIC_EnableIRQ(TIM3_IRQn);
+
+	/* Timer base configuration - 1 MHz */
+  htim3.Instance = TIM3;
+  htim3.Init.Prescaler = (uint32_t)(HAL_RCC_GetSysClockFreq()/PWM_TIMER_CLOCK) - 1;
+  htim3.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim3.Init.Period = 0;
+  htim3.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  HAL_TIM_Base_Init(&htim3);
+
+	/* Timer PWM configuration */
+  sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
+  HAL_TIM_ConfigClockSource(&htim3, &sClockSourceConfig);
+  HAL_TIM_PWM_Init(&htim3);
+
+  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+  HAL_TIMEx_MasterConfigSynchronization(&htim3, &sMasterConfig);
+
+	/* Timer PWM channels */
+  sConfigOC.OCMode = TIM_OCMODE_PWM1;
+  sConfigOC.Pulse = 0;
+  sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
+  sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
+  HAL_TIM_PWM_ConfigChannel(&htim3, &sConfigOC, _SSR_TIM_CH);
+
+}
+
+/*-----------------------------------------------------------*/	
+
+/* TIM3 Deinit function - SSR PWM Timer 16-bit 
+*/
+void TIM3_DeInit(void)
+{
+	HAL_NVIC_DisableIRQ(TIM3_IRQn);
+	HAL_TIM_Base_DeInit(&htim3);
+	HAL_TIM_PWM_DeInit(&htim3);
+	__TIM3_CLK_DISABLE();
+}
+
+/*-----------------------------------------------------------*/
+
+/* --- Set SSR PWM frequency and dutycycle ---
+*/
+Module_Status Set_SSR_PWM(uint32_t freq, float dutycycle)
+{	
+	Module_Status result = H09R0_OK;	
+	uint32_t ARR = PWM_TIMER_CLOCK / freq;
+	
+	if (SSR_State != STATE_PWM)	TIM3_Init();
+	
+	/* PWM period */
+	htim3.Instance->ARR = ARR - 1;
+	
+	/* PWM duty cycle */
+	htim3.Instance->CCR3 = ((float)dutycycle/100.0f) * ARR;
+
+	if (HAL_TIM_PWM_Start(&htim3, _SSR_TIM_CH) != HAL_OK)	
+		return	H09R0_ERROR;
+	
+	return result;
+}
+
+/*-----------------------------------------------------------*/
 
 /* -----------------------------------------------------------------------
 	|																APIs	 																 	|
@@ -173,13 +269,20 @@ Module_Status SSR_on(uint32_t timeout)
 {	
 	Module_Status result = H09R0_OK;	
 	TimerHandle_t xTimer = NULL;
+
+	/* Turn off PWM and re-initialize GPIO if needed */
+	if (SSR_State == STATE_PWM) 
+	{
+		HAL_TIM_PWM_Stop(&htim3, _SSR_TIM_CH);
+		TIM3_DeInit();
+		SSR_Init();
+	}	
 	
+	/* Turn on */
 	HAL_GPIO_WritePin(_SSR_PORT,_SSR_PIN,GPIO_PIN_SET);
 	
 	/* Indicator LED */
-	if (SSRindMode) {
-		IND_ON();
-	}
+	if (SSRindMode) IND_ON();
 	
 	/* Timeout */
 	if (timeout != portMAX_DELAY) {
@@ -190,7 +293,7 @@ Module_Status SSR_on(uint32_t timeout)
 	}
 	
 	/* Update SSR state */
-	SSR_State = 1;
+	SSR_State = STATE_ON;
 	
 	return result;
 }
@@ -203,15 +306,22 @@ Module_Status SSR_off(void)
 {	
 	Module_Status result = H09R0_OK;	
 	
+	/* Turn off PWM and re-initialize GPIO if needed */
+	if (SSR_State == STATE_PWM) 
+	{
+		HAL_TIM_PWM_Stop(&htim3, _SSR_TIM_CH);
+		TIM3_DeInit();
+		SSR_Init();
+	}	
+	
+	/* Turn off */
 	HAL_GPIO_WritePin(_SSR_PORT,_SSR_PIN,GPIO_PIN_RESET);
 	
 	/* Indicator LED */
-	if (SSRindMode) {
-		IND_OFF();
-	}	
+	if (SSRindMode) IND_OFF();
 
 	/* Update SSR state */
-	SSR_State = 0;
+	SSR_State = STATE_OFF;
 	
 	return result;
 }
@@ -225,9 +335,44 @@ Module_Status SSR_toggle(void)
 	Module_Status result = H09R0_OK;	
 	
 	if (SSR_State) 
+	{
+		SSR_OldState = SSR_State;
 		result = SSR_off();
+	}
 	else 
-		result = SSR_on(portMAX_DELAY);
+	{
+		if (SSR_OldState == STATE_ON)
+			result = SSR_on(portMAX_DELAY);
+		else if (SSR_OldState == STATE_PWM)
+			result = SSR_PWM(SSR_OldDC);
+	}
+	
+	return result;
+}
+
+/*-----------------------------------------------------------*/
+
+/* --- Turn-on SSR with pulse-width modulation (PWM) ---
+				dutyCycle: PWM duty cycle in precentage (0 to 100)
+*/
+Module_Status SSR_PWM(float dutyCycle)
+{	
+	Module_Status result = H09R0_OK;	
+	
+	if ( dutyCycle < 0 || dutyCycle > 100 )
+		return H09R0_ERR_Wrong_Value;
+	
+	/* Start the PWM */
+	result = Set_SSR_PWM(SSR_PWM_DEF_FREQ, dutyCycle);
+	
+	if (result == H09R0_OK)
+	{
+		SSR_OldDC = dutyCycle;
+		/* Update SSR state */
+		SSR_State = STATE_PWM;		
+		/* Indicator LED */
+		if (SSRindMode) IND_ON();
+	}
 	
 	return result;
 }
