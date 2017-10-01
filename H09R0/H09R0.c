@@ -27,7 +27,7 @@ UART_HandleTypeDef huart6;
 
 TIM_HandleTypeDef htim3;
 
-SSR_state_t SSR_State = STATE_OFF, SSR_OldState = STATE_OFF; uint8_t SSRindMode = 0;
+SSR_state_t SSR_State = STATE_OFF, SSR_OldState = STATE_ON; uint8_t SSRindMode = 0;
 uint32_t temp32; float SSR_OldDC;
 
 /* Private variables ---------------------------------------------------------*/
@@ -293,7 +293,7 @@ Module_Status SSR_on(uint32_t timeout)
 	}
 	
 	/* Update SSR state */
-	SSR_State = STATE_ON;
+	SSR_State = STATE_ON; SSR_OldState = SSR_State;	
 	
 	return result;
 }
@@ -336,7 +336,6 @@ Module_Status SSR_toggle(void)
 	
 	if (SSR_State) 
 	{
-		SSR_OldState = SSR_State;
 		result = SSR_off();
 	}
 	else 
@@ -369,7 +368,7 @@ Module_Status SSR_PWM(float dutyCycle)
 	{
 		SSR_OldDC = dutyCycle;
 		/* Update SSR state */
-		SSR_State = STATE_PWM;		
+		SSR_State = STATE_PWM; SSR_OldState = SSR_State;			
 		/* Indicator LED */
 		if (SSRindMode) IND_ON();
 	}
