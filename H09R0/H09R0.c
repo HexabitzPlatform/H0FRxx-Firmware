@@ -26,7 +26,8 @@ UART_HandleTypeDef huart5;
 UART_HandleTypeDef huart6;
 
 TIM_HandleTypeDef htim3;
-
+TimerHandle_t xTimer = NULL;
+	
 SSR_state_t SSR_State = STATE_OFF, SSR_OldState = STATE_ON; uint8_t SSRindMode = 0;
 uint32_t temp32; float SSR_OldDC;
 
@@ -100,8 +101,8 @@ void Module_Init(void)
   MX_USART5_UART_Init();
 	MX_USART6_UART_Init();
 	
-	/* SSR PWM Timer - define in Set_SSR_PWM */
-	//TIM3_Init();
+	/* Create a timeout timer for SSR_on() API */
+	xTimer = xTimerCreate( "SSRTimer", pdMS_TO_TICKS(1000), pdFALSE, ( void * ) 1, SSRTimerCallback );	
 	
 	/* SSR GPIO */
 	SSR_Init();
@@ -268,7 +269,7 @@ Module_Status Set_SSR_PWM(uint32_t freq, float dutycycle)
 Module_Status SSR_on(uint32_t timeout)
 {	
 	Module_Status result = H09R0_OK;	
-	TimerHandle_t xTimer = NULL;
+
 
 	/* Turn off PWM and re-initialize GPIO if needed */
 	if (SSR_State == STATE_PWM) 
@@ -285,11 +286,12 @@ Module_Status SSR_on(uint32_t timeout)
 	if (SSRindMode) IND_ON();
 	
 	/* Timeout */
-	if (timeout != portMAX_DELAY) {
-		/* Create a timeout timer */
-		xTimer = xTimerCreate( "SSRTimer", pdMS_TO_TICKS(timeout), pdFALSE, ( void * ) 1, SSRTimerCallback );	
-		/* Start the timeout timer */
-		xTimerStart( xTimer, portMAX_DELAY );
+	if (timeout != portMAX_DELAY) 
+	{		
+		/* Stop the timer if it's already running */
+		if( xTimerIsTimerActive(xTimer) ) xTimerStop( xTimer, 100 );
+		/* Update timer timeout - This also restarts the timer */
+		xTimerChangePeriod( xTimer, pdMS_TO_TICKS(timeout), 100 );
 	}
 	
 	/* Update SSR state */
