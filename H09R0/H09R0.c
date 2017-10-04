@@ -29,7 +29,7 @@ TIM_HandleTypeDef htim3;
 TimerHandle_t xTimer = NULL;
 	
 SSR_state_t SSR_State = STATE_OFF, SSR_OldState = STATE_ON; uint8_t SSRindMode = 0;
-uint32_t temp32; float SSR_OldDC;
+uint32_t temp32; float tempFloat, SSR_OldDC;
 
 /* Private variables ---------------------------------------------------------*/
 
@@ -141,7 +141,13 @@ Module_Status Module_MessagingTask(uint16_t code, uint8_t port, uint8_t src, uin
 		case CODE_H09R0_TOGGLE :
 			SSR_toggle();
 			break;
-			
+		
+		case CODE_H09R0_PWM :
+			tempFloat = (float)( ((uint64_t)cMessage[port-1][4]<<0) + ((uint64_t)cMessage[port-1][5]<<8) + ((uint64_t)cMessage[port-1][6]<<16) + ((uint64_t)cMessage[port-1][7]<<24) + \
+													 ((uint64_t)cMessage[port-1][8]<<32) + ((uint64_t)cMessage[port-1][9]<<40) + ((uint64_t)cMessage[port-1][10]<<48) + ((uint64_t)cMessage[port-1][11]<<56) );
+			SSR_PWM(tempFloat);
+			break;
+		
 		default:
 			result = H09R0_ERR_UnknownMessage;
 			break;

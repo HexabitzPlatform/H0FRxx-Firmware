@@ -128,7 +128,7 @@ extern uint8_t SSRindMode;
 #define	CODE_H09R0_ON							900
 #define	CODE_H09R0_OFF						901
 #define	CODE_H09R0_TOGGLE					902
-
+#define	CODE_H09R0_PWM						903
 
 	
 /* -----------------------------------------------------------------------
