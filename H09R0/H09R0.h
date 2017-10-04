@@ -150,6 +150,7 @@ extern const CLI_Command_Definition_t onCommandDefinition;
 extern const CLI_Command_Definition_t offCommandDefinition;
 extern const CLI_Command_Definition_t toggleCommandDefinition;
 extern const CLI_Command_Definition_t ledModeCommandDefinition;
+extern const CLI_Command_Definition_t pwmCommandDefinition;
 
 
 #endif /* H09R0_H */

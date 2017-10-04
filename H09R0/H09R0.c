@@ -46,6 +46,7 @@ portBASE_TYPE onCommand( int8_t *pcWriteBuffer, size_t xWriteBufferLen, const in
 portBASE_TYPE offCommand( int8_t *pcWriteBuffer, size_t xWriteBufferLen, const int8_t *pcCommandString );
 portBASE_TYPE toggleCommand( int8_t *pcWriteBuffer, size_t xWriteBufferLen, const int8_t *pcCommandString );
 portBASE_TYPE ledModeCommand( int8_t *pcWriteBuffer, size_t xWriteBufferLen, const int8_t *pcCommandString );
+portBASE_TYPE pwmCommand( int8_t *pcWriteBuffer, size_t xWriteBufferLen, const int8_t *pcCommandString );
 
 /* CLI command structure : on */
 const CLI_Command_Definition_t onCommandDefinition =
@@ -80,6 +81,15 @@ const CLI_Command_Definition_t ledModeCommandDefinition =
 	( const int8_t * ) "ledMode", /* The command string to type. */
 	( const int8_t * ) "(H09R0) ledMode:\r\n Set solid state relay indicator LED mode ('on' or 'off') (1st par.)\r\n\r\n",
 	ledModeCommand, /* The function to run. */
+	1 /* One parameter is expected. */
+};
+/*-----------------------------------------------------------*/
+/* CLI command structure : pwm */
+const CLI_Command_Definition_t pwmCommandDefinition =
+{
+	( const int8_t * ) "pwm", /* The command string to type. */
+	( const int8_t * ) "(H09R0) pwm:\r\n Control the solid state relay with pulse-width modulation (PWM) signal with a percentage duty cycle (0-100) (1st par.)\r\n\r\n",
+	pwmCommand, /* The function to run. */
 	1 /* One parameter is expected. */
 };
 /*-----------------------------------------------------------*/
@@ -529,5 +539,48 @@ portBASE_TYPE ledModeCommand( int8_t *pcWriteBuffer, size_t xWriteBufferLen, con
 
 /*-----------------------------------------------------------*/
 
+portBASE_TYPE pwmCommand( int8_t *pcWriteBuffer, size_t xWriteBufferLen, const int8_t *pcCommandString )
+{
+	Module_Status result = H09R0_OK;
+	
+	int8_t *pcParameterString1; portBASE_TYPE xParameterStringLength1 = 0; 
+	float dutycycle = 0;
+	static const int8_t *pcOKMessage = ( int8_t * ) "Solid state relay is pulse-width modulated with %.1f%% duty cycle\r\n";
+	static const int8_t *pcWrongValue = ( int8_t * ) "Wong duty cycle value. Acceptable range is 0 to 100\r\n";
+	
+	/* Remove compile time warnings about unused parameters, and check the
+	write buffer is not NULL.  NOTE - for simplicity, this example assumes the
+	write buffer length is adequate, so does not check for buffer overflows. */
+	( void ) xWriteBufferLen;
+	configASSERT( pcWriteBuffer );
+	
+	/* Obtain the 1st parameter string. */
+	pcParameterString1 = ( int8_t * ) FreeRTOS_CLIGetParameter
+								(
+									pcCommandString,		/* The command string itself. */
+									1,						/* Return the first parameter. */
+									&xParameterStringLength1	/* Store the parameter string length. */
+								);
+	
+	dutycycle = ( float ) atof( ( char * ) pcParameterString1 );
+	
+	if (dutycycle < 0.0f || dutycycle > 100.0f)
+		result = H09R0_ERR_Wrong_Value;
+	else
+		result = SSR_PWM(dutycycle);	
+	
+	/* Respond to the command */
+	if (result == H09R0_OK) {
+			sprintf( ( char * ) pcWriteBuffer, ( char * ) pcOKMessage, dutycycle);
+	} else if (result == H09R0_ERR_Wrong_Value) {
+			strcpy( ( char * ) pcWriteBuffer, ( char * ) pcWrongValue);
+	}
+	
+	/* There is no more data to return after this single string, so return
+	pdFALSE. */
+	return pdFALSE;
+}
+
+/*-----------------------------------------------------------*/
 
 /************************ (C) COPYRIGHT HEXABITZ *****END OF FILE****/
