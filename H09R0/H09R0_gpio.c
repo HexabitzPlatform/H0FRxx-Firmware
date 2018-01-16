@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * File Name          : H09R0_gpio.c
+  * File Name          : H0FR6_gpio.c
   * Description        : This file provides code for the configuration
   *                      of all used GPIO pins.
   ******************************************************************************
