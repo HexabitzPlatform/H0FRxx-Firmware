@@ -2,25 +2,25 @@
     BitzOS (BOS) V0.1.4 - Copyright (C) 2017 Hexabitz
     All rights reserved
 		
-    File Name     : H09R0.h
-    Description   : Header file for module H09R0.
+    File Name     : H0FR6.h
+    Description   : Header file for module H0FR6.
 										Solid state relay (AQH3213A) 
 */
 	
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef H09R0_H
-#define H09R0_H
+#ifndef H0FR6_H
+#define H0FR6_H
 
 /* Includes ------------------------------------------------------------------*/
 #include "BOS.h"
-#include "H09R0_uart.h"	
-#include "H09R0_gpio.h"	
-#include "H09R0_dma.h"	
+#include "H0FR6_uart.h"	
+#include "H0FR6_gpio.h"	
+#include "H0FR6_dma.h"	
 	
 	
 /* Exported definitions -------------------------------------------------------*/
 
-#define	modulePN		_H09R0
+#define	modulePN		_H0FR6
 
 /* Port-related definitions */
 #define	NumOfPorts		5
@@ -92,10 +92,10 @@ typedef enum  { STATE_OFF, STATE_ON, STATE_PWM } SSR_state_t;
 /* H01R0_Status Type Definition */  
 typedef enum 
 {
-  H09R0_OK = 0,
-	H09R0_ERR_UnknownMessage = 1,
-	H09R0_ERR_Wrong_Value = 2,
-	H09R0_ERROR = 255
+  H0FR6_OK = 0,
+	H0FR6_ERR_UnknownMessage = 1,
+	H0FR6_ERR_Wrong_Value = 2,
+	H0FR6_ERROR = 255
 } Module_Status;
 
 /* Indicator LED */
@@ -125,10 +125,10 @@ extern uint8_t SSRindMode;
    ----------------------------------------------------------------------- 
 */
 
-#define	CODE_H09R0_ON							900
-#define	CODE_H09R0_OFF						901
-#define	CODE_H09R0_TOGGLE					902
-#define	CODE_H09R0_PWM						903
+#define	CODE_H0FR6_ON							1500
+#define	CODE_H0FR6_OFF						1501
+#define	CODE_H0FR6_TOGGLE					1502
+#define	CODE_H0FR6_PWM						1503
 
 	
 /* -----------------------------------------------------------------------
@@ -153,6 +153,6 @@ extern const CLI_Command_Definition_t ledModeCommandDefinition;
 extern const CLI_Command_Definition_t pwmCommandDefinition;
 
 
-#endif /* H09R0_H */
+#endif /* H0FR6_H */
 
 /************************ (C) COPYRIGHT HEXABITZ *****END OF FILE****/

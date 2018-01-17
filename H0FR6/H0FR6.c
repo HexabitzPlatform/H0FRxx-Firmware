@@ -2,8 +2,8 @@
     BitzOS (BOS) V0.1.4 - Copyright (C) 2017 Hexabitz
     All rights reserved
 
-    File Name     : H09R0.c
-    Description   : Source code for module H09R0.
+    File Name     : H0FR6.c
+    Description   : Source code for module H0FR6.
 										Solid state relay (AQH3213A) 
 		
 		Required MCU resources : 
@@ -52,7 +52,7 @@ portBASE_TYPE pwmCommand( int8_t *pcWriteBuffer, size_t xWriteBufferLen, const i
 const CLI_Command_Definition_t onCommandDefinition =
 {
 	( const int8_t * ) "on", /* The command string to type. */
-	( const int8_t * ) "(H09R0) on:\r\n Turn solid state relay on with a timeout (ms) (1st par.). Use 'inf' to turn on constantly\r\n\r\n",
+	( const int8_t * ) "(H0FR6) on:\r\n Turn solid state relay on with a timeout (ms) (1st par.). Use 'inf' to turn on constantly\r\n\r\n",
 	onCommand, /* The function to run. */
 	1 /* One parameter is expected. */
 };
@@ -61,7 +61,7 @@ const CLI_Command_Definition_t onCommandDefinition =
 const CLI_Command_Definition_t offCommandDefinition =
 {
 	( const int8_t * ) "off", /* The command string to type. */
-	( const int8_t * ) "(H09R0) off:\r\n Turn solid state relay off\r\n\r\n",
+	( const int8_t * ) "(H0FR6) off:\r\n Turn solid state relay off\r\n\r\n",
 	offCommand, /* The function to run. */
 	0 /* No parameters are expected. */
 };
@@ -70,7 +70,7 @@ const CLI_Command_Definition_t offCommandDefinition =
 const CLI_Command_Definition_t toggleCommandDefinition =
 {
 	( const int8_t * ) "toggle", /* The command string to type. */
-	( const int8_t * ) "(H09R0) toggle:\r\n Toggle solid state relay\r\n\r\n",
+	( const int8_t * ) "(H0FR6) toggle:\r\n Toggle solid state relay\r\n\r\n",
 	toggleCommand, /* The function to run. */
 	0 /* No parameters are expected. */
 };
@@ -79,7 +79,7 @@ const CLI_Command_Definition_t toggleCommandDefinition =
 const CLI_Command_Definition_t ledModeCommandDefinition =
 {
 	( const int8_t * ) "ledMode", /* The command string to type. */
-	( const int8_t * ) "(H09R0) ledMode:\r\n Set solid state relay indicator LED mode ('on' or 'off') (1st par.)\r\n\r\n",
+	( const int8_t * ) "(H0FR6) ledMode:\r\n Set solid state relay indicator LED mode ('on' or 'off') (1st par.)\r\n\r\n",
 	ledModeCommand, /* The function to run. */
 	1 /* One parameter is expected. */
 };
@@ -88,7 +88,7 @@ const CLI_Command_Definition_t ledModeCommandDefinition =
 const CLI_Command_Definition_t pwmCommandDefinition =
 {
 	( const int8_t * ) "pwm", /* The command string to type. */
-	( const int8_t * ) "(H09R0) pwm:\r\n Control the solid state relay with pulse-width modulation (PWM) signal with a percentage duty cycle (0-100) (1st par.)\r\n\r\n",
+	( const int8_t * ) "(H0FR6) pwm:\r\n Control the solid state relay with pulse-width modulation (PWM) signal with a percentage duty cycle (0-100) (1st par.)\r\n\r\n",
 	pwmCommand, /* The function to run. */
 	1 /* One parameter is expected. */
 };
@@ -99,7 +99,7 @@ const CLI_Command_Definition_t pwmCommandDefinition =
    ----------------------------------------------------------------------- 
 */
 
-/* --- H09R0 module initialization --- 
+/* --- H0FR6 module initialization --- 
 */
 void Module_Init(void)
 {	
@@ -121,35 +121,35 @@ void Module_Init(void)
 
 /*-----------------------------------------------------------*/
 
-/* --- H09R0 message processing task. 
+/* --- H0FR6 message processing task. 
 */
 Module_Status Module_MessagingTask(uint16_t code, uint8_t port, uint8_t src, uint8_t dst)
 {
-	Module_Status result = H09R0_OK; 
+	Module_Status result = H0FR6_OK; 
 	
 	switch (code)
 	{
-		case CODE_H09R0_ON :
+		case CODE_H0FR6_ON :
 			temp32 = ( (uint32_t) cMessage[port-1][4] << 24 ) + ( (uint32_t) cMessage[port-1][5] << 16 ) + ( (uint32_t) cMessage[port-1][6] << 8 ) + cMessage[port-1][7];						
 			SSR_on(temp32);
 			break;
 		
-		case CODE_H09R0_OFF :
+		case CODE_H0FR6_OFF :
 			SSR_off();
 			break;
 		
-		case CODE_H09R0_TOGGLE :
+		case CODE_H0FR6_TOGGLE :
 			SSR_toggle();
 			break;
 		
-		case CODE_H09R0_PWM :
+		case CODE_H0FR6_PWM :
 			tempFloat = (float)( ((uint64_t)cMessage[port-1][4]<<0) + ((uint64_t)cMessage[port-1][5]<<8) + ((uint64_t)cMessage[port-1][6]<<16) + ((uint64_t)cMessage[port-1][7]<<24) + \
 													 ((uint64_t)cMessage[port-1][8]<<32) + ((uint64_t)cMessage[port-1][9]<<40) + ((uint64_t)cMessage[port-1][10]<<48) + ((uint64_t)cMessage[port-1][11]<<56) );
 			SSR_PWM(tempFloat);
 			break;
 		
 		default:
-			result = H09R0_ERR_UnknownMessage;
+			result = H0FR6_ERR_UnknownMessage;
 			break;
 	}			
 
@@ -269,7 +269,7 @@ void TIM3_DeInit(void)
 */
 Module_Status Set_SSR_PWM(uint32_t freq, float dutycycle)
 {	
-	Module_Status result = H09R0_OK;	
+	Module_Status result = H0FR6_OK;	
 	uint32_t ARR = PWM_TIMER_CLOCK / freq;
 	
 	if (SSR_State != STATE_PWM)	TIM3_Init();
@@ -281,7 +281,7 @@ Module_Status Set_SSR_PWM(uint32_t freq, float dutycycle)
 	htim3.Instance->CCR3 = ((float)dutycycle/100.0f) * ARR;
 
 	if (HAL_TIM_PWM_Start(&htim3, _SSR_TIM_CH) != HAL_OK)	
-		return	H09R0_ERROR;
+		return	H0FR6_ERROR;
 	
 	return result;
 }
@@ -297,7 +297,7 @@ Module_Status Set_SSR_PWM(uint32_t freq, float dutycycle)
 */
 Module_Status SSR_on(uint32_t timeout)
 {	
-	Module_Status result = H09R0_OK;	
+	Module_Status result = H0FR6_OK;	
 
 
 	/* Turn off PWM and re-initialize GPIO if needed */
@@ -335,7 +335,7 @@ Module_Status SSR_on(uint32_t timeout)
 */
 Module_Status SSR_off(void)
 {	
-	Module_Status result = H09R0_OK;	
+	Module_Status result = H0FR6_OK;	
 	
 	/* Turn off PWM and re-initialize GPIO if needed */
 	if (SSR_State == STATE_PWM) 
@@ -363,7 +363,7 @@ Module_Status SSR_off(void)
 */
 Module_Status SSR_toggle(void)
 {	
-	Module_Status result = H09R0_OK;	
+	Module_Status result = H0FR6_OK;	
 	
 	if (SSR_State) 
 	{
@@ -387,15 +387,15 @@ Module_Status SSR_toggle(void)
 */
 Module_Status SSR_PWM(float dutyCycle)
 {	
-	Module_Status result = H09R0_OK;	
+	Module_Status result = H0FR6_OK;	
 	
 	if ( dutyCycle < 0 || dutyCycle > 100 )
-		return H09R0_ERR_Wrong_Value;
+		return H0FR6_ERR_Wrong_Value;
 	
 	/* Start the PWM */
 	result = Set_SSR_PWM(SSR_PWM_DEF_FREQ, dutyCycle);
 	
-	if (result == H09R0_OK)
+	if (result == H0FR6_OK)
 	{
 		SSR_OldDC = dutyCycle;
 		/* Update SSR state */
@@ -416,7 +416,7 @@ Module_Status SSR_PWM(float dutyCycle)
 
 portBASE_TYPE onCommand( int8_t *pcWriteBuffer, size_t xWriteBufferLen, const int8_t *pcCommandString )
 {
-	Module_Status result = H09R0_OK;
+	Module_Status result = H0FR6_OK;
 	
 	int8_t *pcParameterString1; portBASE_TYPE xParameterStringLength1 = 0; 
 	uint32_t timeout = 0;
@@ -445,7 +445,7 @@ portBASE_TYPE onCommand( int8_t *pcWriteBuffer, size_t xWriteBufferLen, const in
 	result = SSR_on(timeout);	
 	
 	/* Respond to the command */
-	if (result == H09R0_OK) {
+	if (result == H0FR6_OK) {
 		if (timeout != portMAX_DELAY) {
 			sprintf( ( char * ) pcWriteBuffer, ( char * ) pcOKMessage, timeout);
 		} else {
@@ -462,7 +462,7 @@ portBASE_TYPE onCommand( int8_t *pcWriteBuffer, size_t xWriteBufferLen, const in
 
 portBASE_TYPE offCommand( int8_t *pcWriteBuffer, size_t xWriteBufferLen, const int8_t *pcCommandString )
 {
-	Module_Status result = H09R0_OK;
+	Module_Status result = H0FR6_OK;
 	
 	static const int8_t *pcMessage = ( int8_t * ) "Solid state relay is turned off\r\n";
 	
@@ -476,7 +476,7 @@ portBASE_TYPE offCommand( int8_t *pcWriteBuffer, size_t xWriteBufferLen, const i
 	result = SSR_off();
 	
 	/* Respond to the command */
-	if (result == H09R0_OK) {
+	if (result == H0FR6_OK) {
 		strcpy( ( char * ) pcWriteBuffer, ( char * ) pcMessage);
 	}
 		
@@ -489,7 +489,7 @@ portBASE_TYPE offCommand( int8_t *pcWriteBuffer, size_t xWriteBufferLen, const i
 
 portBASE_TYPE toggleCommand( int8_t *pcWriteBuffer, size_t xWriteBufferLen, const int8_t *pcCommandString )
 {
-	Module_Status result = H09R0_OK;
+	Module_Status result = H0FR6_OK;
 	
 	static const int8_t *pcOK1Message = ( int8_t * ) "Solid state relay is turned on\r\n";
 	static const int8_t *pcOK0Message = ( int8_t * ) "Solid state relay is turned off\r\n";
@@ -503,7 +503,7 @@ portBASE_TYPE toggleCommand( int8_t *pcWriteBuffer, size_t xWriteBufferLen, cons
 	result = SSR_toggle();	
 	
 	/* Respond to the command */
-	if (result == H09R0_OK) {
+	if (result == H0FR6_OK) {
 		if (SSR_State) {
 			strcpy( ( char * ) pcWriteBuffer, ( char * ) pcOK1Message);
 		} else {
@@ -560,7 +560,7 @@ portBASE_TYPE ledModeCommand( int8_t *pcWriteBuffer, size_t xWriteBufferLen, con
 
 portBASE_TYPE pwmCommand( int8_t *pcWriteBuffer, size_t xWriteBufferLen, const int8_t *pcCommandString )
 {
-	Module_Status result = H09R0_OK;
+	Module_Status result = H0FR6_OK;
 	
 	int8_t *pcParameterString1; portBASE_TYPE xParameterStringLength1 = 0; 
 	float dutycycle = 0;
@@ -584,14 +584,14 @@ portBASE_TYPE pwmCommand( int8_t *pcWriteBuffer, size_t xWriteBufferLen, const i
 	dutycycle = ( float ) atof( ( char * ) pcParameterString1 );
 	
 	if (dutycycle < 0.0f || dutycycle > 100.0f)
-		result = H09R0_ERR_Wrong_Value;
+		result = H0FR6_ERR_Wrong_Value;
 	else
 		result = SSR_PWM(dutycycle);	
 	
 	/* Respond to the command */
-	if (result == H09R0_OK) {
+	if (result == H0FR6_OK) {
 			sprintf( ( char * ) pcWriteBuffer, ( char * ) pcOKMessage, dutycycle);
-	} else if (result == H09R0_ERR_Wrong_Value) {
+	} else if (result == H0FR6_ERR_Wrong_Value) {
 			strcpy( ( char * ) pcWriteBuffer, ( char * ) pcWrongValue);
 	}
 	

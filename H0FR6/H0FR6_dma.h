@@ -1,8 +1,8 @@
 /**
   ******************************************************************************
-  * File Name          : H09R0_uart.h
-  * Description        : This file provides code for the configuration
-  *                      of the USART instances.
+  * File Name          : H0FR6_dma.h
+  * Description        : This file contains all the functions prototypes for 
+  *                      the DMA  
   ******************************************************************************
   *
   * COPYRIGHT(c) 2015 STMicroelectronics
@@ -38,50 +38,56 @@
 */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __H09R0_uart_H
-#define __H09R0_uart_H
+#ifndef __H0FR6_dma_H
+#define __H0FR6_dma_H
+
 #ifdef __cplusplus
  extern "C" {
 #endif
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f0xx_hal.h"
-
-/* External variables -----------------------------------------------*/
-extern FlagStatus UartRxReady;
-extern FlagStatus UartTxReady;
-extern uint8_t PcPort;
-
 	 
-// Blocking (polling-based) read
-#define readPx(port, buffer, n, timeout) while(HAL_UART_Receive(GetUart(port), (uint8_t *)buffer, n, timeout) != HAL_OK) {}
-	
-// Blocking (polling-based) write
-#define writePx(port, buffer, timeout) while(HAL_UART_Transmit(GetUart(port), (uint8_t *)buffer, strlen(buffer), timeout) != HAL_OK) {}
+	 
+/* Check which DMA interrupt occured */	 
+#define HAL_DMA_GET_IT_SOURCE(__HANDLE__, __INTERRUPT__)  ((((__HANDLE__)->ISR & (__INTERRUPT__)) == (__INTERRUPT__)) ? SET : RESET)
 
-/* Check which UART interrupt occured */	 
-#define HAL_UART_GET_IT_SOURCE(__HANDLE__, __INTERRUPT__)  ((((__HANDLE__)->Instance->ISR & (__INTERRUPT__)) == (__INTERRUPT__)) ? SET : RESET)
 
-/* External function prototypes -----------------------------------------------*/
+/* External variables --------------------------------------------------------*/
+extern DMA_HandleTypeDef portMemDMA1;
+extern DMA_HandleTypeDef portMemDMA2;
+extern DMA_HandleTypeDef portMemDMA3;
+extern DMA_HandleTypeDef portPortDMA1;
+extern DMA_HandleTypeDef portPortDMA2;
+extern DMA_HandleTypeDef portPortDMA3;	 
 
-extern HAL_StatusTypeDef readPxMutex(uint8_t port, char *buffer, uint16_t n, uint32_t mutexTimeout, uint32_t portTimeout);
-extern HAL_StatusTypeDef writePxMutex(uint8_t port, char *buffer, uint16_t n, uint32_t mutexTimeout, uint32_t portTimeout);
-extern HAL_StatusTypeDef readPxITMutex(uint8_t port, char *buffer, uint16_t n, uint32_t mutexTimeout);
-extern HAL_StatusTypeDef writePxITMutex(uint8_t port, char *buffer, uint16_t n, uint32_t mutexTimeout);
+extern uint32_t DMAStream1count;
+extern uint32_t DMAStream2count;
+extern uint32_t DMAStream3count;
+extern uint32_t DMAStream1total;
+extern uint32_t DMAStream2total;
+extern uint32_t DMAStream3total;
 
+extern UART_HandleTypeDef* dmaStreamDst[3];
+	 
+/* External function prototypes ----------------------------------------------*/
+extern void MX_DMA_Init(void);
+extern void PortMemDMA1_Setup(UART_HandleTypeDef* huart, uint8_t num);
+extern void PortMemDMA2_Setup(UART_HandleTypeDef* huart, uint8_t num);
+extern void PortMemDMA3_Setup(UART_HandleTypeDef* huart, uint8_t num);
+extern void PortPortDMA1_Setup(UART_HandleTypeDef* huartSrc, UART_HandleTypeDef* huartDst, uint8_t num);
+extern void PortPortDMA2_Setup(UART_HandleTypeDef* huartSrc, UART_HandleTypeDef* huartDst, uint8_t num);
+extern void PortPortDMA3_Setup(UART_HandleTypeDef* huartSrc, UART_HandleTypeDef* huartDst, uint8_t num);
+extern void StopPortPortDMA1(void);
+extern void StopPortPortDMA2(void);
+extern void StopPortPortDMA3(void);
 
 
 #ifdef __cplusplus
 }
 #endif
-#endif /*__H09R0_uart_H */
 
-/**
-  * @}
-  */
+#endif /* __H0FR6_dma_H */
 
-/**
-  * @}
-  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

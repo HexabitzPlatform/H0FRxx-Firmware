@@ -1,8 +1,8 @@
 /**
   ******************************************************************************
-  * File Name          : H09R0_gpio.c
+  * File Name          : H0FR6_uart.h
   * Description        : This file provides code for the configuration
-  *                      of all used GPIO pins.
+  *                      of the USART instances.
   ******************************************************************************
   *
   * COPYRIGHT(c) 2015 STMicroelectronics
@@ -31,57 +31,57 @@
   *
   ******************************************************************************
   */
-
+	
 /*
 		MODIFIED by Hexabitz for BitzOS (BOS) V0.1.4 - Copyright (C) 2017 Hexabitz
     All rights reserved
 */
 
+/* Define to prevent recursive inclusion -------------------------------------*/
+#ifndef __H0FR6_uart_H
+#define __H0FR6_uart_H
+#ifdef __cplusplus
+ extern "C" {
+#endif
+
 /* Includes ------------------------------------------------------------------*/
-#include "BOS.h"
+#include "stm32f0xx_hal.h"
 
-/*----------------------------------------------------------------------------*/
-/* Configure GPIO                                                             */
-/*----------------------------------------------------------------------------*/
+/* External variables -----------------------------------------------*/
+extern FlagStatus UartRxReady;
+extern FlagStatus UartTxReady;
+extern uint8_t PcPort;
 
-/** Pinout Configuration
-*/
-void MX_GPIO_Init(void)
-{
-  /* GPIO Ports Clock Enable */
-  __GPIOC_CLK_ENABLE();
-  __GPIOA_CLK_ENABLE();
-  __GPIOD_CLK_ENABLE();
-	__GPIOB_CLK_ENABLE();
-	__GPIOF_CLK_ENABLE();		// for HSE and Boot0
+	 
+// Blocking (polling-based) read
+#define readPx(port, buffer, n, timeout) while(HAL_UART_Receive(GetUart(port), (uint8_t *)buffer, n, timeout) != HAL_OK) {}
 	
-	IND_LED_Init();
-}
+// Blocking (polling-based) write
+#define writePx(port, buffer, timeout) while(HAL_UART_Transmit(GetUart(port), (uint8_t *)buffer, strlen(buffer), timeout) != HAL_OK) {}
 
-/* --- Configure indicator LED --- 
-*/
-void IND_LED_Init(void)
-{
-	GPIO_InitTypeDef GPIO_InitStruct;
-	
-	GPIO_InitStruct.Pin = _IND_LED_PIN;
-	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-	GPIO_InitStruct.Pull = GPIO_NOPULL;
-	GPIO_InitStruct.Speed = GPIO_SPEED_HIGH;
-	HAL_GPIO_Init(_IND_LED_PORT, &GPIO_InitStruct);
-}
+/* Check which UART interrupt occured */	 
+#define HAL_UART_GET_IT_SOURCE(__HANDLE__, __INTERRUPT__)  ((((__HANDLE__)->Instance->ISR & (__INTERRUPT__)) == (__INTERRUPT__)) ? SET : RESET)
 
-/* --- Configure SSR GPIO --- 
-*/
-void SSR_Init(void)
-{
-	GPIO_InitTypeDef GPIO_InitStruct;
-	
-	GPIO_InitStruct.Pin = _SSR_PIN;
-	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-	GPIO_InitStruct.Pull = GPIO_NOPULL;
-	GPIO_InitStruct.Speed = GPIO_SPEED_HIGH;
-	HAL_GPIO_Init(_SSR_PORT, &GPIO_InitStruct);
+/* External function prototypes -----------------------------------------------*/
+
+extern HAL_StatusTypeDef readPxMutex(uint8_t port, char *buffer, uint16_t n, uint32_t mutexTimeout, uint32_t portTimeout);
+extern HAL_StatusTypeDef writePxMutex(uint8_t port, char *buffer, uint16_t n, uint32_t mutexTimeout, uint32_t portTimeout);
+extern HAL_StatusTypeDef readPxITMutex(uint8_t port, char *buffer, uint16_t n, uint32_t mutexTimeout);
+extern HAL_StatusTypeDef writePxITMutex(uint8_t port, char *buffer, uint16_t n, uint32_t mutexTimeout);
+
+
+
+#ifdef __cplusplus
 }
+#endif
+#endif /*__H0FR6_uart_H */
+
+/**
+  * @}
+  */
+
+/**
+  * @}
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
