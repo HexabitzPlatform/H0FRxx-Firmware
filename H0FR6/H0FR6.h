@@ -1,5 +1,5 @@
 /*
-    BitzOS (BOS) V0.1.5 - Copyright (C) 2017-2018 Hexabitz
+    BitzOS (BOS) V0.1.6 - Copyright (C) 2017-2019 Hexabitz
     All rights reserved
 		
     File Name     : H0FR6.h
@@ -86,7 +86,9 @@
 #define PWM_TIMER_CLOCK			16000000
 #define SSR_PWM_DEF_FREQ				24000
 #define SSR_PWM_DEF_PERIOD			((float) (1/SSR_PWM_FREQ) )
-	
+
+#define NUM_MODULE_PARAMS		1
+
 typedef enum  { STATE_OFF, STATE_ON, STATE_PWM } SSR_state_t; 
 
 /* H01R0_Status Type Definition */  
