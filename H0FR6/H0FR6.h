@@ -121,17 +121,6 @@ extern void MX_USART6_UART_Init(void);
 
 extern SSR_state_t SSR_State; 
 extern uint8_t SSRindMode;
-
-/* -----------------------------------------------------------------------
-	|														Message Codes	 														 	|
-   ----------------------------------------------------------------------- 
-*/
-
-#define	CODE_H0FR6_ON							1500
-#define	CODE_H0FR6_OFF						1501
-#define	CODE_H0FR6_TOGGLE					1502
-#define	CODE_H0FR6_PWM						1503
-
 	
 /* -----------------------------------------------------------------------
 	|																APIs	 																 	|
