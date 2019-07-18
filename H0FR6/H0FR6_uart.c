@@ -148,7 +148,7 @@ void MX_USART5_UART_Init(void)
   huart5.Init.OneBitSampling = UART_ONEBIT_SAMPLING_DISABLED;
   huart5.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;
 	HAL_UART_Init(&huart5);
-	#if _P6pol_reversed	
+	#if _P1pol_reversed	
 		huart5.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_SWAP_INIT;
 		huart5.AdvancedInit.Swap = UART_ADVFEATURE_SWAP_ENABLE;
 	  HAL_UART_Init(&huart5);
