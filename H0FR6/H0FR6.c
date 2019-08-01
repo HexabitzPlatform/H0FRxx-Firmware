@@ -3,13 +3,14 @@
     All rights reserved
 
     File Name     : H0FR6.c
-    Description   : Source code for module H0FR6.
-										Solid state relay (AQH3213A) 
+    Description   : Source code for module H0FR1 SPDT mechanical DC relay
+										and module H0FR6 Solid state AC relay (AQH3213A).
+										 
 		
 		Required MCU resources : 
 		
 			>> USARTs 1,2,3,5,6 for module ports.
-			>> Timer 3 (Ch3) for SSR PWM.
+			>> Timer 3 (Ch3) for SSR PWM (H0FR6 only).
 			>> GPIOB 0 for SSR.
 			
 */
@@ -49,7 +50,9 @@ portBASE_TYPE onCommand( int8_t *pcWriteBuffer, size_t xWriteBufferLen, const in
 portBASE_TYPE offCommand( int8_t *pcWriteBuffer, size_t xWriteBufferLen, const int8_t *pcCommandString );
 portBASE_TYPE toggleCommand( int8_t *pcWriteBuffer, size_t xWriteBufferLen, const int8_t *pcCommandString );
 portBASE_TYPE ledModeCommand( int8_t *pcWriteBuffer, size_t xWriteBufferLen, const int8_t *pcCommandString );
-portBASE_TYPE pwmCommand( int8_t *pcWriteBuffer, size_t xWriteBufferLen, const int8_t *pcCommandString );
+#ifdef H0FR6
+	portBASE_TYPE pwmCommand( int8_t *pcWriteBuffer, size_t xWriteBufferLen, const int8_t *pcCommandString );
+#endif
 
 /* CLI command structure : on */
 const CLI_Command_Definition_t onCommandDefinition =
@@ -87,6 +90,7 @@ const CLI_Command_Definition_t ledModeCommandDefinition =
 	1 /* One parameter is expected. */
 };
 /*-----------------------------------------------------------*/
+#ifdef H0FR6
 /* CLI command structure : pwm */
 const CLI_Command_Definition_t pwmCommandDefinition =
 {
@@ -95,6 +99,7 @@ const CLI_Command_Definition_t pwmCommandDefinition =
 	pwmCommand, /* The function to run. */
 	1 /* One parameter is expected. */
 };
+#endif
 /*-----------------------------------------------------------*/
 
 /* -----------------------------------------------------------------------
@@ -144,13 +149,15 @@ Module_Status Module_MessagingTask(uint16_t code, uint8_t port, uint8_t src, uin
 		case CODE_H0FR6_TOGGLE :
 			SSR_toggle();
 			break;
-		
+
+#ifdef H0FR6		
 		case CODE_H0FR6_PWM :
 			tempFloat = (float)( ((uint64_t)cMessage[port-1][4]<<0) + ((uint64_t)cMessage[port-1][5]<<8) + ((uint64_t)cMessage[port-1][6]<<16) + ((uint64_t)cMessage[port-1][7]<<24) + \
 													 ((uint64_t)cMessage[port-1][8]<<32) + ((uint64_t)cMessage[port-1][9]<<40) + ((uint64_t)cMessage[port-1][10]<<48) + ((uint64_t)cMessage[port-1][11]<<56) );
 			SSR_PWM(tempFloat);
 			break;
-		
+#endif
+			
 		default:
 			result = H0FR6_ERR_UnknownMessage;
 			break;
@@ -169,7 +176,9 @@ void RegisterModuleCLICommands(void)
 	FreeRTOS_CLIRegisterCommand( &offCommandDefinition );
 	FreeRTOS_CLIRegisterCommand( &toggleCommandDefinition );
 	FreeRTOS_CLIRegisterCommand( &ledModeCommandDefinition );
+#ifdef H0FR6
 	FreeRTOS_CLIRegisterCommand( &pwmCommandDefinition );
+#endif
 }
 
 /*-----------------------------------------------------------*/
@@ -202,7 +211,7 @@ void SSRTimerCallback( TimerHandle_t xTimerSSR )
 }
 
 /*-----------------------------------------------------------*/	
-
+#ifdef H0FR6
 /* TIM3 init function - SSR PWM Timer 16-bit 
 */
 void TIM3_Init(void)
@@ -288,7 +297,7 @@ Module_Status Set_SSR_PWM(uint32_t freq, float dutycycle)
 	
 	return result;
 }
-
+#endif
 /*-----------------------------------------------------------*/
 
 /* -----------------------------------------------------------------------
@@ -302,7 +311,7 @@ Module_Status SSR_on(uint32_t timeout)
 {	
 	Module_Status result = H0FR6_OK;	
 
-
+#ifdef H0FR6
 	/* Turn off PWM and re-initialize GPIO if needed */
 	if (SSR_State == STATE_PWM) 
 	{
@@ -310,6 +319,7 @@ Module_Status SSR_on(uint32_t timeout)
 		TIM3_DeInit();
 		SSR_Init();
 	}	
+#endif
 	
 	/* Turn on */
 	HAL_GPIO_WritePin(_SSR_PORT,_SSR_PIN,GPIO_PIN_SET);
@@ -339,7 +349,8 @@ Module_Status SSR_on(uint32_t timeout)
 Module_Status SSR_off(void)
 {	
 	Module_Status result = H0FR6_OK;	
-	
+
+#ifdef H0FR6	
 	/* Turn off PWM and re-initialize GPIO if needed */
 	if (SSR_State == STATE_PWM) 
 	{
@@ -347,6 +358,7 @@ Module_Status SSR_off(void)
 		TIM3_DeInit();
 		SSR_Init();
 	}	
+#endif
 	
 	/* Turn off */
 	HAL_GPIO_WritePin(_SSR_PORT,_SSR_PIN,GPIO_PIN_RESET);
@@ -376,15 +388,17 @@ Module_Status SSR_toggle(void)
 	{
 		if (SSR_OldState == STATE_ON)
 			result = SSR_on(portMAX_DELAY);
+	#ifdef H0FR6
 		else if (SSR_OldState == STATE_PWM)
 			result = SSR_PWM(SSR_OldDC);
+	#endif
 	}
 	
 	return result;
 }
 
 /*-----------------------------------------------------------*/
-
+#ifdef H0FR6
 /* --- Turn-on SSR with pulse-width modulation (PWM) ---
 				dutyCycle: PWM duty cycle in precentage (0 to 100)
 */
@@ -409,7 +423,7 @@ Module_Status SSR_PWM(float dutyCycle)
 	
 	return result;
 }
-
+#endif
 /*-----------------------------------------------------------*/
 
 /* -----------------------------------------------------------------------
@@ -560,7 +574,7 @@ portBASE_TYPE ledModeCommand( int8_t *pcWriteBuffer, size_t xWriteBufferLen, con
 }
 
 /*-----------------------------------------------------------*/
-
+#ifdef H0FR6
 portBASE_TYPE pwmCommand( int8_t *pcWriteBuffer, size_t xWriteBufferLen, const int8_t *pcCommandString )
 {
 	Module_Status result = H0FR6_OK;
@@ -602,7 +616,7 @@ portBASE_TYPE pwmCommand( int8_t *pcWriteBuffer, size_t xWriteBufferLen, const i
 	pdFALSE. */
 	return pdFALSE;
 }
-
+#endif
 /*-----------------------------------------------------------*/
 
 /************************ (C) COPYRIGHT HEXABITZ *****END OF FILE****/
