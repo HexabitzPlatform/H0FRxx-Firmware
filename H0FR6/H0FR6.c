@@ -84,7 +84,7 @@ const CLI_Command_Definition_t toggleCommandDefinition =
 /* CLI command structure : ledMode */
 const CLI_Command_Definition_t ledModeCommandDefinition =
 {
-	( const int8_t * ) "ledMode", /* The command string to type. */
+	( const int8_t * ) "ledmode", /* The command string to type. */
 	( const int8_t * ) "(H0FR6) ledMode:\r\n Set solid state relay indicator LED mode ('on' or 'off') (1st par.)\r\n\r\n",
 	ledModeCommand, /* The function to run. */
 	1 /* One parameter is expected. */
