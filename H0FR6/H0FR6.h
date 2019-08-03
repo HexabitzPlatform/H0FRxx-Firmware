@@ -3,8 +3,8 @@
     All rights reserved
 		
     File Name     : H0FR6.h
-    Description   : Header file for module H0FR6.
-										Solid state relay (AQH3213A) 
+    Description   : Header file for module H0FR1 SPDT mechanical DC relay
+										and module H0FR6 Solid state AC relay (AQH3213A).
 */
 	
 /* Define to prevent recursive inclusion -------------------------------------*/
@@ -21,7 +21,12 @@
 	
 /* Exported definitions -------------------------------------------------------*/
 
-#define	modulePN		_H0FR6
+#ifdef H0FR1
+	#define	modulePN		_H0FR1
+#endif
+#ifdef H0FR6
+	#define	modulePN		_H0FR6
+#endif
 
 /* Port-related definitions */
 #define	NumOfPorts		5
@@ -80,13 +85,21 @@
 #define	USART6_AF				GPIO_AF5_USART6
 
 /* Module-specific Definitions */
-#define	_SSR_PIN						GPIO_PIN_0
-#define	_SSR_PORT						GPIOB
-#define _SSR_TIM_CH					TIM_CHANNEL_3
-#define _SSR_GPIO_CLK()			__GPIOB_CLK_ENABLE();
-#define PWM_TIMER_CLOCK			16000000
-#define SSR_PWM_DEF_FREQ				24000
-#define SSR_PWM_DEF_PERIOD			((float) (1/SSR_PWM_FREQ) )
+
+#ifdef H0FR1
+	#define	_SSR_PIN						GPIO_PIN_0
+	#define	_SSR_PORT						GPIOB
+	#define _SSR_GPIO_CLK()			__GPIOB_CLK_ENABLE();
+#endif
+#ifdef H0FR6
+	#define	_SSR_PIN						GPIO_PIN_0
+	#define	_SSR_PORT						GPIOB
+	#define _SSR_TIM_CH					TIM_CHANNEL_3
+	#define _SSR_GPIO_CLK()			__GPIOB_CLK_ENABLE();
+	#define PWM_TIMER_CLOCK			16000000
+	#define SSR_PWM_DEF_FREQ				24000
+	#define SSR_PWM_DEF_PERIOD			((float) (1/SSR_PWM_FREQ) )
+#endif
 
 #define NUM_MODULE_PARAMS		1
 
@@ -102,9 +115,14 @@ typedef enum
 } Module_Status;
 
 /* Indicator LED */
-#define _IND_LED_PORT		GPIOC
-#define _IND_LED_PIN		GPIO_PIN_14
-
+#ifdef H0FR1
+	#define _IND_LED_PORT		GPIOA
+	#define _IND_LED_PIN		GPIO_PIN_11
+#endif
+#ifdef H0FR6
+	#define _IND_LED_PORT		GPIOC
+	#define _IND_LED_PIN		GPIO_PIN_14
+#endif
 
 /* Export UART variables */
 extern UART_HandleTypeDef huart1;
@@ -131,7 +149,9 @@ extern uint8_t SSRindMode;
 extern Module_Status SSR_on(uint32_t timeout);
 extern Module_Status SSR_off(void);
 extern Module_Status SSR_toggle(void);
-extern Module_Status SSR_PWM(float dutyCycle);
+#ifdef H0FR6
+	extern Module_Status SSR_PWM(float dutyCycle);
+#endif
 
 /* -----------------------------------------------------------------------
 	|															Commands																 	|
@@ -142,8 +162,9 @@ extern const CLI_Command_Definition_t onCommandDefinition;
 extern const CLI_Command_Definition_t offCommandDefinition;
 extern const CLI_Command_Definition_t toggleCommandDefinition;
 extern const CLI_Command_Definition_t ledModeCommandDefinition;
-extern const CLI_Command_Definition_t pwmCommandDefinition;
-
+#ifdef H0FR6
+	extern const CLI_Command_Definition_t pwmCommandDefinition;
+#endif
 
 #endif /* H0FR6_H */
 
