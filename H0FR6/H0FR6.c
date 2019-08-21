@@ -58,7 +58,7 @@ portBASE_TYPE ledModeCommand( int8_t *pcWriteBuffer, size_t xWriteBufferLen, con
 const CLI_Command_Definition_t onCommandDefinition =
 {
 	( const int8_t * ) "on", /* The command string to type. */
-	( const int8_t * ) "(H0FR6) on:\r\n Turn solid state relay on with a timeout (ms) (1st par.). Use 'inf' to turn on constantly\r\n\r\n",
+	( const int8_t * ) "on:\r\n Turn solid state relay on with a timeout (ms) (1st par.). Use 'inf' to turn on constantly\r\n\r\n",
 	onCommand, /* The function to run. */
 	1 /* One parameter is expected. */
 };
@@ -67,7 +67,7 @@ const CLI_Command_Definition_t onCommandDefinition =
 const CLI_Command_Definition_t offCommandDefinition =
 {
 	( const int8_t * ) "off", /* The command string to type. */
-	( const int8_t * ) "(H0FR6) off:\r\n Turn solid state relay off\r\n\r\n",
+	( const int8_t * ) "off:\r\n Turn solid state relay off\r\n\r\n",
 	offCommand, /* The function to run. */
 	0 /* No parameters are expected. */
 };
@@ -76,7 +76,7 @@ const CLI_Command_Definition_t offCommandDefinition =
 const CLI_Command_Definition_t toggleCommandDefinition =
 {
 	( const int8_t * ) "toggle", /* The command string to type. */
-	( const int8_t * ) "(H0FR6) toggle:\r\n Toggle solid state relay\r\n\r\n",
+	( const int8_t * ) "toggle:\r\n Toggle solid state relay\r\n\r\n",
 	toggleCommand, /* The function to run. */
 	0 /* No parameters are expected. */
 };
@@ -85,7 +85,7 @@ const CLI_Command_Definition_t toggleCommandDefinition =
 const CLI_Command_Definition_t ledModeCommandDefinition =
 {
 	( const int8_t * ) "ledmode", /* The command string to type. */
-	( const int8_t * ) "(H0FR6) ledMode:\r\n Set solid state relay indicator LED mode ('on' or 'off') (1st par.)\r\n\r\n",
+	( const int8_t * ) "ledMode:\r\n Set solid state relay indicator LED mode ('on' or 'off') (1st par.)\r\n\r\n",
 	ledModeCommand, /* The function to run. */
 	1 /* One parameter is expected. */
 };
@@ -95,7 +95,7 @@ const CLI_Command_Definition_t ledModeCommandDefinition =
 const CLI_Command_Definition_t pwmCommandDefinition =
 {
 	( const int8_t * ) "pwm", /* The command string to type. */
-	( const int8_t * ) "(H0FR6) pwm:\r\n Control the solid state relay with pulse-width modulation (PWM) signal with a percentage duty cycle (0-100) (1st par.)\r\n\r\n",
+	( const int8_t * ) "pwm:\r\n Control the solid state relay with pulse-width modulation (PWM) signal with a percentage duty cycle (0-100) (1st par.)\r\n\r\n",
 	pwmCommand, /* The function to run. */
 	1 /* One parameter is expected. */
 };
