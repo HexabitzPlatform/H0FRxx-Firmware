@@ -131,14 +131,14 @@ void Module_Init(void)
 
 /* --- H0FR6 message processing task. 
 */
-Module_Status Module_MessagingTask(uint16_t code, uint8_t port, uint8_t src, uint8_t dst)
+Module_Status Module_MessagingTask(uint16_t code, uint8_t port, uint8_t src, uint8_t dst, uint8_t shift)
 {
 	Module_Status result = H0FR6_OK; 
 	
 	switch (code)
 	{
 		case CODE_H0FR6_ON :
-			temp32 = ( (uint32_t) cMessage[port-1][4] << 24 ) + ( (uint32_t) cMessage[port-1][5] << 16 ) + ( (uint32_t) cMessage[port-1][6] << 8 ) + cMessage[port-1][7];						
+			temp32 = ( (uint32_t) cMessage[port-1][shift] << 24 ) + ( (uint32_t) cMessage[port-1][1+shift] << 16 ) + ( (uint32_t) cMessage[port-1][2+shift] << 8 ) + cMessage[port-1][3+shift];						
 			SSR_on(temp32);
 			break;
 		
@@ -152,8 +152,7 @@ Module_Status Module_MessagingTask(uint16_t code, uint8_t port, uint8_t src, uin
 
 #ifdef H0FR6		
 		case CODE_H0FR6_PWM :
-			tempFloat = (float)( ((uint64_t)cMessage[port-1][4]<<0) + ((uint64_t)cMessage[port-1][5]<<8) + ((uint64_t)cMessage[port-1][6]<<16) + ((uint64_t)cMessage[port-1][7]<<24) + \
-													 ((uint64_t)cMessage[port-1][8]<<32) + ((uint64_t)cMessage[port-1][9]<<40) + ((uint64_t)cMessage[port-1][10]<<48) + ((uint64_t)cMessage[port-1][11]<<56) );
+			tempFloat = (float)( ((uint64_t)cMessage[port-1][shift]<<0) + ((uint64_t)cMessage[port-1][1+shift]<<8) + ((uint64_t)cMessage[port-1][2+shift]<<16) + ((uint64_t)cMessage[port-1][3+shift]<<24) );
 			SSR_PWM(tempFloat);
 			break;
 #endif
