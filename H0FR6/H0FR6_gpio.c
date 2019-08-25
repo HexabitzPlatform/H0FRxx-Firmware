@@ -71,17 +71,17 @@ void IND_LED_Init(void)
 	HAL_GPIO_Init(_IND_LED_PORT, &GPIO_InitStruct);
 }
 
-/* --- Configure SSR GPIO --- 
+/* --- Configure Relay GPIO --- 
 */
-void SSR_Init(void)
+void Relay_Init(void)
 {
 	GPIO_InitTypeDef GPIO_InitStruct;
 	
-	GPIO_InitStruct.Pin = _SSR_PIN;
+	GPIO_InitStruct.Pin = _Relay_PIN;
 	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
 	GPIO_InitStruct.Pull = GPIO_NOPULL;
 	GPIO_InitStruct.Speed = GPIO_SPEED_HIGH;
-	HAL_GPIO_Init(_SSR_PORT, &GPIO_InitStruct);
+	HAL_GPIO_Init(_Relay_PORT, &GPIO_InitStruct);
 }
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
