@@ -87,23 +87,23 @@
 /* Module-specific Definitions */
 
 #ifdef H0FR1
-	#define	_SSR_PIN						GPIO_PIN_0
-	#define	_SSR_PORT						GPIOB
-	#define _SSR_GPIO_CLK()			__GPIOB_CLK_ENABLE();
+	#define	_Relay_PIN						GPIO_PIN_0
+	#define	_Relay_PORT						GPIOB
+	#define _Relay_GPIO_CLK()			__GPIOB_CLK_ENABLE();
 #endif
 #ifdef H0FR6
-	#define	_SSR_PIN						GPIO_PIN_0
-	#define	_SSR_PORT						GPIOB
-	#define _SSR_TIM_CH					TIM_CHANNEL_3
-	#define _SSR_GPIO_CLK()			__GPIOB_CLK_ENABLE();
+	#define	_Relay_PIN						GPIO_PIN_0
+	#define	_Relay_PORT						GPIOB
+	#define _Relay_TIM_CH					TIM_CHANNEL_3
+	#define _Relay_GPIO_CLK()			__GPIOB_CLK_ENABLE();
 	#define PWM_TIMER_CLOCK			16000000
-	#define SSR_PWM_DEF_FREQ				24000
-	#define SSR_PWM_DEF_PERIOD			((float) (1/SSR_PWM_FREQ) )
+	#define Relay_PWM_DEF_FREQ				24000
+	#define Relay_PWM_DEF_PERIOD			((float) (1/Relay_PWM_FREQ) )
 #endif
 
 #define NUM_MODULE_PARAMS		1
 
-typedef enum  { STATE_OFF, STATE_ON, STATE_PWM } SSR_state_t; 
+typedef enum  { STATE_OFF, STATE_ON, STATE_PWM } Relay_state_t; 
 
 /* H01R0_Status Type Definition */  
 typedef enum 
@@ -138,19 +138,19 @@ extern void MX_USART3_UART_Init(void);
 extern void MX_USART5_UART_Init(void);
 extern void MX_USART6_UART_Init(void);
 
-extern SSR_state_t SSR_State; 
-extern uint8_t SSRindMode;
+extern Relay_state_t Relay_State; 
+extern uint8_t RelayindMode;
 	
 /* -----------------------------------------------------------------------
 	|																APIs	 																 	|
    ----------------------------------------------------------------------- 
 */
 
-extern Module_Status SSR_on(uint32_t timeout);
-extern Module_Status SSR_off(void);
-extern Module_Status SSR_toggle(void);
+extern Module_Status Relay_on(uint32_t timeout);
+extern Module_Status Relay_off(void);
+extern Module_Status Relay_toggle(void);
 #ifdef H0FR6
-	extern Module_Status SSR_PWM(float dutyCycle);
+	extern Module_Status Relay_PWM(float dutyCycle);
 #endif
 
 /* -----------------------------------------------------------------------
