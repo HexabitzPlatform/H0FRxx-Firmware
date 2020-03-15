@@ -1,10 +1,10 @@
 /*
-    BitzOS (BOS) V0.1.6 - Copyright (C) 2017-2019 Hexabitz
+    BitzOS (BOS) V0.2.0 - Copyright (C) 2017-2019 Hexabitz
     All rights reserved
 		
     File Name     : H0FR6.h
-    Description   : Header file for module H0FR6.
-										Solid state relay (AQH3213A) 
+    Description   : Header file for module H0FR1 SPDT mechanical DC relay
+										and module H0FR6 Solid state AC relay (AQH3213A).
 */
 	
 /* Define to prevent recursive inclusion -------------------------------------*/
@@ -13,6 +13,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "BOS.h"
+#include "H0FR6_MemoryMap.h"	
 #include "H0FR6_uart.h"	
 #include "H0FR6_gpio.h"	
 #include "H0FR6_dma.h"	
@@ -20,7 +21,12 @@
 	
 /* Exported definitions -------------------------------------------------------*/
 
-#define	modulePN		_H0FR6
+#ifdef H0FR1
+	#define	modulePN		_H0FR1
+#endif
+#ifdef H0FR6
+	#define	modulePN		_H0FR6
+#endif
 
 /* Port-related definitions */
 #define	NumOfPorts		5
@@ -79,17 +85,25 @@
 #define	USART6_AF				GPIO_AF5_USART6
 
 /* Module-specific Definitions */
-#define	_SSR_PIN						GPIO_PIN_0
-#define	_SSR_PORT						GPIOB
-#define _SSR_TIM_CH					TIM_CHANNEL_3
-#define _SSR_GPIO_CLK()			__GPIOB_CLK_ENABLE();
-#define PWM_TIMER_CLOCK			16000000
-#define SSR_PWM_DEF_FREQ				24000
-#define SSR_PWM_DEF_PERIOD			((float) (1/SSR_PWM_FREQ) )
+
+#ifdef H0FR1
+	#define	_Relay_PIN						GPIO_PIN_0
+	#define	_Relay_PORT						GPIOB
+	#define _Relay_GPIO_CLK()			__GPIOB_CLK_ENABLE();
+#endif
+#ifdef H0FR6
+	#define	_Relay_PIN						GPIO_PIN_0
+	#define	_Relay_PORT						GPIOB
+	#define _Relay_TIM_CH					TIM_CHANNEL_3
+	#define _Relay_GPIO_CLK()			__GPIOB_CLK_ENABLE();
+	#define PWM_TIMER_CLOCK			16000000
+	#define Relay_PWM_DEF_FREQ				24000
+	#define Relay_PWM_DEF_PERIOD			((float) (1/Relay_PWM_FREQ) )
+#endif
 
 #define NUM_MODULE_PARAMS		1
 
-typedef enum  { STATE_OFF, STATE_ON, STATE_PWM } SSR_state_t; 
+typedef enum  { STATE_OFF, STATE_ON, STATE_PWM } Relay_state_t; 
 
 /* H01R0_Status Type Definition */  
 typedef enum 
@@ -101,9 +115,14 @@ typedef enum
 } Module_Status;
 
 /* Indicator LED */
-#define _IND_LED_PORT		GPIOC
-#define _IND_LED_PIN		GPIO_PIN_14
-
+#ifdef H0FR1
+	#define _IND_LED_PORT		GPIOA
+	#define _IND_LED_PIN		GPIO_PIN_11
+#endif
+#ifdef H0FR6
+	#define _IND_LED_PORT		GPIOC
+	#define _IND_LED_PIN		GPIO_PIN_14
+#endif
 
 /* Export UART variables */
 extern UART_HandleTypeDef huart1;
@@ -119,29 +138,20 @@ extern void MX_USART3_UART_Init(void);
 extern void MX_USART5_UART_Init(void);
 extern void MX_USART6_UART_Init(void);
 
-extern SSR_state_t SSR_State; 
-extern uint8_t SSRindMode;
-
-/* -----------------------------------------------------------------------
-	|														Message Codes	 														 	|
-   ----------------------------------------------------------------------- 
-*/
-
-#define	CODE_H0FR6_ON							1500
-#define	CODE_H0FR6_OFF						1501
-#define	CODE_H0FR6_TOGGLE					1502
-#define	CODE_H0FR6_PWM						1503
-
+extern Relay_state_t Relay_State; 
+extern uint8_t RelayindMode;
 	
 /* -----------------------------------------------------------------------
 	|																APIs	 																 	|
    ----------------------------------------------------------------------- 
 */
 
-extern Module_Status SSR_on(uint32_t timeout);
-extern Module_Status SSR_off(void);
-extern Module_Status SSR_toggle(void);
-extern Module_Status SSR_PWM(float dutyCycle);
+extern Module_Status Relay_on(uint32_t timeout);
+extern Module_Status Relay_off(void);
+extern Module_Status Relay_toggle(void);
+#ifdef H0FR6
+	extern Module_Status Relay_PWM(float dutyCycle);
+#endif
 
 /* -----------------------------------------------------------------------
 	|															Commands																 	|
@@ -152,8 +162,9 @@ extern const CLI_Command_Definition_t onCommandDefinition;
 extern const CLI_Command_Definition_t offCommandDefinition;
 extern const CLI_Command_Definition_t toggleCommandDefinition;
 extern const CLI_Command_Definition_t ledModeCommandDefinition;
-extern const CLI_Command_Definition_t pwmCommandDefinition;
-
+#ifdef H0FR6
+	extern const CLI_Command_Definition_t pwmCommandDefinition;
+#endif
 
 #endif /* H0FR6_H */
 
