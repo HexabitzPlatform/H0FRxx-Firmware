@@ -27,23 +27,23 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
  11 .ARM.attributes 00000028  00000000  00000000  00030a10  2**0
                   CONTENTS, READONLY
- 12 .debug_info   000448fe  00000000  00000000  00030a38  2**0
+ 12 .debug_info   0004490a  00000000  00000000  00030a38  2**0
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_abbrev 00007152  00000000  00000000  00075336  2**0
+ 13 .debug_abbrev 00007152  00000000  00000000  00075342  2**0
                   CONTENTS, READONLY, DEBUGGING
- 14 .debug_loc    0001924e  00000000  00000000  0007c488  2**0
+ 14 .debug_loc    0001924e  00000000  00000000  0007c494  2**0
                   CONTENTS, READONLY, DEBUGGING
- 15 .debug_aranges 00001a88  00000000  00000000  000956d8  2**3
+ 15 .debug_aranges 00001a88  00000000  00000000  000956e8  2**3
                   CONTENTS, READONLY, DEBUGGING
- 16 .debug_ranges 00001e68  00000000  00000000  00097160  2**3
+ 16 .debug_ranges 00001e68  00000000  00000000  00097170  2**3
                   CONTENTS, READONLY, DEBUGGING
- 17 .debug_line   0001335f  00000000  00000000  00098fc8  2**0
+ 17 .debug_line   00013396  00000000  00000000  00098fd8  2**0
                   CONTENTS, READONLY, DEBUGGING
- 18 .debug_str    00009cd0  00000000  00000000  000ac327  2**0
+ 18 .debug_str    00009d53  00000000  00000000  000ac36e  2**0
                   CONTENTS, READONLY, DEBUGGING
- 19 .comment      0000007b  00000000  00000000  000b5ff7  2**0
+ 19 .comment      0000007b  00000000  00000000  000b60c1  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  00005d48  00000000  00000000  000b6074  2**2
+ 20 .debug_frame  00005d48  00000000  00000000  000b613c  2**2
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -6170,8 +6170,8 @@ static portBASE_TYPE setBaudrateCommand( int8_t *pcWriteBuffer, size_t xWriteBuf
  8003032:	b002      	add	sp, #8
  8003034:	bd70      	pop	{r4, r5, r6, pc}
  8003036:	46c0      	nop			; (mov r8, r8)
- 8003038:	080187f0 	.word	0x080187f0
- 800303c:	080187c8 	.word	0x080187c8
+ 8003038:	080187f4 	.word	0x080187f4
+ 800303c:	080187cc 	.word	0x080187cc
 
 08003040 <flashsizeCommand>:
 }
@@ -6259,9 +6259,9 @@ static portBASE_TYPE flashsizeCommand( int8_t *pcWriteBuffer, size_t xWriteBuffe
  80030b6:	e7e2      	b.n	800307e <pingCommand+0x1e>
  80030b8:	200011c8 	.word	0x200011c8
  80030bc:	200010c4 	.word	0x200010c4
- 80030c0:	08018448 	.word	0x08018448
+ 80030c0:	0801844c 	.word	0x0801844c
  80030c4:	48000800 	.word	0x48000800
- 80030c8:	0801845c 	.word	0x0801845c
+ 80030c8:	08018460 	.word	0x08018460
 
 080030cc <StreamTimerCallback>:
 {
@@ -6591,22 +6591,22 @@ static portBASE_TYPE snipCommand( int8_t *pcWriteBuffer, size_t xWriteBufferLen,
  80032de:	46c0      	nop			; (mov r8, r8)
  80032e0:	080175f0 	.word	0x080175f0
  80032e4:	20000a2f 	.word	0x20000a2f
- 80032e8:	08018a10 	.word	0x08018a10
+ 80032e8:	08018a14 	.word	0x08018a14
  80032ec:	20001403 	.word	0x20001403
  80032f0:	2000690c 	.word	0x2000690c
- 80032f4:	08018a48 	.word	0x08018a48
+ 80032f4:	08018a4c 	.word	0x08018a4c
  80032f8:	20000040 	.word	0x20000040
  80032fc:	08018260 	.word	0x08018260
- 8003300:	08018ab4 	.word	0x08018ab4
+ 8003300:	08018ab8 	.word	0x08018ab8
  8003304:	08017764 	.word	0x08017764
- 8003308:	08018a54 	.word	0x08018a54
- 800330c:	08018a68 	.word	0x08018a68
- 8003310:	08018a80 	.word	0x08018a80
- 8003314:	08018a98 	.word	0x08018a98
+ 8003308:	08018a58 	.word	0x08018a58
+ 800330c:	08018a6c 	.word	0x08018a6c
+ 8003310:	08018a84 	.word	0x08018a84
+ 8003314:	08018a9c 	.word	0x08018a9c
  8003318:	20000e64 	.word	0x20000e64
- 800331c:	08018ac4 	.word	0x08018ac4
- 8003320:	08018acc 	.word	0x08018acc
- 8003324:	08018ad8 	.word	0x08018ad8
+ 800331c:	08018ac8 	.word	0x08018ac8
+ 8003320:	08018ad0 	.word	0x08018ad0
+ 8003324:	08018adc 	.word	0x08018adc
 
 08003328 <idcodeCommand>:
 {	
@@ -6735,12 +6735,12 @@ static portBASE_TYPE snipCommand( int8_t *pcWriteBuffer, size_t xWriteBufferLen,
  800341e:	2000      	movs	r0, #0
  8003420:	bd70      	pop	{r4, r5, r6, pc}
  8003422:	46c0      	nop			; (mov r8, r8)
- 8003424:	08019a64 	.word	0x08019a64
+ 8003424:	08019a68 	.word	0x08019a68
  8003428:	1ffff7ac 	.word	0x1ffff7ac
- 800342c:	08019a74 	.word	0x08019a74
+ 800342c:	08019a78 	.word	0x08019a78
  8003430:	1ffff7b0 	.word	0x1ffff7b0
  8003434:	1ffff7b4 	.word	0x1ffff7b4
- 8003438:	0801a288 	.word	0x0801a288
+ 8003438:	0801a28c 	.word	0x0801a28c
 
 0800343c <getCommand>:
 {
@@ -7023,7 +7023,7 @@ static portBASE_TYPE snipCommand( int8_t *pcWriteBuffer, size_t xWriteBufferLen,
  8003650:	08017fcc 	.word	0x08017fcc
  8003654:	08017fd4 	.word	0x08017fd4
  8003658:	08017fdc 	.word	0x08017fdc
- 800365c:	08019c24 	.word	0x08019c24
+ 800365c:	08019c28 	.word	0x08019c28
  8003660:	08017fe8 	.word	0x08017fe8
  8003664:	08017ff4 	.word	0x08017ff4
  8003668:	08018004 	.word	0x08018004
@@ -7058,7 +7058,7 @@ static portBASE_TYPE snipCommand( int8_t *pcWriteBuffer, size_t xWriteBufferLen,
  80036ae:	2000      	movs	r0, #0
  80036b0:	bd10      	pop	{r4, pc}
  80036b2:	46c0      	nop			; (mov r8, r8)
- 80036b4:	08018488 	.word	0x08018488
+ 80036b4:	0801848c 	.word	0x0801848c
 
 080036b8 <prvTaskStatsCommand>:
 {
@@ -7080,7 +7080,7 @@ static portBASE_TYPE snipCommand( int8_t *pcWriteBuffer, size_t xWriteBufferLen,
  80036d2:	2000      	movs	r0, #0
  80036d4:	bd10      	pop	{r4, pc}
  80036d6:	46c0      	nop			; (mov r8, r8)
- 80036d8:	080184ec 	.word	0x080184ec
+ 80036d8:	080184f0 	.word	0x080184f0
 
 080036dc <TIM_USEC_Init>:
 {
@@ -7816,7 +7816,7 @@ static portBASE_TYPE delSnipCommand( int8_t *pcWriteBuffer, size_t xWriteBufferL
  8003bc0:	20001403 	.word	0x20001403
  8003bc4:	08017f28 	.word	0x08017f28
  8003bc8:	2000690c 	.word	0x2000690c
- 8003bcc:	08018400 	.word	0x08018400
+ 8003bcc:	08018404 	.word	0x08018404
 
 08003bd0 <actSnipCommand>:
 {	
@@ -9240,7 +9240,7 @@ static portBASE_TYPE delSnipCommand( int8_t *pcWriteBuffer, size_t xWriteBufferL
  8004506:	46c0      	nop			; (mov r8, r8)
  8004508:	08017be4 	.word	0x08017be4
  800450c:	08017bf0 	.word	0x08017bf0
- 8004510:	080182f4 	.word	0x080182f4
+ 8004510:	080182f8 	.word	0x080182f8
  8004514:	200068ec 	.word	0x200068ec
  8004518:	20006894 	.word	0x20006894
  800451c:	000032f2 	.word	0x000032f2
@@ -9626,35 +9626,35 @@ static portBASE_TYPE delSnipCommand( int8_t *pcWriteBuffer, size_t xWriteBufferL
  80047ba:	f7ff fe35 	bl	8004428 <RegisterUserCLICommands>
 }
  80047be:	bd10      	pop	{r4, pc}
- 80047c0:	08018548 	.word	0x08018548
- 80047c4:	080184dc 	.word	0x080184dc
- 80047c8:	08018478 	.word	0x08018478
+ 80047c0:	0801854c 	.word	0x0801854c
+ 80047c4:	080184e0 	.word	0x080184e0
+ 80047c8:	0801847c 	.word	0x0801847c
  80047cc:	08017dd4 	.word	0x08017dd4
  80047d0:	08017f5c 	.word	0x08017f5c
- 80047d4:	080186fc 	.word	0x080186fc
- 80047d8:	080183f0 	.word	0x080183f0
+ 80047d4:	08018700 	.word	0x08018700
+ 80047d8:	080183f4 	.word	0x080183f4
  80047dc:	0801814c 	.word	0x0801814c
- 80047e0:	08018b90 	.word	0x08018b90
+ 80047e0:	08018b94 	.word	0x08018b94
  80047e4:	08018250 	.word	0x08018250
- 80047e8:	080187b8 	.word	0x080187b8
+ 80047e8:	080187bc 	.word	0x080187bc
  80047ec:	08017cbc 	.word	0x08017cbc
- 80047f0:	080186ec 	.word	0x080186ec
- 80047f4:	08018a00 	.word	0x08018a00
+ 80047f0:	080186f0 	.word	0x080186f0
+ 80047f4:	08018a04 	.word	0x08018a04
  80047f8:	080180a0 	.word	0x080180a0
  80047fc:	08017ee0 	.word	0x08017ee0
- 8004800:	08019a08 	.word	0x08019a08
+ 8004800:	08019a0c 	.word	0x08019a0c
  8004804:	08017e48 	.word	0x08017e48
- 8004808:	08018804 	.word	0x08018804
- 800480c:	08019a7c 	.word	0x08019a7c
+ 8004808:	08018808 	.word	0x08018808
+ 800480c:	08019a80 	.word	0x08019a80
  8004810:	080181cc 	.word	0x080181cc
  8004814:	08017f8c 	.word	0x08017f8c
- 8004818:	08018b80 	.word	0x08018b80
+ 8004818:	08018b84 	.word	0x08018b84
  800481c:	08017c40 	.word	0x08017c40
- 8004820:	08018438 	.word	0x08018438
+ 8004820:	0801843c 	.word	0x0801843c
  8004824:	08017f4c 	.word	0x08017f4c
  8004828:	08017e20 	.word	0x08017e20
- 800482c:	08019a54 	.word	0x08019a54
- 8004830:	0801999c 	.word	0x0801999c
+ 800482c:	08019a58 	.word	0x08019a58
+ 8004830:	080199a0 	.word	0x080199a0
  8004834:	200067dc 	.word	0x200067dc
 
 08004838 <GetUart>:
@@ -10502,12 +10502,12 @@ static portBASE_TYPE testportCommand( int8_t *pcWriteBuffer, size_t xWriteBuffer
  8004df4:	08017fc4 	.word	0x08017fc4
  8004df8:	20000a2f 	.word	0x20000a2f
  8004dfc:	2000157c 	.word	0x2000157c
- 8004e00:	08019908 	.word	0x08019908
- 8004e04:	0801991c 	.word	0x0801991c
+ 8004e00:	0801990c 	.word	0x0801990c
+ 8004e04:	08019920 	.word	0x08019920
  8004e08:	2000143c 	.word	0x2000143c
- 8004e0c:	080198ec 	.word	0x080198ec
- 8004e10:	08019970 	.word	0x08019970
- 8004e14:	08019980 	.word	0x08019980
+ 8004e0c:	080198f0 	.word	0x080198f0
+ 8004e10:	08019974 	.word	0x08019974
+ 8004e14:	08019984 	.word	0x08019984
 
 08004e18 <FindBroadcastRoutes>:
 {
@@ -12850,7 +12850,7 @@ static portBASE_TYPE testportCommand( int8_t *pcWriteBuffer, size_t xWriteBuffer
  8005e30:	18c9      	adds	r1, r1, r3
  8005e32:	0049      	lsls	r1, r1, #1
  8005e34:	4b1e      	ldr	r3, [pc, #120]	; (8005eb0 <DisplayTopology+0x194>)
- 8005e36:	1859      	adds	r1, r3, r1
+ 8005e36:	18c9      	adds	r1, r1, r3
  8005e38:	2205      	movs	r2, #5
  8005e3a:	0020      	movs	r0, r4
  8005e3c:	f00d fa2f 	bl	801329e <strncpy>
@@ -12895,7 +12895,7 @@ static portBASE_TYPE testportCommand( int8_t *pcWriteBuffer, size_t xWriteBuffer
  8005e88:	20001220 	.word	0x20001220
  8005e8c:	08017b94 	.word	0x08017b94
  8005e90:	08017ba8 	.word	0x08017ba8
- 8005e94:	08019f74 	.word	0x08019f74
+ 8005e94:	08019f78 	.word	0x08019f78
  8005e98:	2000001c 	.word	0x2000001c
  8005e9c:	20000a30 	.word	0x20000a30
  8005ea0:	08017bc0 	.word	0x08017bc0
@@ -12904,7 +12904,7 @@ static portBASE_TYPE testportCommand( int8_t *pcWriteBuffer, size_t xWriteBuffer
  8005eac:	08017bb0 	.word	0x08017bb0
  8005eb0:	08018274 	.word	0x08018274
  8005eb4:	08017ba4 	.word	0x08017ba4
- 8005eb8:	080192b0 	.word	0x080192b0
+ 8005eb8:	080192b4 	.word	0x080192b4
 
 08005ebc <DisplayPortsDir>:
 {
@@ -13061,9 +13061,9 @@ static portBASE_TYPE testportCommand( int8_t *pcWriteBuffer, size_t xWriteBuffer
  8005fdc:	0020      	movs	r0, r4
  8005fde:	f00d f929 	bl	8013234 <strcat>
 	sprintf(pcUserMessage, "\n\rFirmware version: %d.%d.%d", _firmMajor, _firmMinor, _firmPatch);
- 8005fe2:	2301      	movs	r3, #1
+ 8005fe2:	2303      	movs	r3, #3
  8005fe4:	9300      	str	r3, [sp, #0]
- 8005fe6:	3301      	adds	r3, #1
+ 8005fe6:	3b01      	subs	r3, #1
  8005fe8:	2200      	movs	r2, #0
  8005fea:	4986      	ldr	r1, [pc, #536]	; (8006204 <DisplayModuleStatus+0x260>)
  8005fec:	0028      	movs	r0, r5
@@ -13684,10 +13684,10 @@ static portBASE_TYPE testportCommand( int8_t *pcWriteBuffer, size_t xWriteBuffer
  8006490:	20001324 	.word	0x20001324
  8006494:	200011f8 	.word	0x200011f8
  8006498:	200011c8 	.word	0x200011c8
- 800649c:	08018324 	.word	0x08018324
- 80064a0:	0801833c 	.word	0x0801833c
- 80064a4:	0801837c 	.word	0x0801837c
- 80064a8:	080183b0 	.word	0x080183b0
+ 800649c:	08018328 	.word	0x08018328
+ 80064a0:	08018340 	.word	0x08018340
+ 80064a4:	08018380 	.word	0x08018380
+ 80064a8:	080183b4 	.word	0x080183b4
 
 080064ac <AddModuleToGroup>:
 {
@@ -14060,11 +14060,11 @@ static portBASE_TYPE testportCommand( int8_t *pcWriteBuffer, size_t xWriteBuffer
  8006750:	080180bc 	.word	0x080180bc
  8006754:	080180ec 	.word	0x080180ec
  8006758:	08018108 	.word	0x08018108
- 800675c:	0801833c 	.word	0x0801833c
- 8006760:	080183b0 	.word	0x080183b0
+ 800675c:	08018340 	.word	0x08018340
+ 8006760:	080183b4 	.word	0x080183b4
  8006764:	08018128 	.word	0x08018128
  8006768:	080180c0 	.word	0x080180c0
- 800676c:	0801837c 	.word	0x0801837c
+ 800676c:	08018380 	.word	0x08018380
 
 08006770 <ReadPortsDir>:
 {
@@ -14697,9 +14697,9 @@ static portBASE_TYPE testportCommand( int8_t *pcWriteBuffer, size_t xWriteBuffer
  8006bc4:	200011c8 	.word	0x200011c8
  8006bc8:	200012e0 	.word	0x200012e0
  8006bcc:	200012c4 	.word	0x200012c4
- 8006bd0:	08018690 	.word	0x08018690
- 8006bd4:	08018558 	.word	0x08018558
- 8006bd8:	08018594 	.word	0x08018594
+ 8006bd0:	08018694 	.word	0x08018694
+ 8006bd4:	0801855c 	.word	0x0801855c
+ 8006bd8:	08018598 	.word	0x08018598
 
 08006bdc <bootloaderUpdateCommand>:
 {
@@ -15406,10 +15406,10 @@ static portBASE_TYPE testportCommand( int8_t *pcWriteBuffer, size_t xWriteBuffer
  80070f4:	20000c58 	.word	0x20000c58
  80070f8:	200012c0 	.word	0x200012c0
  80070fc:	200010c4 	.word	0x200010c4
- 8007100:	08018448 	.word	0x08018448
+ 8007100:	0801844c 	.word	0x0801844c
  8007104:	20001220 	.word	0x20001220
  8007108:	20000a2f 	.word	0x20000a2f
- 800710c:	0801845c 	.word	0x0801845c
+ 800710c:	08018460 	.word	0x08018460
  8007110:	48000800 	.word	0x48000800
  8007114:	200011cc 	.word	0x200011cc
  8007118:	2000001e 	.word	0x2000001e
@@ -18062,10 +18062,10 @@ static portBASE_TYPE testportCommand( int8_t *pcWriteBuffer, size_t xWriteBuffer
  80084b0:	9809      	ldr	r0, [sp, #36]	; 0x24
  80084b2:	f00a fe9f 	bl	80131f4 <sprintf>
  80084b6:	e7e0      	b.n	800847a <scastCommand+0x12e>
- 80084b8:	0801870c 	.word	0x0801870c
- 80084bc:	08018714 	.word	0x08018714
- 80084c0:	08018720 	.word	0x08018720
- 80084c4:	08018730 	.word	0x08018730
+ 80084b8:	08018710 	.word	0x08018710
+ 80084bc:	08018718 	.word	0x08018718
+ 80084c0:	08018724 	.word	0x08018724
+ 80084c4:	08018734 	.word	0x08018734
 
 080084c8 <AddPortButton>:
 {
@@ -18535,7 +18535,7 @@ static portBASE_TYPE testportCommand( int8_t *pcWriteBuffer, size_t xWriteBuffer
  8008808:	f00a fcf4 	bl	80131f4 <sprintf>
  800880c:	e7f0      	b.n	80087f0 <removebuttonCommand+0x30>
  800880e:	46c0      	nop			; (mov r8, r8)
- 8008810:	080186c4 	.word	0x080186c4
+ 8008810:	080186c8 	.word	0x080186c8
 
 08008814 <SetButtonEvents>:
 {
@@ -19486,10 +19486,10 @@ static portBASE_TYPE testportCommand( int8_t *pcWriteBuffer, size_t xWriteBuffer
  8008e9c:	e7ce      	b.n	8008e3c <timeCommand+0x1c>
  8008e9e:	46c0      	nop			; (mov r8, r8)
  8008ea0:	20006894 	.word	0x20006894
- 8008ea4:	080199ac 	.word	0x080199ac
- 8008ea8:	08019a00 	.word	0x08019a00
- 8008eac:	080199d4 	.word	0x080199d4
- 8008eb0:	08019a04 	.word	0x08019a04
+ 8008ea4:	080199b0 	.word	0x080199b0
+ 8008ea8:	08019a04 	.word	0x08019a04
+ 8008eac:	080199d8 	.word	0x080199d8
+ 8008eb0:	08019a08 	.word	0x08019a08
 
 08008eb4 <setCommand>:
 {
@@ -19901,21 +19901,21 @@ static portBASE_TYPE testportCommand( int8_t *pcWriteBuffer, size_t xWriteBuffer
  80091ae:	e6dc      	b.n	8008f6a <setCommand+0xb6>
  80091b0:	20001200 	.word	0x20001200
  80091b4:	08017fb0 	.word	0x08017fb0
- 80091b8:	08018908 	.word	0x08018908
- 80091bc:	08018918 	.word	0x08018918
+ 80091b8:	0801890c 	.word	0x0801890c
+ 80091bc:	0801891c 	.word	0x0801891c
  80091c0:	0801803c 	.word	0x0801803c
  80091c4:	2000120c 	.word	0x2000120c
  80091c8:	08017fb8 	.word	0x08017fb8
  80091cc:	08017fc4 	.word	0x08017fc4
  80091d0:	20006894 	.word	0x20006894
- 80091d4:	08018820 	.word	0x08018820
- 80091d8:	08018814 	.word	0x08018814
- 80091dc:	0801881c 	.word	0x0801881c
+ 80091d4:	08018824 	.word	0x08018824
+ 80091d8:	08018818 	.word	0x08018818
+ 80091dc:	08018820 	.word	0x08018820
  80091e0:	08017fcc 	.word	0x08017fcc
  80091e4:	08017fd4 	.word	0x08017fd4
  80091e8:	08017fdc 	.word	0x08017fdc
- 80091ec:	08018834 	.word	0x08018834
- 80091f0:	08018864 	.word	0x08018864
+ 80091ec:	08018838 	.word	0x08018838
+ 80091f0:	08018868 	.word	0x08018868
  80091f4:	08017fe8 	.word	0x08017fe8
  80091f8:	08017ff4 	.word	0x08017ff4
  80091fc:	08018004 	.word	0x08018004
@@ -20336,40 +20336,40 @@ static portBASE_TYPE testportCommand( int8_t *pcWriteBuffer, size_t xWriteBuffer
  800953c:	20001214 	.word	0x20001214
  8009540:	20001218 	.word	0x20001218
  8009544:	2000121c 	.word	0x2000121c
- 8009548:	08018910 	.word	0x08018910
- 800954c:	08018914 	.word	0x08018914
+ 8009548:	08018914 	.word	0x08018914
+ 800954c:	08018918 	.word	0x08018918
  8009550:	20006894 	.word	0x20006894
- 8009554:	08018920 	.word	0x08018920
- 8009558:	08018928 	.word	0x08018928
- 800955c:	08018930 	.word	0x08018930
- 8009560:	0801893c 	.word	0x0801893c
- 8009564:	08018948 	.word	0x08018948
- 8009568:	08018950 	.word	0x08018950
- 800956c:	0801895c 	.word	0x0801895c
- 8009570:	080189f8 	.word	0x080189f8
- 8009574:	08018964 	.word	0x08018964
- 8009578:	08018968 	.word	0x08018968
- 800957c:	08018974 	.word	0x08018974
- 8009580:	08018978 	.word	0x08018978
- 8009584:	08018980 	.word	0x08018980
- 8009588:	08018984 	.word	0x08018984
- 800958c:	0801898c 	.word	0x0801898c
- 8009590:	08018990 	.word	0x08018990
- 8009594:	08018994 	.word	0x08018994
- 8009598:	08018998 	.word	0x08018998
- 800959c:	080189a0 	.word	0x080189a0
- 80095a0:	080189a4 	.word	0x080189a4
- 80095a4:	080189ac 	.word	0x080189ac
- 80095a8:	080189b0 	.word	0x080189b0
- 80095ac:	080189b8 	.word	0x080189b8
- 80095b0:	080189bc 	.word	0x080189bc
- 80095b4:	080189c8 	.word	0x080189c8
- 80095b8:	080189cc 	.word	0x080189cc
- 80095bc:	080189d4 	.word	0x080189d4
- 80095c0:	080189d8 	.word	0x080189d8
- 80095c4:	080189e4 	.word	0x080189e4
- 80095c8:	080189e8 	.word	0x080189e8
- 80095cc:	080189f4 	.word	0x080189f4
+ 8009554:	08018924 	.word	0x08018924
+ 8009558:	0801892c 	.word	0x0801892c
+ 800955c:	08018934 	.word	0x08018934
+ 8009560:	08018940 	.word	0x08018940
+ 8009564:	0801894c 	.word	0x0801894c
+ 8009568:	08018954 	.word	0x08018954
+ 800956c:	08018960 	.word	0x08018960
+ 8009570:	080189fc 	.word	0x080189fc
+ 8009574:	08018968 	.word	0x08018968
+ 8009578:	0801896c 	.word	0x0801896c
+ 800957c:	08018978 	.word	0x08018978
+ 8009580:	0801897c 	.word	0x0801897c
+ 8009584:	08018984 	.word	0x08018984
+ 8009588:	08018988 	.word	0x08018988
+ 800958c:	08018990 	.word	0x08018990
+ 8009590:	08018994 	.word	0x08018994
+ 8009594:	08018998 	.word	0x08018998
+ 8009598:	0801899c 	.word	0x0801899c
+ 800959c:	080189a4 	.word	0x080189a4
+ 80095a0:	080189a8 	.word	0x080189a8
+ 80095a4:	080189b0 	.word	0x080189b0
+ 80095a8:	080189b4 	.word	0x080189b4
+ 80095ac:	080189bc 	.word	0x080189bc
+ 80095b0:	080189c0 	.word	0x080189c0
+ 80095b4:	080189cc 	.word	0x080189cc
+ 80095b8:	080189d0 	.word	0x080189d0
+ 80095bc:	080189d8 	.word	0x080189d8
+ 80095c0:	080189dc 	.word	0x080189dc
+ 80095c4:	080189e8 	.word	0x080189e8
+ 80095c8:	080189ec 	.word	0x080189ec
+ 80095cc:	080189f8 	.word	0x080189f8
  80095d0:	08017e90 	.word	0x08017e90
 			temp82 = JANUARY;
  80095d4:	2401      	movs	r4, #1
@@ -20500,7 +20500,7 @@ static portBASE_TYPE testportCommand( int8_t *pcWriteBuffer, size_t xWriteBuffer
  80096a4:	fffff830 	.word	0xfffff830
  80096a8:	20006894 	.word	0x20006894
  80096ac:	20001214 	.word	0x20001214
- 80096b0:	080189f8 	.word	0x080189f8
+ 80096b0:	080189fc 	.word	0x080189fc
 
 080096b4 <GetDateString>:
 {
@@ -20534,7 +20534,7 @@ static portBASE_TYPE testportCommand( int8_t *pcWriteBuffer, size_t xWriteBuffer
  80096e8:	b002      	add	sp, #8
  80096ea:	bd10      	pop	{r4, pc}
  80096ec:	20006894 	.word	0x20006894
- 80096f0:	08019a8c 	.word	0x08019a8c
+ 80096f0:	08019a90 	.word	0x08019a90
  80096f4:	08017f9c 	.word	0x08017f9c
 
 080096f8 <dateCommand>:
@@ -20675,7 +20675,7 @@ static portBASE_TYPE testportCommand( int8_t *pcWriteBuffer, size_t xWriteBuffer
  80097e4:	f009 fd06 	bl	80131f4 <sprintf>
  80097e8:	e7e5      	b.n	80097b6 <bridgeCommand+0x72>
  80097ea:	46c0      	nop			; (mov r8, r8)
- 80097ec:	08019970 	.word	0x08019970
+ 80097ec:	08019974 	.word	0x08019974
  80097f0:	08017e08 	.word	0x08017e08
  80097f4:	08017de4 	.word	0x08017de4
 
@@ -20840,9 +20840,9 @@ static portBASE_TYPE testportCommand( int8_t *pcWriteBuffer, size_t xWriteBuffer
  8009914:	f009 fc6e 	bl	80131f4 <sprintf>
  8009918:	e7e5      	b.n	80098e6 <unbridgeCommand+0x72>
  800991a:	46c0      	nop			; (mov r8, r8)
- 800991c:	08019970 	.word	0x08019970
- 8009920:	08019a38 	.word	0x08019a38
- 8009924:	08019a18 	.word	0x08019a18
+ 800991c:	08019974 	.word	0x08019974
+ 8009920:	08019a3c 	.word	0x08019a3c
+ 8009924:	08019a1c 	.word	0x08019a1c
 
 08009928 <StringToLowerCase>:
 /*-----------------------------------------------------------*/
@@ -21423,11 +21423,11 @@ BOS_Status ParseSnippetCondition(char *string)
  8009cd8:	2000690c 	.word	0x2000690c
  8009cdc:	20001368 	.word	0x20001368
  8009ce0:	08017a44 	.word	0x08017a44
- 8009ce4:	08018a78 	.word	0x08018a78
+ 8009ce4:	08018a7c 	.word	0x08018a7c
  8009ce8:	20000cdc 	.word	0x20000cdc
- 8009cec:	08019c88 	.word	0x08019c88
- 8009cf0:	08019c98 	.word	0x08019c98
- 8009cf4:	08019ca8 	.word	0x08019ca8
+ 8009cec:	08019c8c 	.word	0x08019c8c
+ 8009cf0:	08019c9c 	.word	0x08019c9c
+ 8009cf4:	08019cac 	.word	0x08019cac
 			else if (secondPart != NULL && thirdPart != NULL) 
  8009cf8:	2e00      	cmp	r6, #0
  8009cfa:	d04f      	beq.n	8009d9c <ParseSnippetCondition+0x444>
@@ -22126,29 +22126,29 @@ BOS_Status ParseSnippetCondition(char *string)
 }
  800a21a:	e043      	b.n	800a2a4 <CLI_CommandParser+0x400>
  800a21c:	20001430 	.word	0x20001430
- 800a220:	08019ac8 	.word	0x08019ac8
- 800a224:	08019b1c 	.word	0x08019b1c
- 800a228:	08019b68 	.word	0x08019b68
- 800a22c:	08019ac4 	.word	0x08019ac4
+ 800a220:	08019acc 	.word	0x08019acc
+ 800a224:	08019b20 	.word	0x08019b20
+ 800a228:	08019b6c 	.word	0x08019b6c
+ 800a22c:	08019ac8 	.word	0x08019ac8
  800a230:	08017bac 	.word	0x08017bac
- 800a234:	08019b24 	.word	0x08019b24
+ 800a234:	08019b28 	.word	0x08019b28
  800a238:	200011c8 	.word	0x200011c8
- 800a23c:	08019410 	.word	0x08019410
+ 800a23c:	08019414 	.word	0x08019414
  800a240:	20006894 	.word	0x20006894
  800a244:	20000a2f 	.word	0x20000a2f
  800a248:	200012c0 	.word	0x200012c0
  800a24c:	20001622 	.word	0x20001622
- 800a250:	08019c2c 	.word	0x08019c2c
- 800a254:	08019b6c 	.word	0x08019b6c
- 800a258:	08019b94 	.word	0x08019b94
+ 800a250:	08019c30 	.word	0x08019c30
+ 800a254:	08019b70 	.word	0x08019b70
+ 800a258:	08019b98 	.word	0x08019b98
  800a25c:	20000cc0 	.word	0x20000cc0
  800a260:	20001094 	.word	0x20001094
- 800a264:	08019bbc 	.word	0x08019bbc
+ 800a264:	08019bc0 	.word	0x08019bc0
  800a268:	20001402 	.word	0x20001402
  800a26c:	20000f08 	.word	0x20000f08
- 800a270:	08019bdc 	.word	0x08019bdc
- 800a274:	08019c08 	.word	0x08019c08
- 800a278:	08019c4c 	.word	0x08019c4c
+ 800a270:	08019be0 	.word	0x08019be0
+ 800a274:	08019c0c 	.word	0x08019c0c
+ 800a278:	08019c50 	.word	0x08019c50
 		memset( pcOutputString, 0x00, strlen((char*)pcOutputString) );
  800a27c:	0020      	movs	r0, r4
  800a27e:	f7f5 ff4b 	bl	8000118 <strlen>
@@ -22441,13 +22441,13 @@ char cRxedChar; int8_t cInputIndex = 0, *pcOutputString;
  800a480:	08018274 	.word	0x08018274
  800a484:	200011c8 	.word	0x200011c8
  800a488:	20001404 	.word	0x20001404
- 800a48c:	08019cb8 	.word	0x08019cb8
+ 800a48c:	08019cbc 	.word	0x08019cbc
  800a490:	00000293 	.word	0x00000293
- 800a494:	08019ce4 	.word	0x08019ce4
+ 800a494:	08019ce8 	.word	0x08019ce8
  800a498:	2000157c 	.word	0x2000157c
  800a49c:	2000143c 	.word	0x2000143c
  800a4a0:	20001334 	.word	0x20001334
- 800a4a4:	0801a288 	.word	0x0801a288
+ 800a4a4:	0801a28c 	.word	0x0801a28c
  800a4a8:	200013d0 	.word	0x200013d0
 
 0800a4ac <ParseSnippetCommand>:
@@ -22709,7 +22709,7 @@ bool CheckSnippetCondition(uint8_t index)
  800a63c:	2000690c 	.word	0x2000690c
  800a640:	20000cdc 	.word	0x20000cdc
  800a644:	20000040 	.word	0x20000040
- 800a648:	08019aa8 	.word	0x08019aa8
+ 800a648:	08019aac 	.word	0x08019aac
 
 0800a64c <ExecuteSnippet>:
 /*-----------------------------------------------------------*/
@@ -25142,28 +25142,28 @@ void BackEndTask(void * argument)
  800b564:	bd70      	pop	{r4, r5, r6, pc}
  800b566:	46c0      	nop			; (mov r8, r8)
  800b568:	2000161c 	.word	0x2000161c
- 800b56c:	08019f78 	.word	0x08019f78
+ 800b56c:	08019f7c 	.word	0x08019f7c
  800b570:	0800af91 	.word	0x0800af91
  800b574:	200015fc 	.word	0x200015fc
- 800b578:	08019f84 	.word	0x08019f84
+ 800b578:	08019f88 	.word	0x08019f88
  800b57c:	0800b04d 	.word	0x0800b04d
  800b580:	20001614 	.word	0x20001614
- 800b584:	08019f90 	.word	0x08019f90
+ 800b584:	08019f94 	.word	0x08019f94
  800b588:	080128c3 	.word	0x080128c3
  800b58c:	20001628 	.word	0x20001628
- 800b590:	08019f9c 	.word	0x08019f9c
+ 800b590:	08019fa0 	.word	0x08019fa0
  800b594:	0800a2c9 	.word	0x0800a2c9
  800b598:	08006d49 	.word	0x08006d49
  800b59c:	20001600 	.word	0x20001600
- 800b5a0:	08019fa4 	.word	0x08019fa4
+ 800b5a0:	08019fa8 	.word	0x08019fa8
  800b5a4:	20001604 	.word	0x20001604
- 800b5a8:	08019fb0 	.word	0x08019fb0
+ 800b5a8:	08019fb4 	.word	0x08019fb4
  800b5ac:	20001608 	.word	0x20001608
- 800b5b0:	08019fbc 	.word	0x08019fbc
+ 800b5b0:	08019fc0 	.word	0x08019fc0
  800b5b4:	2000160c 	.word	0x2000160c
- 800b5b8:	08019fc8 	.word	0x08019fc8
+ 800b5b8:	08019fcc 	.word	0x08019fcc
  800b5bc:	20001610 	.word	0x20001610
- 800b5c0:	08019fd4 	.word	0x08019fd4
+ 800b5c0:	08019fd8 	.word	0x08019fd8
  800b5c4:	20006990 	.word	0x20006990
  800b5c8:	20006974 	.word	0x20006974
 
@@ -25362,13 +25362,13 @@ portBASE_TYPE ledModeCommand( int8_t *pcWriteBuffer, size_t xWriteBufferLen, con
  800b6b6:	d0f5      	beq.n	800b6a4 <ledModeCommand+0x68>
  800b6b8:	e7dd      	b.n	800b676 <ledModeCommand+0x3a>
  800b6ba:	46c0      	nop			; (mov r8, r8)
- 800b6bc:	080190e4 	.word	0x080190e4
- 800b6c0:	08019fec 	.word	0x08019fec
+ 800b6bc:	080190e8 	.word	0x080190e8
+ 800b6c0:	08019ff0 	.word	0x08019ff0
  800b6c4:	2000162d 	.word	0x2000162d
- 800b6c8:	08019ff8 	.word	0x08019ff8
- 800b6cc:	08019ff0 	.word	0x08019ff0
- 800b6d0:	08019ff4 	.word	0x08019ff4
- 800b6d4:	0801a028 	.word	0x0801a028
+ 800b6c8:	08019ffc 	.word	0x08019ffc
+ 800b6cc:	08019ff4 	.word	0x08019ff4
+ 800b6d0:	08019ff8 	.word	0x08019ff8
+ 800b6d4:	0801a02c 	.word	0x0801a02c
 
 0800b6d8 <Module_Init>:
 {	
@@ -25402,7 +25402,7 @@ portBASE_TYPE ledModeCommand( int8_t *pcWriteBuffer, size_t xWriteBufferLen, con
  800b70c:	bd00      	pop	{pc}
  800b70e:	46c0      	nop			; (mov r8, r8)
  800b710:	0800ba75 	.word	0x0800ba75
- 800b714:	08019fe0 	.word	0x08019fe0
+ 800b714:	08019fe4 	.word	0x08019fe4
  800b718:	20001630 	.word	0x20001630
 
 0800b71c <RegisterModuleCLICommands>:
@@ -25426,11 +25426,11 @@ portBASE_TYPE ledModeCommand( int8_t *pcWriteBuffer, size_t xWriteBufferLen, con
 }
  800b73c:	bd10      	pop	{r4, pc}
  800b73e:	46c0      	nop			; (mov r8, r8)
- 800b740:	0801a10c 	.word	0x0801a10c
- 800b744:	0801a08c 	.word	0x0801a08c
- 800b748:	0801a36c 	.word	0x0801a36c
- 800b74c:	0801a058 	.word	0x0801a058
- 800b750:	0801a198 	.word	0x0801a198
+ 800b740:	0801a110 	.word	0x0801a110
+ 800b744:	0801a090 	.word	0x0801a090
+ 800b748:	0801a370 	.word	0x0801a370
+ 800b74c:	0801a05c 	.word	0x0801a05c
+ 800b750:	0801a19c 	.word	0x0801a19c
 
 0800b754 <GetPort>:
 	if (huart->Instance == USART5)
@@ -25809,10 +25809,10 @@ portBASE_TYPE ledModeCommand( int8_t *pcWriteBuffer, size_t xWriteBufferLen, con
  800ba00:	f007 f9f5 	bl	8012dee <memcpy>
  800ba04:	e7e6      	b.n	800b9d4 <onCommand+0x40>
  800ba06:	46c0      	nop			; (mov r8, r8)
- 800ba08:	0801a09c 	.word	0x0801a09c
- 800ba0c:	0801a0a0 	.word	0x0801a0a0
- 800ba10:	0801a0a4 	.word	0x0801a0a4
- 800ba14:	0801a0d8 	.word	0x0801a0d8
+ 800ba08:	0801a0a0 	.word	0x0801a0a0
+ 800ba0c:	0801a0a4 	.word	0x0801a0a4
+ 800ba10:	0801a0a8 	.word	0x0801a0a8
+ 800ba14:	0801a0dc 	.word	0x0801a0dc
 
 0800ba18 <Relay_off>:
 {	
@@ -25893,7 +25893,7 @@ portBASE_TYPE ledModeCommand( int8_t *pcWriteBuffer, size_t xWriteBufferLen, con
  800ba98:	f007 f9a9 	bl	8012dee <memcpy>
  800ba9c:	e7f7      	b.n	800ba8e <offCommand+0x12>
  800ba9e:	46c0      	nop			; (mov r8, r8)
- 800baa0:	0801a068 	.word	0x0801a068
+ 800baa0:	0801a06c 	.word	0x0801a06c
 
 0800baa4 <Relay_PWM>:
 {	
@@ -26023,8 +26023,8 @@ portBASE_TYPE ledModeCommand( int8_t *pcWriteBuffer, size_t xWriteBufferLen, con
  800bb84:	2000      	movs	r0, #0
  800bb86:	bd10      	pop	{r4, pc}
  800bb88:	2000162c 	.word	0x2000162c
- 800bb8c:	0801a068 	.word	0x0801a068
- 800bb90:	0801a348 	.word	0x0801a348
+ 800bb8c:	0801a06c 	.word	0x0801a06c
+ 800bb90:	0801a34c 	.word	0x0801a34c
 
 0800bb94 <Module_MessagingTask>:
 {
@@ -26233,8 +26233,8 @@ portBASE_TYPE pwmCommand( int8_t *pcWriteBuffer, size_t xWriteBufferLen, const i
  800bcd8:	d1fa      	bne.n	800bcd0 <pwmCommand+0x64>
  800bcda:	e7e5      	b.n	800bca8 <pwmCommand+0x3c>
  800bcdc:	42c80000 	.word	0x42c80000
- 800bce0:	0801a160 	.word	0x0801a160
- 800bce4:	0801a11c 	.word	0x0801a11c
+ 800bce0:	0801a164 	.word	0x0801a164
+ 800bce4:	0801a120 	.word	0x0801a120
 
 0800bce8 <DMA_MSG_RX_CH_Init>:
 /*-----------------------------------------------------------*/
@@ -30794,8 +30794,8 @@ int8_t cParameters = 0;
  800d74e:	46c0      	nop			; (mov r8, r8)
  800d750:	20001be4 	.word	0x20001be4
  800d754:	20000054 	.word	0x20000054
- 800d758:	0801a3d4 	.word	0x0801a3d4
- 800d75c:	0801a37c 	.word	0x0801a37c
+ 800d758:	0801a3d8 	.word	0x0801a3d8
+ 800d75c:	0801a380 	.word	0x0801a380
 
 0800d760 <FreeRTOS_CLIGetOutputBuffer>:
 }
@@ -33078,7 +33078,7 @@ TCB_t *pxTCB;
  800e41e:	b005      	add	sp, #20
  800e420:	bd00      	pop	{pc}
  800e422:	46c0      	nop			; (mov r8, r8)
- 800e424:	0801a4f4 	.word	0x0801a4f4
+ 800e424:	0801a4f8 	.word	0x0801a4f8
  800e428:	0800e69d 	.word	0x0800e69d
  800e42c:	20001ce4 	.word	0x20001ce4
  800e430:	20001d10 	.word	0x20001d10
@@ -33723,7 +33723,7 @@ BaseType_t xAlreadyYielded = pdFALSE;
  800e89c:	20001d14 	.word	0x20001d14
  800e8a0:	20001c88 	.word	0x20001c88
  800e8a4:	20001bf0 	.word	0x20001bf0
- 800e8a8:	0801a4b8 	.word	0x0801a4b8
+ 800e8a8:	0801a4bc 	.word	0x0801a4bc
  800e8ac:	20001ca0 	.word	0x20001ca0
  800e8b0:	20001bfc 	.word	0x20001bfc
 
@@ -34273,7 +34273,7 @@ BaseType_t xAlreadyYielded = pdFALSE;
  800ec04:	bdf0      	pop	{r4, r5, r6, r7, pc}
  800ec06:	46c0      	nop			; (mov r8, r8)
  800ec08:	20001c8c 	.word	0x20001c8c
- 800ec0c:	0801a4e4 	.word	0x0801a4e4
+ 800ec0c:	0801a4e8 	.word	0x0801a4e8
 
 0800ec10 <vTaskGetRunTimeStats>:
 /*----------------------------------------------------------*/
@@ -34402,8 +34402,8 @@ BaseType_t xAlreadyYielded = pdFALSE;
  800ecae:	f004 faa1 	bl	80131f4 <sprintf>
  800ecb2:	e7d9      	b.n	800ec68 <vTaskGetRunTimeStats+0x58>
  800ecb4:	20001c8c 	.word	0x20001c8c
- 800ecb8:	0801a4d8 	.word	0x0801a4d8
- 800ecbc:	0801a4cc 	.word	0x0801a4cc
+ 800ecb8:	0801a4dc 	.word	0x0801a4dc
+ 800ecbc:	0801a4d0 	.word	0x0801a4d0
 
 0800ecc0 <pvTaskIncrementMutexHeldCount>:
 
@@ -34845,7 +34845,7 @@ static void prvCheckForValidListAndQueue( void )
  800eec4:	20001d34 	.word	0x20001d34
  800eec8:	20001d18 	.word	0x20001d18
  800eecc:	20001d1c 	.word	0x20001d1c
- 800eed0:	0801a524 	.word	0x0801a524
+ 800eed0:	0801a528 	.word	0x0801a528
 
 0800eed4 <xTimerCreateTimerTask>:
 {
@@ -34879,7 +34879,7 @@ static void prvCheckForValidListAndQueue( void )
  800ef04:	b005      	add	sp, #20
  800ef06:	bd00      	pop	{pc}
  800ef08:	20001d4c 	.word	0x20001d4c
- 800ef0c:	0801a52c 	.word	0x0801a52c
+ 800ef0c:	0801a530 	.word	0x0801a530
  800ef10:	0800f05d 	.word	0x0800f05d
 
 0800ef14 <xTimerCreate>:
@@ -35291,7 +35291,7 @@ Timer_t * const pxTimer = ( Timer_t * ) listGET_OWNER_OF_HEAD_ENTRY( pxCurrentTi
 			( void ) xTaskResumeAll();
  800f1ba:	f7ff f9db 	bl	800e574 <xTaskResumeAll>
  800f1be:	e76d      	b.n	800f09c <prvTimerTask+0x40>
- 800f1c0:	0801a4fc 	.word	0x0801a4fc
+ 800f1c0:	0801a500 	.word	0x0801a500
  800f1c4:	20001d18 	.word	0x20001d18
  800f1c8:	20001d4c 	.word	0x20001d4c
 
@@ -36083,9 +36083,18 @@ uint32_t HAL_GetDEVID(void)
 void HAL_NVIC_SetPriority(IRQn_Type IRQn, uint32_t PreemptPriority, uint32_t SubPriority)
 { 
  800f5dc:	b570      	push	{r4, r5, r6, lr}
+    \param [in]      IRQn  Interrupt number.
+    \param [in]  priority  Priority to set.
+ */
+__STATIC_INLINE void NVIC_SetPriority(IRQn_Type IRQn, uint32_t priority)
+{
   if((int32_t)(IRQn) < 0) {
  800f5de:	2800      	cmp	r0, #0
  800f5e0:	db14      	blt.n	800f60c <HAL_NVIC_SetPriority+0x30>
+    SCB->SHP[_SHP_IDX(IRQn)] = ((uint32_t)(SCB->SHP[_SHP_IDX(IRQn)] & ~(0xFFUL << _BIT_SHIFT(IRQn))) |
+       (((priority << (8 - __NVIC_PRIO_BITS)) & (uint32_t)0xFFUL) << _BIT_SHIFT(IRQn)));
+  }
+  else {
     NVIC->IP[_IP_IDX(IRQn)]  = ((uint32_t)(NVIC->IP[_IP_IDX(IRQn)]  & ~(0xFFUL << _BIT_SHIFT(IRQn))) |
  800f5e2:	0883      	lsrs	r3, r0, #2
  800f5e4:	009b      	lsls	r3, r3, #2
@@ -40350,7 +40359,7 @@ uint32_t HAL_RCC_GetHCLKFreq(void)
  8011018:	bd10      	pop	{r4, pc}
  801101a:	46c0      	nop			; (mov r8, r8)
  801101c:	40021000 	.word	0x40021000
- 8011020:	0801a534 	.word	0x0801a534
+ 8011020:	0801a538 	.word	0x0801a538
  8011024:	2000004c 	.word	0x2000004c
 
 08011028 <HAL_RCC_GetPCLK1Freq>:
@@ -40375,7 +40384,7 @@ uint32_t HAL_RCC_GetPCLK1Freq(void)
  801103c:	bd10      	pop	{r4, pc}
  801103e:	46c0      	nop			; (mov r8, r8)
  8011040:	40021000 	.word	0x40021000
- 8011044:	0801a534 	.word	0x0801a534
+ 8011044:	0801a538 	.word	0x0801a538
 
 08011048 <HAL_RCCEx_PeriphCLKConfig>:
   *         the backup registers) and RCC_BDCR register are set to their reset values.
@@ -46505,7 +46514,7 @@ void UserTask(void * argument)
  80135a6:	e7b0      	b.n	801350a <_strtod_l+0x212>
  80135a8:	000c      	movs	r4, r1
  80135aa:	e77e      	b.n	80134aa <_strtod_l+0x1b2>
- 80135ac:	0801a554 	.word	0x0801a554
+ 80135ac:	0801a558 	.word	0x0801a558
  80135b0:	ffefffff 	.word	0xffefffff
  80135b4:	00000433 	.word	0x00000433
  80135b8:	7ff00000 	.word	0x7ff00000
@@ -46865,7 +46874,7 @@ void UserTask(void * argument)
  80138ac:	0801a700 	.word	0x0801a700
  80138b0:	7ff00000 	.word	0x7ff00000
  80138b4:	0801a5b5 	.word	0x0801a5b5
- 80138b8:	0801a568 	.word	0x0801a568
+ 80138b8:	0801a56c 	.word	0x0801a56c
  80138bc:	fff80000 	.word	0xfff80000
  80138c0:	0801a738 	.word	0x0801a738
  80138c4:	fcb00000 	.word	0xfcb00000
@@ -54212,7 +54221,7 @@ void UserTask(void * argument)
  8017550:	2000      	movs	r0, #0
  8017552:	e7ca      	b.n	80174ea <__register_exitproc+0x3e>
  8017554:	20000a0c 	.word	0x20000a0c
- 8017558:	0801a544 	.word	0x0801a544
+ 8017558:	0801a548 	.word	0x0801a548
  801755c:	08012955 	.word	0x08012955
 
 08017560 <_calloc_r>:
