@@ -1,0 +1,17 @@
+H0FR6.c:537:15:ledModeCommand	24	static,ignoring_inline_asm
+H0FR6.c:112:6:Module_Init	16	static
+H0FR6.c:172:6:RegisterModuleCLICommands	8	static
+H0FR6.c:187:9:GetPort	0	static
+H0FR6.c:216:6:TIM3_Init	96	static
+H0FR6.c:269:6:TIM3_DeInit	8	static
+H0FR6.c:281:15:Set_Relay_PWM	24	static
+H0FR6.c:309:15:Relay_on	16	static
+H0FR6.c:433:15:onCommand	24	static,ignoring_inline_asm
+H0FR6.c:348:15:Relay_off	8	static
+H0FR6.c:207:6:RelayTimerCallback	8	static
+H0FR6.c:479:15:offCommand	8	static,ignoring_inline_asm
+H0FR6.c:404:15:Relay_PWM	16	static
+H0FR6.c:378:15:Relay_toggle	8	static
+H0FR6.c:506:15:toggleCommand	8	static,ignoring_inline_asm
+H0FR6.c:134:15:Module_MessagingTask	32	static
+H0FR6.c:577:15:pwmCommand	24	static,ignoring_inline_asm
