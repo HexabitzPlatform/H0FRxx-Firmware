@@ -37,13 +37,13 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
  16 .debug_ranges 00001e68  00000000  00000000  00097170  2**3
                   CONTENTS, READONLY, DEBUGGING
- 17 .debug_line   00013396  00000000  00000000  00098fd8  2**0
+ 17 .debug_line   000133d2  00000000  00000000  00098fd8  2**0
                   CONTENTS, READONLY, DEBUGGING
- 18 .debug_str    00009d53  00000000  00000000  000ac36e  2**0
+ 18 .debug_str    00009d4f  00000000  00000000  000ac3aa  2**0
                   CONTENTS, READONLY, DEBUGGING
- 19 .comment      0000007b  00000000  00000000  000b60c1  2**0
+ 19 .comment      0000007b  00000000  00000000  000b60f9  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  00005d48  00000000  00000000  000b613c  2**2
+ 20 .debug_frame  00005d48  00000000  00000000  000b6174  2**2
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -36083,18 +36083,9 @@ uint32_t HAL_GetDEVID(void)
 void HAL_NVIC_SetPriority(IRQn_Type IRQn, uint32_t PreemptPriority, uint32_t SubPriority)
 { 
  800f5dc:	b570      	push	{r4, r5, r6, lr}
-    \param [in]      IRQn  Interrupt number.
-    \param [in]  priority  Priority to set.
- */
-__STATIC_INLINE void NVIC_SetPriority(IRQn_Type IRQn, uint32_t priority)
-{
   if((int32_t)(IRQn) < 0) {
  800f5de:	2800      	cmp	r0, #0
  800f5e0:	db14      	blt.n	800f60c <HAL_NVIC_SetPriority+0x30>
-    SCB->SHP[_SHP_IDX(IRQn)] = ((uint32_t)(SCB->SHP[_SHP_IDX(IRQn)] & ~(0xFFUL << _BIT_SHIFT(IRQn))) |
-       (((priority << (8 - __NVIC_PRIO_BITS)) & (uint32_t)0xFFUL) << _BIT_SHIFT(IRQn)));
-  }
-  else {
     NVIC->IP[_IP_IDX(IRQn)]  = ((uint32_t)(NVIC->IP[_IP_IDX(IRQn)]  & ~(0xFFUL << _BIT_SHIFT(IRQn))) |
  800f5e2:	0883      	lsrs	r3, r0, #2
  800f5e4:	009b      	lsls	r3, r3, #2
