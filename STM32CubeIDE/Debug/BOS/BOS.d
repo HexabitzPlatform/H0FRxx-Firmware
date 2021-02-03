@@ -53,6 +53,7 @@ BOS/BOS.o: D:/Hexabitz/for\ Release/Modules\ firmware/H0FRxx/BOS/BOS.c \
  ../../Thirdparty/Middleware/FreeRTOS/Source/include/FreeRTOS_CLI.h \
  D:/Hexabitz/for\ Release/Modules\ firmware/H0FRxx/BOS/BOS_eeprom.h \
  D:/Hexabitz/for\ Release/Modules\ firmware/H0FRxx/BOS/BOS_utils.h \
+ D:/Hexabitz/for\ Release/Modules\ firmware/H0FRxx/BOS/BOS_messaging.h \
  ../../H0FR6/H0FR6.h ../../BOS/BOS.h ../../H0FR6/H0FR6_MemoryMap.h \
  ../../H0FR6/H0FR6_uart.h ../../H0FR6/H0FR6_gpio.h \
  ../../H0FR6/H0FR6_dma.h \
@@ -165,6 +166,8 @@ D:/Hexabitz/for\ Release/Modules\ firmware/H0FRxx/BOS/BOS_MsgCodes.h:
 D:/Hexabitz/for\ Release/Modules\ firmware/H0FRxx/BOS/BOS_eeprom.h:
 
 D:/Hexabitz/for\ Release/Modules\ firmware/H0FRxx/BOS/BOS_utils.h:
+
+D:/Hexabitz/for\ Release/Modules\ firmware/H0FRxx/BOS/BOS_messaging.h:
 
 ../../H0FR6/H0FR6.h:
 

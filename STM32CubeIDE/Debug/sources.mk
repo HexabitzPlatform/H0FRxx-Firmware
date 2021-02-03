@@ -13,11 +13,21 @@ SIZE_OUTPUT :=
 OBJDUMP_LIST := 
 EXECUTABLES := 
 OBJS := 
+S_DEPS := 
+S_UPPER_DEPS := 
 C_DEPS := 
 
 # Every subdirectory with source files must be described here
 SUBDIRS := \
 BOS \
+H0FR1/BOS \
+H0FR1/Thirdparty/CMSIS/Device/ST/STM32F0xx/Source/Templates \
+H0FR1/Thirdparty/Middleware/FreeRTOS/Source/CMSIS_RTOS \
+H0FR1/Thirdparty/Middleware/FreeRTOS/Source \
+H0FR1/Thirdparty/Middleware/FreeRTOS/Source/portable/GCC/ARM_CM0 \
+H0FR1/Thirdparty/Middleware/FreeRTOS/Source/portable/MemMang \
+H0FR1/Thirdparty/STM32F0xx_HAL_Driver/Src \
+H0FR1/User \
 H0FR6 \
 H0FR6/gcc \
 Thirdparty/CMSIS/Device/ST/STM32F0xx/Source/Templates \

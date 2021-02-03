@@ -17,17 +17,36 @@ RM := rm -rf
 -include Thirdparty/CMSIS/Device/ST/STM32F0xx/Source/Templates/subdir.mk
 -include H0FR6/gcc/subdir.mk
 -include H0FR6/subdir.mk
+-include H0FR1/User/subdir.mk
+-include H0FR1/Thirdparty/STM32F0xx_HAL_Driver/Src/subdir.mk
+-include H0FR1/Thirdparty/Middleware/FreeRTOS/Source/portable/MemMang/subdir.mk
+-include H0FR1/Thirdparty/Middleware/FreeRTOS/Source/portable/GCC/ARM_CM0/subdir.mk
+-include H0FR1/Thirdparty/Middleware/FreeRTOS/Source/CMSIS_RTOS/subdir.mk
+-include H0FR1/Thirdparty/Middleware/FreeRTOS/Source/subdir.mk
+-include H0FR1/Thirdparty/CMSIS/Device/ST/STM32F0xx/Source/Templates/subdir.mk
+-include H0FR1/BOS/subdir.mk
 -include BOS/subdir.mk
 -include subdir.mk
 -include objects.mk
 
 ifneq ($(MAKECMDGOALS),clean)
+ifneq ($(strip $(S_DEPS)),)
+-include $(S_DEPS)
+endif
+ifneq ($(strip $(S_UPPER_DEPS)),)
+-include $(S_UPPER_DEPS)
+endif
 ifneq ($(strip $(C_DEPS)),)
 -include $(C_DEPS)
 endif
 endif
 
 -include ../makefile.defs
+
+BUILD_ARTIFACT_NAME := H0FRxx
+BUILD_ARTIFACT_EXTENSION := elf
+BUILD_ARTIFACT_PREFIX := 
+BUILD_ARTIFACT := $(BUILD_ARTIFACT_PREFIX)$(BUILD_ARTIFACT_NAME).$(BUILD_ARTIFACT_EXTENSION)
 
 # Add inputs and outputs from these tool invocations to the build variables 
 EXECUTABLES += \
@@ -44,7 +63,10 @@ H0FRxx.hex \
 
 
 # All Target
-all: H0FRxx.elf secondary-outputs
+all: main-build
+
+# Main-build Target
+main-build: H0FRxx.elf secondary-outputs
 
 # Tool invocations
 H0FRxx.elf: $(OBJS) $(USER_OBJS) D:\Hexabitz\for\ Release\Modules\ firmware\H0FRxx\STM32CubeIDE\STM32F091RCTX_FLASH.ld
@@ -74,7 +96,14 @@ clean:
 
 secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST) $(OBJCOPY_HEX)
 
-.PHONY: all clean dependents
+fail-specified-linker-script-missing:
+	@echo 'Error: Cannot find the specified linker script. Check the linker settings in the build configuration.'
+	@exit 2
+
+warn-no-linker-script-specified:
+	@echo 'Warning: No linker script specified. Check the linker settings in the build configuration.'
+
+.PHONY: all clean dependents fail-specified-linker-script-missing warn-no-linker-script-specified
 .SECONDARY:
 
 -include ../makefile.targets
