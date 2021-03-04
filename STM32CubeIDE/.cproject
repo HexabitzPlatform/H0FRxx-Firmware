@@ -177,21 +177,7 @@
                     					
                     <sourceEntries>
                         						
-                        <entry excluding="H0FR6|Thirdparty/Middleware/FreeRTOS/Source/portable/MemMang|Thirdparty/Middleware/FreeRTOS/Source/portable/GCC|Thirdparty/STM32F0xx_HAL_Driver/Src|Thirdparty/Middleware/FreeRTOS/Source/CMSIS_RTOS|Thirdparty/CMSIS/Device/ST/STM32F0xx/Source|BOS" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
-                        						
-                        <entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="BOS"/>
-                        						
-                        <entry flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="H0FR6"/>
-                        						
-                        <entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Thirdparty/CMSIS/Device/ST/STM32F0xx/Source"/>
-                        						
-                        <entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Thirdparty/Middleware/FreeRTOS/Source/CMSIS_RTOS"/>
-                        						
-                        <entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Thirdparty/Middleware/FreeRTOS/Source/portable/GCC"/>
-                        						
-                        <entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Thirdparty/Middleware/FreeRTOS/Source/portable/MemMang"/>
-                        						
-                        <entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Thirdparty/STM32F0xx_HAL_Driver/Src"/>
+                        <entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
                         					
                     </sourceEntries>
                     				
