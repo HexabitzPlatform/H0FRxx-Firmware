@@ -1,0 +1,5 @@
+H0FR6_gpio.c:66:6:IND_LED_Init	32	static
+H0FR6_gpio.c:52:6:GPIO_Init	32	static
+H0FR6_gpio.c:79:6:Relay_Init	32	static
+H0FR6_gpio.c:147:12:GetPortGPIOs	24	static
+H0FR6_gpio.c:93:9:IsFactoryReset	88	static

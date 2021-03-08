@@ -1,0 +1,15 @@
+H0FR6.c:695:15:ledModeCommand	24	static,ignoring_inline_asm
+H0FR6.c:115:6:SystemClock_Config	128	static
+H0FR6.c:164:9:SaveToRO	72	static
+H0FR6.c:260:9:ClearROtopology	8	static
+H0FR6.c:270:6:Module_Init	16	static
+H0FR6.c:330:6:RegisterModuleCLICommands	8	static
+H0FR6.c:345:9:GetPort	0	static
+H0FR6.c:467:15:Relay_on	16	static
+H0FR6.c:591:15:onCommand	24	static,ignoring_inline_asm
+H0FR6.c:506:15:Relay_off	8	static
+H0FR6.c:365:6:RelayTimerCallback	8	static
+H0FR6.c:637:15:offCommand	8	static,ignoring_inline_asm
+H0FR6.c:536:15:Relay_toggle	8	static
+H0FR6.c:292:15:Module_MessagingTask	16	static
+H0FR6.c:664:15:toggleCommand	8	static,ignoring_inline_asm
