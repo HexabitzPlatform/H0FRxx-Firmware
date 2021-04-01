@@ -16,7 +16,8 @@
 #include "H0FR6_MemoryMap.h"	
 #include "H0FR6_uart.h"	
 #include "H0FR6_gpio.h"	
-#include "H0FR6_dma.h"	
+#include "H0FR6_dma.h"
+#include "H0FR6_adc.h"
 	
 	
 /* Exported definitions -------------------------------------------------------*/
@@ -29,7 +30,7 @@
 #endif
 
 /* Port-related definitions */
-#define	NumOfPorts		5
+#define	NumOfPorts			5
 #define P_PROG 				P2						/* ST factory bootloader UART */
 
 /* Define available ports */
@@ -56,47 +57,47 @@
 /* Port Definitions */
 #define	USART1_TX_PIN		GPIO_PIN_9
 #define	USART1_RX_PIN		GPIO_PIN_10
-#define	USART1_TX_PORT	GPIOA
-#define	USART1_RX_PORT	GPIOA
-#define	USART1_AF				GPIO_AF1_USART1
+#define	USART1_TX_PORT		GPIOA
+#define	USART1_RX_PORT		GPIOA
+#define	USART1_AF			GPIO_AF1_USART1
 
 #define	USART2_TX_PIN		GPIO_PIN_2
 #define	USART2_RX_PIN		GPIO_PIN_3
-#define	USART2_TX_PORT	GPIOA
-#define	USART2_RX_PORT	GPIOA
-#define	USART2_AF				GPIO_AF1_USART2
+#define	USART2_TX_PORT		GPIOA
+#define	USART2_RX_PORT		GPIOA
+#define	USART2_AF			GPIO_AF1_USART2
 
 #define	USART3_TX_PIN		GPIO_PIN_10
 #define	USART3_RX_PIN		GPIO_PIN_11
-#define	USART3_TX_PORT	GPIOB
-#define	USART3_RX_PORT	GPIOB
-#define	USART3_AF				GPIO_AF4_USART3
+#define	USART3_TX_PORT		GPIOB
+#define	USART3_RX_PORT		GPIOB
+#define	USART3_AF			GPIO_AF4_USART3
 
 #define	USART5_TX_PIN		GPIO_PIN_3
 #define	USART5_RX_PIN		GPIO_PIN_4
-#define	USART5_TX_PORT	GPIOB
-#define	USART5_RX_PORT	GPIOB
-#define	USART5_AF				GPIO_AF4_USART5
+#define	USART5_TX_PORT		GPIOB
+#define	USART5_RX_PORT		GPIOB
+#define	USART5_AF			GPIO_AF4_USART5
 
 #define	USART6_TX_PIN		GPIO_PIN_4
 #define	USART6_RX_PIN		GPIO_PIN_5
-#define	USART6_TX_PORT	GPIOA
-#define	USART6_RX_PORT	GPIOA
-#define	USART6_AF				GPIO_AF5_USART6
+#define	USART6_TX_PORT		GPIOA
+#define	USART6_RX_PORT		GPIOA
+#define	USART6_AF			GPIO_AF5_USART6
 
 /* Module-specific Definitions */
 
 #ifdef H0FR1
 	#define	_Relay_PIN						GPIO_PIN_0
 	#define	_Relay_PORT						GPIOB
-	#define _Relay_GPIO_CLK()			__GPIOB_CLK_ENABLE();
+	#define _Relay_GPIO_CLK()				__GPIOB_CLK_ENABLE();
 #endif
 #ifdef H0FR6
 	#define	_Relay_PIN						GPIO_PIN_0
 	#define	_Relay_PORT						GPIOB
 	#define _Relay_TIM_CH					TIM_CHANNEL_3
-	#define _Relay_GPIO_CLK()			__GPIOB_CLK_ENABLE();
-	#define PWM_TIMER_CLOCK			16000000
+	#define _Relay_GPIO_CLK()				__GPIOB_CLK_ENABLE();
+	#define PWM_TIMER_CLOCK					16000000
 	#define Relay_PWM_DEF_FREQ				24000
 	#define Relay_PWM_DEF_PERIOD			((float) (1/Relay_PWM_FREQ) )
 #endif
@@ -108,14 +109,14 @@ typedef enum  { STATE_OFF, STATE_ON, STATE_PWM } Relay_state_t;
 /* H01R0_Status Type Definition */  
 typedef enum 
 {
-  H0FR6_OK = 0,
+	H0FR6_OK = 0,
 	H0FR6_ERR_UnknownMessage = 1,
 	H0FR6_ERR_Wrong_Value = 2,
 	H0FR6_ERROR = 255
 } Module_Status;
 
 /* Indicator LED */
-#ifdef H0FR1
+#if defined(H0FR1) || defined(H0FR7)
 	#define _IND_LED_PORT		GPIOA
 	#define _IND_LED_PIN		GPIO_PIN_11
 #endif
@@ -152,7 +153,9 @@ extern Module_Status Relay_toggle(void);
 #ifdef H0FR6
 	extern Module_Status Relay_PWM(float dutyCycle);
 #endif
-
+#ifdef H0FR7
+	extern void Read_Current(float *result);
+#endif
 /* -----------------------------------------------------------------------
 	|															Commands																 	|
    ----------------------------------------------------------------------- 

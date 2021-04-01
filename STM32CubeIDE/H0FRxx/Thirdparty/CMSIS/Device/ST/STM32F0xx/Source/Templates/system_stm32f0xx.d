@@ -1,5 +1,5 @@
 Thirdparty/CMSIS/Device/ST/STM32F0xx/Source/Templates/system_stm32f0xx.o: \
- D:/Hexabitz/for\ Release/Modules\ firmware/H0FRxx/Thirdparty/CMSIS/Device/ST/STM32F0xx/Source/Templates/system_stm32f0xx.c \
+ C:/Users/Root/Desktop/Current\ work/H0FRxx-Firmware/Thirdparty/CMSIS/Device/ST/STM32F0xx/Source/Templates/system_stm32f0xx.c \
  ../../Thirdparty/CMSIS/Device/ST/STM32F0xx/Include/stm32f0xx.h \
  ../../Thirdparty/CMSIS/Device/ST/STM32F0xx/Include/stm32f091xc.h \
  ../../Thirdparty/CMSIS/Include/core_cm0.h \
@@ -17,6 +17,8 @@ Thirdparty/CMSIS/Device/ST/STM32F0xx/Source/Templates/system_stm32f0xx.o: \
  ../../Thirdparty/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_dma.h \
  ../../Thirdparty/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_dma_ex.h \
  ../../Thirdparty/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_cortex.h \
+ ../../Thirdparty/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_adc.h \
+ ../../Thirdparty/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_adc_ex.h \
  ../../Thirdparty/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_crc.h \
  ../../Thirdparty/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_crc_ex.h \
  ../../Thirdparty/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_flash.h \
@@ -65,6 +67,10 @@ Thirdparty/CMSIS/Device/ST/STM32F0xx/Source/Templates/system_stm32f0xx.o: \
 ../../Thirdparty/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_dma_ex.h:
 
 ../../Thirdparty/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_cortex.h:
+
+../../Thirdparty/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_adc.h:
+
+../../Thirdparty/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_adc_ex.h:
 
 ../../Thirdparty/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_crc.h:
 

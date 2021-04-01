@@ -33,12 +33,16 @@ module_param_t modParam[NUM_MODULE_PARAMS] = {{.paramPtr=NULL, .paramFormat=FMT_
 extern FLASH_ProcessTypeDef pFlash;
 extern uint8_t numOfRecordedSnippets;
 
+#define adc_convertion 0.08
 
 TIM_HandleTypeDef htim3;
 TimerHandle_t xTimerRelay = NULL;
 	
 Relay_state_t Relay_state = STATE_OFF, Relay_Oldstate = STATE_ON; uint8_t RelayindMode = 0;
 uint32_t temp32; float tempFloat, Relay_OldDC;
+
+uint32_t dma_buffer[1] = { 0 };
+float Current;
 
 /* Private variables ---------------------------------------------------------*/
 
@@ -48,7 +52,8 @@ void RelayTimerCallback( TimerHandle_t xTimerRelay );
 Module_Status Set_Relay_PWM(uint32_t freq, float dutycycle);
 void TIM3_Init(void);
 void TIM3_DeInit(void);
-
+float Current_Calculation(void);
+void Read_Current(float *result);
 /* Create CLI commands --------------------------------------------------------*/
 
 portBASE_TYPE onCommand( int8_t *pcWriteBuffer, size_t xWriteBufferLen, const int8_t *pcCommandString );
@@ -265,23 +270,31 @@ uint8_t ClearROtopology(void)
 	
 	return SaveToRO();
 }
+
+
+
 /* --- H0FR6 module initialization --- 
 */
 void Module_Init(void)
 {	
 	
 	/* Array ports */
-  MX_USART1_UART_Init();
-  MX_USART2_UART_Init();
-  MX_USART3_UART_Init();
-  MX_USART5_UART_Init();
+	MX_USART1_UART_Init();
+	MX_USART2_UART_Init();
+	MX_USART3_UART_Init();
+	MX_USART5_UART_Init();
 	MX_USART6_UART_Init();
 	
+	/* ADC init */
+	MX_ADC_Init();
+
 	/* Create a timeout timer for Relay_on() API */
 	xTimerRelay = xTimerCreate( "RelayTimer", pdMS_TO_TICKS(1000), pdFALSE, ( void * ) 1, RelayTimerCallback );	
 	
 	/* Relay GPIO */
 	Relay_Init();
+
+	HAL_ADC_Start_DMA(&hadc, dma_buffer, 1);
   
 }
 
@@ -457,6 +470,13 @@ Module_Status Set_Relay_PWM(uint32_t freq, float dutycycle)
 #endif
 /*-----------------------------------------------------------*/
 
+/* --- ADC Calculation ---
+*/
+float Current_Calculation(void)
+{
+	return Current = dma_buffer[0] * adc_convertion;
+}
+
 /* -----------------------------------------------------------------------
 	|																APIs	 																 	|
    ----------------------------------------------------------------------- 
@@ -579,6 +599,17 @@ Module_Status Relay_PWM(float dutyCycle)
 	}
 	
 	return result;
+}
+#endif
+
+/*-----------------------------------------------------------*/
+#ifdef H0FR7
+/* --- Read Current value with Analog Digital Converter (ADC) ---
+*/
+void Read_Current(float *result)
+{
+	*result = Current_Calculation();
+
 }
 #endif
 /*-----------------------------------------------------------*/

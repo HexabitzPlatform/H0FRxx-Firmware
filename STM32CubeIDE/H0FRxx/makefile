@@ -1,6 +1,5 @@
 ################################################################################
 # Automatically-generated file. Do not edit!
-# Toolchain: GNU Tools for STM32 (9-2020-q2-update)
 ################################################################################
 
 -include ../makefile.init
@@ -35,12 +34,6 @@ endif
 
 -include ../makefile.defs
 
-OPTIONAL_TOOL_DEPS := \
-$(wildcard ../makefile.defs) \
-$(wildcard ../makefile.init) \
-$(wildcard ../makefile.targets) \
-
-
 BUILD_ARTIFACT_NAME := H0FRxx
 BUILD_ARTIFACT_EXTENSION := elf
 BUILD_ARTIFACT_PREFIX := 
@@ -68,22 +61,22 @@ all:
 main-build: H0FRxx.elf secondary-outputs
 
 # Tool invocations
-H0FRxx.elf: $(OBJS) $(USER_OBJS) D:\Hexabitz\for\ Release\Modules\ firmware\H0FRxx\STM32CubeIDE\STM32F091RCTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "H0FRxx.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m0 -T"D:\Hexabitz\for Release\Modules firmware\H0FRxx\STM32CubeIDE\STM32F091RCTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="H0FRxx.map" -Wl,--gc-sections -static  -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+H0FRxx.elf: $(OBJS) $(USER_OBJS) C:\Users\Root\Desktop\Current\ work\H0FRxx-Firmware\STM32CubeIDE\STM32F091RCTX_FLASH.ld
+	arm-none-eabi-gcc -o "H0FRxx.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m0 -T"C:\Users\Root\Desktop\Current work\H0FRxx-Firmware\STM32CubeIDE\STM32F091RCTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="H0FRxx.map" -Wl,--gc-sections -static  -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
-default.size.stdout: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
+default.size.stdout: $(EXECUTABLES)
 	arm-none-eabi-size  $(EXECUTABLES)
 	@echo 'Finished building: $@'
 	@echo ' '
 
-H0FRxx.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
+H0FRxx.list: $(EXECUTABLES)
 	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "H0FRxx.list"
 	@echo 'Finished building: $@'
 	@echo ' '
 
-H0FRxx.hex: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
+H0FRxx.hex: $(EXECUTABLES)
 	arm-none-eabi-objcopy  -O ihex $(EXECUTABLES) "H0FRxx.hex"
 	@echo 'Finished building: $@'
 	@echo ' '

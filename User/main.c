@@ -87,14 +87,17 @@ int main(void)
 /*-----------------------------------------------------------*/
 
 /* User Task */
-void UserTask(void * argument)
+void UserTask(void *argument)
 {
 
-		
+	float val;
+
+
   /* Infinite loop */
   for(;;)
   {
-
+	  Read_Current(&val);
+	  Delay_ms(100);
 	}
 }
 

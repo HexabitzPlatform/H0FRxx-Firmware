@@ -162,6 +162,16 @@
 			<locationURI>PARENT-1-PROJECT_LOC/H0FR6/H0FR6_MemoryMap.h</locationURI>
 		</link>
 		<link>
+			<name>H0FR6/H0FR6_adc.c</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/H0FR6/H0FR6_adc.c</locationURI>
+		</link>
+		<link>
+			<name>H0FR6/H0FR6_adc.h</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/H0FR6/H0FR6_adc.h</locationURI>
+		</link>
+		<link>
 			<name>H0FR6/H0FR6_dma.c</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/H0FR6/H0FR6_dma.c</locationURI>

@@ -22,10 +22,10 @@ cmsis_os.c:649:15:osSemaphoreCreate	8	static
 cmsis_os.c:673:9:osSemaphoreWait	16	static,ignoring_inline_asm
 cmsis_os.c:713:10:osSemaphoreRelease	16	static,ignoring_inline_asm
 cmsis_os.c:740:10:osSemaphoreDelete	8	static,ignoring_inline_asm
-cmsis_os.c:777:10:osPoolCreate	24	static
-cmsis_os.c:822:7:osPoolAlloc	24	static,ignoring_inline_asm
+cmsis_os.c:777:10:osPoolCreate	16	static
+cmsis_os.c:822:7:osPoolAlloc	32	static,ignoring_inline_asm
 cmsis_os.c:866:7:osPoolCAlloc	8	static
-cmsis_os.c:885:10:osPoolFree	24	static
+cmsis_os.c:885:10:osPoolFree	16	static
 cmsis_os.c:929:14:osMessageCreate	8	static
 cmsis_os.c:944:10:osMessagePut	24	static,ignoring_inline_asm
 cmsis_os.c:976:9:osMessageGet	32	static,ignoring_inline_asm

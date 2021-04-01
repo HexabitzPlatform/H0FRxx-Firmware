@@ -1,5 +1,5 @@
 Thirdparty/Middleware/FreeRTOS/Source/portable/GCC/ARM_CM0/port.o: \
- D:/Hexabitz/for\ Release/Modules\ firmware/H0FRxx/Thirdparty/Middleware/FreeRTOS/Source/portable/GCC/ARM_CM0/port.c \
+ C:/Users/Root/Desktop/Current\ work/H0FRxx-Firmware/Thirdparty/Middleware/FreeRTOS/Source/portable/GCC/ARM_CM0/port.c \
  ../../Thirdparty/Middleware/FreeRTOS/Source/include/FreeRTOS.h \
  ../../BOS/FreeRTOSConfig.h \
  ../../Thirdparty/Middleware/FreeRTOS/Source/include/projdefs.h \

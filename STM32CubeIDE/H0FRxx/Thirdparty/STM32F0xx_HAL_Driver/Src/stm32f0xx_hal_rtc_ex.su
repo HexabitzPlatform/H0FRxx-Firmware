@@ -2,8 +2,8 @@ stm32f0xx_hal_rtc_ex.c:152:19:HAL_RTCEx_SetTimeStamp	12	static
 stm32f0xx_hal_rtc_ex.c:206:19:HAL_RTCEx_SetTimeStamp_IT	12	static
 stm32f0xx_hal_rtc_ex.c:256:19:HAL_RTCEx_DeactivateTimeStamp	8	static
 stm32f0xx_hal_rtc_ex.c:300:19:HAL_RTCEx_GetTimeStamp	24	static
-stm32f0xx_hal_rtc_ex.c:351:19:HAL_RTCEx_SetTamper	12	static
-stm32f0xx_hal_rtc_ex.c:400:19:HAL_RTCEx_SetTamper_IT	12	static
+stm32f0xx_hal_rtc_ex.c:351:19:HAL_RTCEx_SetTamper	16	static
+stm32f0xx_hal_rtc_ex.c:400:19:HAL_RTCEx_SetTamper_IT	16	static
 stm32f0xx_hal_rtc_ex.c:457:19:HAL_RTCEx_DeactivateTamper	8	static
 stm32f0xx_hal_rtc_ex.c:553:13:HAL_RTCEx_TimeStampEventCallback	0	static
 stm32f0xx_hal_rtc_ex.c:565:13:HAL_RTCEx_Tamper1EventCallback	0	static

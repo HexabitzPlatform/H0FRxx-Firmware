@@ -1,5 +1,5 @@
 Thirdparty/Middleware/FreeRTOS/Source/FreeRTOS_CLI.o: \
- D:/Hexabitz/for\ Release/Modules\ firmware/H0FRxx/Thirdparty/Middleware/FreeRTOS/Source/FreeRTOS_CLI.c \
+ C:/Users/Root/Desktop/Current\ work/H0FRxx-Firmware/Thirdparty/Middleware/FreeRTOS/Source/FreeRTOS_CLI.c \
  ../../Thirdparty/Middleware/FreeRTOS/Source/include/FreeRTOS.h \
  ../../BOS/FreeRTOSConfig.h \
  ../../Thirdparty/Middleware/FreeRTOS/Source/include/projdefs.h \
@@ -28,6 +28,8 @@ Thirdparty/Middleware/FreeRTOS/Source/FreeRTOS_CLI.o: \
  ../../Thirdparty/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_dma.h \
  ../../Thirdparty/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_dma_ex.h \
  ../../Thirdparty/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_cortex.h \
+ ../../Thirdparty/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_adc.h \
+ ../../Thirdparty/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_adc_ex.h \
  ../../Thirdparty/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_crc.h \
  ../../Thirdparty/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_crc_ex.h \
  ../../Thirdparty/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_flash.h \
@@ -54,7 +56,8 @@ Thirdparty/Middleware/FreeRTOS/Source/FreeRTOS_CLI.o: \
  ../../BOS/BOS_eeprom.h ../../BOS/BOS.h ../../BOS/BOS_utils.h \
  ../../BOS/BOS_messaging.h ../../H0FR6/H0FR6.h \
  ../../H0FR6/H0FR6_MemoryMap.h ../../H0FR6/H0FR6_uart.h \
- ../../H0FR6/H0FR6_gpio.h ../../H0FR6/H0FR6_dma.h ../../BOS/BOS_DMA.h
+ ../../H0FR6/H0FR6_gpio.h ../../H0FR6/H0FR6_dma.h ../../H0FR6/H0FR6_adc.h \
+ ../../BOS/BOS_DMA.h
 
 ../../Thirdparty/Middleware/FreeRTOS/Source/include/FreeRTOS.h:
 
@@ -113,6 +116,10 @@ Thirdparty/Middleware/FreeRTOS/Source/FreeRTOS_CLI.o: \
 ../../Thirdparty/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_dma_ex.h:
 
 ../../Thirdparty/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_cortex.h:
+
+../../Thirdparty/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_adc.h:
+
+../../Thirdparty/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_adc_ex.h:
 
 ../../Thirdparty/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_crc.h:
 
@@ -177,5 +184,7 @@ Thirdparty/Middleware/FreeRTOS/Source/FreeRTOS_CLI.o: \
 ../../H0FR6/H0FR6_gpio.h:
 
 ../../H0FR6/H0FR6_dma.h:
+
+../../H0FR6/H0FR6_adc.h:
 
 ../../BOS/BOS_DMA.h:
