@@ -1,5 +1,5 @@
 Thirdparty/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c.o: \
- C:/Users/Root/Desktop/Current\ work/H0FRxx-Firmware/Thirdparty/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c.c \
+ W:/Current\ work/H0FRxx-Firmware/Thirdparty/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c.c \
  ../../Thirdparty/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal.h \
  ../../H0FR6/stm32f0xx_hal_conf.h \
  ../../Thirdparty/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_rcc.h \

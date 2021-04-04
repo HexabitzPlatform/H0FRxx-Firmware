@@ -4,15 +4,15 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
-C:/Users/Root/Desktop/Current\ work/H0FRxx-Firmware/BOS/BOS.c \
-C:/Users/Root/Desktop/Current\ work/H0FRxx-Firmware/BOS/BOS_CLI.c \
-C:/Users/Root/Desktop/Current\ work/H0FRxx-Firmware/BOS/BOS_CLIcommands.c \
-C:/Users/Root/Desktop/Current\ work/H0FRxx-Firmware/BOS/BOS_dma.c \
-C:/Users/Root/Desktop/Current\ work/H0FRxx-Firmware/BOS/BOS_eeprom.c \
-C:/Users/Root/Desktop/Current\ work/H0FRxx-Firmware/BOS/BOS_freertos.c \
-C:/Users/Root/Desktop/Current\ work/H0FRxx-Firmware/BOS/BOS_inputs.c \
-C:/Users/Root/Desktop/Current\ work/H0FRxx-Firmware/BOS/BOS_messaging.c \
-C:/Users/Root/Desktop/Current\ work/H0FRxx-Firmware/BOS/BOS_msgparser.c 
+W:/Current\ work/H0FRxx-Firmware/BOS/BOS.c \
+W:/Current\ work/H0FRxx-Firmware/BOS/BOS_CLI.c \
+W:/Current\ work/H0FRxx-Firmware/BOS/BOS_CLIcommands.c \
+W:/Current\ work/H0FRxx-Firmware/BOS/BOS_dma.c \
+W:/Current\ work/H0FRxx-Firmware/BOS/BOS_eeprom.c \
+W:/Current\ work/H0FRxx-Firmware/BOS/BOS_freertos.c \
+W:/Current\ work/H0FRxx-Firmware/BOS/BOS_inputs.c \
+W:/Current\ work/H0FRxx-Firmware/BOS/BOS_messaging.c \
+W:/Current\ work/H0FRxx-Firmware/BOS/BOS_msgparser.c 
 
 OBJS += \
 ./BOS/BOS.o \
@@ -38,22 +38,22 @@ C_DEPS += \
 
 
 # Each subdirectory must supply rules for building sources it contributes
-BOS/BOS.o: C:/Users/Root/Desktop/Current\ work/H0FRxx-Firmware/BOS/BOS.c
+BOS/BOS.o: W:/Current\ work/H0FRxx-Firmware/BOS/BOS.c
 	arm-none-eabi-gcc "$<" -mcpu=cortex-m0 -std=c99 -g -DUSE_HAL_DRIVER -DDEBUG -DSTM32F091xB -DSTM32F091xC '-D_module=1' -DH0FR1 -DH0FR7 -c -I../../Thirdparty/CMSIS/Include -I../../Thirdparty/CMSIS/Device/ST/STM32F0xx/Include -I../../Thirdparty/STM32F0xx_HAL_Driver/Inc/Legacy -I../../Thirdparty/STM32F0xx_HAL_Driver/Inc -I../../Thirdparty/Middleware/FreeRTOS/Source/include -I../../Thirdparty/Middleware/FreeRTOS/Source/portable/GCC/ARM_CM0 -I../../Thirdparty/Middleware/FreeRTOS/Source/CMSIS_RTOS -I../../BOS -I../../User -I../../H0FR6 -O1 -ffunction-sections -fdata-sections -fstack-usage -MMD -MP -MF"BOS/BOS.d" -MT"$@"  -mfloat-abi=soft -mthumb -o "$@"
-BOS/BOS_CLI.o: C:/Users/Root/Desktop/Current\ work/H0FRxx-Firmware/BOS/BOS_CLI.c
+BOS/BOS_CLI.o: W:/Current\ work/H0FRxx-Firmware/BOS/BOS_CLI.c
 	arm-none-eabi-gcc "$<" -mcpu=cortex-m0 -std=c99 -g -DUSE_HAL_DRIVER -DDEBUG -DSTM32F091xB -DSTM32F091xC '-D_module=1' -DH0FR1 -DH0FR7 -c -I../../Thirdparty/CMSIS/Include -I../../Thirdparty/CMSIS/Device/ST/STM32F0xx/Include -I../../Thirdparty/STM32F0xx_HAL_Driver/Inc/Legacy -I../../Thirdparty/STM32F0xx_HAL_Driver/Inc -I../../Thirdparty/Middleware/FreeRTOS/Source/include -I../../Thirdparty/Middleware/FreeRTOS/Source/portable/GCC/ARM_CM0 -I../../Thirdparty/Middleware/FreeRTOS/Source/CMSIS_RTOS -I../../BOS -I../../User -I../../H0FR6 -O1 -ffunction-sections -fdata-sections -fstack-usage -MMD -MP -MF"BOS/BOS_CLI.d" -MT"$@"  -mfloat-abi=soft -mthumb -o "$@"
-BOS/BOS_CLIcommands.o: C:/Users/Root/Desktop/Current\ work/H0FRxx-Firmware/BOS/BOS_CLIcommands.c
+BOS/BOS_CLIcommands.o: W:/Current\ work/H0FRxx-Firmware/BOS/BOS_CLIcommands.c
 	arm-none-eabi-gcc "$<" -mcpu=cortex-m0 -std=c99 -g -DUSE_HAL_DRIVER -DDEBUG -DSTM32F091xB -DSTM32F091xC '-D_module=1' -DH0FR1 -DH0FR7 -c -I../../Thirdparty/CMSIS/Include -I../../Thirdparty/CMSIS/Device/ST/STM32F0xx/Include -I../../Thirdparty/STM32F0xx_HAL_Driver/Inc/Legacy -I../../Thirdparty/STM32F0xx_HAL_Driver/Inc -I../../Thirdparty/Middleware/FreeRTOS/Source/include -I../../Thirdparty/Middleware/FreeRTOS/Source/portable/GCC/ARM_CM0 -I../../Thirdparty/Middleware/FreeRTOS/Source/CMSIS_RTOS -I../../BOS -I../../User -I../../H0FR6 -O1 -ffunction-sections -fdata-sections -fstack-usage -MMD -MP -MF"BOS/BOS_CLIcommands.d" -MT"$@"  -mfloat-abi=soft -mthumb -o "$@"
-BOS/BOS_dma.o: C:/Users/Root/Desktop/Current\ work/H0FRxx-Firmware/BOS/BOS_dma.c
+BOS/BOS_dma.o: W:/Current\ work/H0FRxx-Firmware/BOS/BOS_dma.c
 	arm-none-eabi-gcc "$<" -mcpu=cortex-m0 -std=c99 -g -DUSE_HAL_DRIVER -DDEBUG -DSTM32F091xB -DSTM32F091xC '-D_module=1' -DH0FR1 -DH0FR7 -c -I../../Thirdparty/CMSIS/Include -I../../Thirdparty/CMSIS/Device/ST/STM32F0xx/Include -I../../Thirdparty/STM32F0xx_HAL_Driver/Inc/Legacy -I../../Thirdparty/STM32F0xx_HAL_Driver/Inc -I../../Thirdparty/Middleware/FreeRTOS/Source/include -I../../Thirdparty/Middleware/FreeRTOS/Source/portable/GCC/ARM_CM0 -I../../Thirdparty/Middleware/FreeRTOS/Source/CMSIS_RTOS -I../../BOS -I../../User -I../../H0FR6 -O1 -ffunction-sections -fdata-sections -fstack-usage -MMD -MP -MF"BOS/BOS_dma.d" -MT"$@"  -mfloat-abi=soft -mthumb -o "$@"
-BOS/BOS_eeprom.o: C:/Users/Root/Desktop/Current\ work/H0FRxx-Firmware/BOS/BOS_eeprom.c
+BOS/BOS_eeprom.o: W:/Current\ work/H0FRxx-Firmware/BOS/BOS_eeprom.c
 	arm-none-eabi-gcc "$<" -mcpu=cortex-m0 -std=c99 -g -DUSE_HAL_DRIVER -DDEBUG -DSTM32F091xB -DSTM32F091xC '-D_module=1' -DH0FR1 -DH0FR7 -c -I../../Thirdparty/CMSIS/Include -I../../Thirdparty/CMSIS/Device/ST/STM32F0xx/Include -I../../Thirdparty/STM32F0xx_HAL_Driver/Inc/Legacy -I../../Thirdparty/STM32F0xx_HAL_Driver/Inc -I../../Thirdparty/Middleware/FreeRTOS/Source/include -I../../Thirdparty/Middleware/FreeRTOS/Source/portable/GCC/ARM_CM0 -I../../Thirdparty/Middleware/FreeRTOS/Source/CMSIS_RTOS -I../../BOS -I../../User -I../../H0FR6 -O1 -ffunction-sections -fdata-sections -fstack-usage -MMD -MP -MF"BOS/BOS_eeprom.d" -MT"$@"  -mfloat-abi=soft -mthumb -o "$@"
-BOS/BOS_freertos.o: C:/Users/Root/Desktop/Current\ work/H0FRxx-Firmware/BOS/BOS_freertos.c
+BOS/BOS_freertos.o: W:/Current\ work/H0FRxx-Firmware/BOS/BOS_freertos.c
 	arm-none-eabi-gcc "$<" -mcpu=cortex-m0 -std=c99 -g -DUSE_HAL_DRIVER -DDEBUG -DSTM32F091xB -DSTM32F091xC '-D_module=1' -DH0FR1 -DH0FR7 -c -I../../Thirdparty/CMSIS/Include -I../../Thirdparty/CMSIS/Device/ST/STM32F0xx/Include -I../../Thirdparty/STM32F0xx_HAL_Driver/Inc/Legacy -I../../Thirdparty/STM32F0xx_HAL_Driver/Inc -I../../Thirdparty/Middleware/FreeRTOS/Source/include -I../../Thirdparty/Middleware/FreeRTOS/Source/portable/GCC/ARM_CM0 -I../../Thirdparty/Middleware/FreeRTOS/Source/CMSIS_RTOS -I../../BOS -I../../User -I../../H0FR6 -O1 -ffunction-sections -fdata-sections -fstack-usage -MMD -MP -MF"BOS/BOS_freertos.d" -MT"$@"  -mfloat-abi=soft -mthumb -o "$@"
-BOS/BOS_inputs.o: C:/Users/Root/Desktop/Current\ work/H0FRxx-Firmware/BOS/BOS_inputs.c
+BOS/BOS_inputs.o: W:/Current\ work/H0FRxx-Firmware/BOS/BOS_inputs.c
 	arm-none-eabi-gcc "$<" -mcpu=cortex-m0 -std=c99 -g -DUSE_HAL_DRIVER -DDEBUG -DSTM32F091xB -DSTM32F091xC '-D_module=1' -DH0FR1 -DH0FR7 -c -I../../Thirdparty/CMSIS/Include -I../../Thirdparty/CMSIS/Device/ST/STM32F0xx/Include -I../../Thirdparty/STM32F0xx_HAL_Driver/Inc/Legacy -I../../Thirdparty/STM32F0xx_HAL_Driver/Inc -I../../Thirdparty/Middleware/FreeRTOS/Source/include -I../../Thirdparty/Middleware/FreeRTOS/Source/portable/GCC/ARM_CM0 -I../../Thirdparty/Middleware/FreeRTOS/Source/CMSIS_RTOS -I../../BOS -I../../User -I../../H0FR6 -O1 -ffunction-sections -fdata-sections -fstack-usage -MMD -MP -MF"BOS/BOS_inputs.d" -MT"$@"  -mfloat-abi=soft -mthumb -o "$@"
-BOS/BOS_messaging.o: C:/Users/Root/Desktop/Current\ work/H0FRxx-Firmware/BOS/BOS_messaging.c
+BOS/BOS_messaging.o: W:/Current\ work/H0FRxx-Firmware/BOS/BOS_messaging.c
 	arm-none-eabi-gcc "$<" -mcpu=cortex-m0 -std=c99 -g -DUSE_HAL_DRIVER -DDEBUG -DSTM32F091xB -DSTM32F091xC '-D_module=1' -DH0FR1 -DH0FR7 -c -I../../Thirdparty/CMSIS/Include -I../../Thirdparty/CMSIS/Device/ST/STM32F0xx/Include -I../../Thirdparty/STM32F0xx_HAL_Driver/Inc/Legacy -I../../Thirdparty/STM32F0xx_HAL_Driver/Inc -I../../Thirdparty/Middleware/FreeRTOS/Source/include -I../../Thirdparty/Middleware/FreeRTOS/Source/portable/GCC/ARM_CM0 -I../../Thirdparty/Middleware/FreeRTOS/Source/CMSIS_RTOS -I../../BOS -I../../User -I../../H0FR6 -O1 -ffunction-sections -fdata-sections -fstack-usage -MMD -MP -MF"BOS/BOS_messaging.d" -MT"$@"  -mfloat-abi=soft -mthumb -o "$@"
-BOS/BOS_msgparser.o: C:/Users/Root/Desktop/Current\ work/H0FRxx-Firmware/BOS/BOS_msgparser.c
+BOS/BOS_msgparser.o: W:/Current\ work/H0FRxx-Firmware/BOS/BOS_msgparser.c
 	arm-none-eabi-gcc "$<" -mcpu=cortex-m0 -std=c99 -g -DUSE_HAL_DRIVER -DDEBUG -DSTM32F091xB -DSTM32F091xC '-D_module=1' -DH0FR1 -DH0FR7 -c -I../../Thirdparty/CMSIS/Include -I../../Thirdparty/CMSIS/Device/ST/STM32F0xx/Include -I../../Thirdparty/STM32F0xx_HAL_Driver/Inc/Legacy -I../../Thirdparty/STM32F0xx_HAL_Driver/Inc -I../../Thirdparty/Middleware/FreeRTOS/Source/include -I../../Thirdparty/Middleware/FreeRTOS/Source/portable/GCC/ARM_CM0 -I../../Thirdparty/Middleware/FreeRTOS/Source/CMSIS_RTOS -I../../BOS -I../../User -I../../H0FR6 -O1 -ffunction-sections -fdata-sections -fstack-usage -MMD -MP -MF"BOS/BOS_msgparser.d" -MT"$@"  -mfloat-abi=soft -mthumb -o "$@"
 

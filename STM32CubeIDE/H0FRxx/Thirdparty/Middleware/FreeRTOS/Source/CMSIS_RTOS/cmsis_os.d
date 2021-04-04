@@ -1,6 +1,6 @@
 Thirdparty/Middleware/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.o: \
- C:/Users/Root/Desktop/Current\ work/H0FRxx-Firmware/Thirdparty/Middleware/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c \
- C:/Users/Root/Desktop/Current\ work/H0FRxx-Firmware/Thirdparty/Middleware/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h \
+ W:/Current\ work/H0FRxx-Firmware/Thirdparty/Middleware/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c \
+ W:/Current\ work/H0FRxx-Firmware/Thirdparty/Middleware/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h \
  ../../Thirdparty/CMSIS/Include/core_cmFunc.h \
  ../../Thirdparty/Middleware/FreeRTOS/Source/include/FreeRTOS.h \
  ../../BOS/FreeRTOSConfig.h \
@@ -19,7 +19,7 @@ Thirdparty/Middleware/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.o: \
  ../../Thirdparty/Middleware/FreeRTOS/Source/include/event_groups.h \
  ../../Thirdparty/Middleware/FreeRTOS/Source/include/timers.h
 
-C:/Users/Root/Desktop/Current\ work/H0FRxx-Firmware/Thirdparty/Middleware/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h:
+W:/Current\ work/H0FRxx-Firmware/Thirdparty/Middleware/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h:
 
 ../../Thirdparty/CMSIS/Include/core_cmFunc.h:
 
