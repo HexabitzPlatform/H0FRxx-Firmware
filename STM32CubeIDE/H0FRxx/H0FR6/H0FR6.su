@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 H0FR6.c:725:15:ledModeCommand	24	static,ignoring_inline_asm
 H0FR6.c:117:6:SystemClock_Config	128	static
 H0FR6.c:166:9:SaveToRO	72	static
@@ -20,3 +21,22 @@ H0FR6.c:694:15:toggleCommand	8	static,ignoring_inline_asm
 H0FR6.c:301:15:Module_MessagingTask	32	static
 H0FR6.c:765:15:pwmCommand	24	static,ignoring_inline_asm
 H0FR6.c:609:6:Read_Current	8	static
+=======
+H0FR6.c:730:15:ledModeCommand	24	static,ignoring_inline_asm
+H0FR6.c:120:6:SystemClock_Config	128	static
+H0FR6.c:169:9:SaveToRO	72	static
+H0FR6.c:265:9:ClearROtopology	8	static
+H0FR6.c:278:6:Module_Init	16	static
+H0FR6.c:343:6:RegisterModuleCLICommands	8	static
+H0FR6.c:358:9:GetPort	0	static
+H0FR6.c:475:7:Current_Calculation	16	static
+H0FR6.c:491:15:Relay_on	16	static
+H0FR6.c:626:15:onCommand	24	static,ignoring_inline_asm
+H0FR6.c:530:15:Relay_off	8	static
+H0FR6.c:378:6:RelayTimerCallback	8	static
+H0FR6.c:672:15:offCommand	8	static,ignoring_inline_asm
+H0FR6.c:560:15:Relay_toggle	8	static
+H0FR6.c:305:15:Module_MessagingTask	16	static
+H0FR6.c:699:15:toggleCommand	8	static,ignoring_inline_asm
+H0FR6.c:613:6:Read_Current	8	static
+>>>>>>> 78bdbae2070dfa7fe06bf033691aa322343ab346
