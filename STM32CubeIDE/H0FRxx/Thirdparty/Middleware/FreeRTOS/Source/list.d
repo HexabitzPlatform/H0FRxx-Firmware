@@ -1,5 +1,5 @@
 Thirdparty/Middleware/FreeRTOS/Source/list.o: \
- W:/Current\ work/H0FRxx-Firmware/Thirdparty/Middleware/FreeRTOS/Source/list.c \
+ C:/Users/Root/Desktop/Current\ work/H0FRxx-Firmware/Thirdparty/Middleware/FreeRTOS/Source/list.c \
  ../../Thirdparty/Middleware/FreeRTOS/Source/include/FreeRTOS.h \
  ../../BOS/FreeRTOSConfig.h \
  ../../Thirdparty/Middleware/FreeRTOS/Source/include/projdefs.h \

@@ -21,6 +21,7 @@
 	
 	
 /* Exported definitions -------------------------------------------------------*/
+
 #ifdef H0FR1
 	#define	modulePN		_H0FR1
 #endif
@@ -85,12 +86,13 @@
 #define	USART6_AF			GPIO_AF5_USART6
 
 /* Module-specific Definitions */
-#if defined(H0FR1) || defined(H0FR7)
+
+#ifdef H0FR1
 	#define	_Relay_PIN						GPIO_PIN_0
 	#define	_Relay_PORT						GPIOB
 	#define _Relay_GPIO_CLK()				__GPIOB_CLK_ENABLE();
 #endif
-#if defined(H0FR1) || defined(H0FR7)
+#ifdef H0FR6
 	#define	_Relay_PIN						GPIO_PIN_0
 	#define	_Relay_PORT						GPIOB
 	#define _Relay_TIM_CH					TIM_CHANNEL_3
@@ -98,10 +100,6 @@
 	#define PWM_TIMER_CLOCK					16000000
 	#define Relay_PWM_DEF_FREQ				24000
 	#define Relay_PWM_DEF_PERIOD			((float) (1/Relay_PWM_FREQ) )
-#endif
-
-#ifdef H0FR7
-	#define ADC_CONVERSION 0.00595
 #endif
 
 #define NUM_MODULE_PARAMS		1
@@ -145,22 +143,21 @@ extern Relay_state_t Relay_State;
 extern uint8_t RelayindMode;
 	
 /* -----------------------------------------------------------------------
-	|		        		    	APIs	 							|									 	|
+	|																APIs	 																 	|
    ----------------------------------------------------------------------- 
 */
 
 extern Module_Status Relay_on(uint32_t timeout);
 extern Module_Status Relay_off(void);
 extern Module_Status Relay_toggle(void);
-#if defined(H0FR1) || defined(H0FR7)
+#ifdef H0FR6
 	extern Module_Status Relay_PWM(float dutyCycle);
 #endif
 #ifdef H0FR7
 	extern void Read_Current(float *result);
 #endif
-
 /* -----------------------------------------------------------------------
-	|			    			 Commands								|								 	|
+	|															Commands																 	|
    ----------------------------------------------------------------------- 
 */
 
@@ -168,7 +165,7 @@ extern const CLI_Command_Definition_t onCommandDefinition;
 extern const CLI_Command_Definition_t offCommandDefinition;
 extern const CLI_Command_Definition_t toggleCommandDefinition;
 extern const CLI_Command_Definition_t ledModeCommandDefinition;
-#if defined(H0FR1) || defined(H0FR7)
+#ifdef H0FR6
 	extern const CLI_Command_Definition_t pwmCommandDefinition;
 #endif
 

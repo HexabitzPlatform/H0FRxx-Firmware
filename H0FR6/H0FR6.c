@@ -10,8 +10,7 @@
 		Required MCU resources : 
 		
 			>> USARTs 1,2,3,5,6 for module ports.
-			>> Timer 3 (Ch3) for Relay PWM (H0FR6 || H0FR7).
-			>> ADC 1 (Ch0) for Mosfet Current calculation (H0FR7 only)
+			>> Timer 3 (Ch3) for Relay PWM (H0FR6 only).
 			>> GPIOB 0 for Relay.
 			
 */
@@ -34,15 +33,19 @@ module_param_t modParam[NUM_MODULE_PARAMS] = {{.paramPtr=NULL, .paramFormat=FMT_
 extern FLASH_ProcessTypeDef pFlash;
 extern uint8_t numOfRecordedSnippets;
 
-/* Private variables ---------------------------------------------------------*/
+#define adc_convertion 0.08
+
 TIM_HandleTypeDef htim3;
 TimerHandle_t xTimerRelay = NULL;
 	
 Relay_state_t Relay_state = STATE_OFF, Relay_Oldstate = STATE_ON; uint8_t RelayindMode = 0;
 uint32_t temp32; float tempFloat, Relay_OldDC;
 
-uint32_t rawValues;
+uint32_t dma_buffer[1] = { 0 };
 float Current;
+
+/* Private variables ---------------------------------------------------------*/
+
 
 /* Private function prototypes -----------------------------------------------*/	
 void RelayTimerCallback( TimerHandle_t xTimerRelay );
@@ -51,13 +54,13 @@ void TIM3_Init(void);
 void TIM3_DeInit(void);
 float Current_Calculation(void);
 void Read_Current(float *result);
-
 /* Create CLI commands --------------------------------------------------------*/
+
 portBASE_TYPE onCommand( int8_t *pcWriteBuffer, size_t xWriteBufferLen, const int8_t *pcCommandString );
 portBASE_TYPE offCommand( int8_t *pcWriteBuffer, size_t xWriteBufferLen, const int8_t *pcCommandString );
 portBASE_TYPE toggleCommand( int8_t *pcWriteBuffer, size_t xWriteBufferLen, const int8_t *pcCommandString );
 portBASE_TYPE ledModeCommand( int8_t *pcWriteBuffer, size_t xWriteBufferLen, const int8_t *pcCommandString );
-#if defined(H0FR1) || defined(H0FR7)
+#ifdef H0FR6
 	portBASE_TYPE pwmCommand( int8_t *pcWriteBuffer, size_t xWriteBufferLen, const int8_t *pcCommandString );
 #endif
 
@@ -97,7 +100,7 @@ const CLI_Command_Definition_t ledModeCommandDefinition =
 	1 /* One parameter is expected. */
 };
 /*-----------------------------------------------------------*/
-#if defined(H0FR1) || defined(H0FR7)
+#ifdef H0FR6
 /* CLI command structure : pwm */
 const CLI_Command_Definition_t pwmCommandDefinition =
 {
@@ -110,7 +113,7 @@ const CLI_Command_Definition_t pwmCommandDefinition =
 /*-----------------------------------------------------------*/
 
 /* -----------------------------------------------------------------------
-	|				    	Private Functions	 						|							|
+	|												 Private Functions	 														|
    ----------------------------------------------------------------------- 
 */
 
@@ -270,7 +273,7 @@ uint8_t ClearROtopology(void)
 
 
 
-/* --- (H0FR6 || H0FR7) module initialization ---
+/* --- H0FR6 module initialization --- 
 */
 void Module_Init(void)
 {	
@@ -291,12 +294,13 @@ void Module_Init(void)
 	/* Relay GPIO */
 	Relay_Init();
 
-
+	HAL_ADC_Start_DMA(&hadc, dma_buffer, 1);
+  
 }
 
 /*-----------------------------------------------------------*/
 
-/* --- (H0FR6 || H0FR7) message processing task.
+/* --- H0FR6 message processing task. 
 */
 Module_Status Module_MessagingTask(uint16_t code, uint8_t port, uint8_t src, uint8_t dst, uint8_t shift)
 {
@@ -317,7 +321,7 @@ Module_Status Module_MessagingTask(uint16_t code, uint8_t port, uint8_t src, uin
 			Relay_toggle();
 			break;
 
-#if defined(H0FR1) || defined(H0FR7)
+#ifdef H0FR6		
 		case CODE_H0FR6_PWM :
 			tempFloat = (float)( ((uint64_t)cMessage[port-1][shift]<<24) + ((uint64_t)cMessage[port-1][1+shift]<<16) + ((uint64_t)cMessage[port-1][2+shift]<<8) + ((uint64_t)cMessage[port-1][3+shift]) );
 			Relay_PWM(tempFloat);
@@ -342,7 +346,7 @@ void RegisterModuleCLICommands(void)
 	FreeRTOS_CLIRegisterCommand( &offCommandDefinition );
 	FreeRTOS_CLIRegisterCommand( &toggleCommandDefinition );
 	FreeRTOS_CLIRegisterCommand( &ledModeCommandDefinition );
-#if defined(H0FR1) || defined(H0FR7)
+#ifdef H0FR6
 	FreeRTOS_CLIRegisterCommand( &pwmCommandDefinition );
 #endif
 }
@@ -377,7 +381,7 @@ void RelayTimerCallback( TimerHandle_t xTimerRelay )
 }
 
 /*-----------------------------------------------------------*/	
-#if defined(H0FR1) || defined(H0FR7)
+#ifdef H0FR6
 /* TIM3 init function - Relay PWM Timer 16-bit 
 */
 void TIM3_Init(void)
@@ -466,19 +470,15 @@ Module_Status Set_Relay_PWM(uint32_t freq, float dutycycle)
 #endif
 /*-----------------------------------------------------------*/
 
-/* --- ADC Calculation for the Current in H0FR7 ---
+/* --- ADC Calculation ---
 */
 float Current_Calculation(void)
 {
-	HAL_ADC_Start(&hadc);
-	HAL_ADC_PollForConversion(&hadc, 10);
-	rawValues = HAL_ADC_GetValue(&hadc);
-	HAL_ADC_Stop(&hadc);
-	return Current = rawValues * ADC_CONVERSION;
+	return Current = dma_buffer[0] * adc_convertion;
 }
 
 /* -----------------------------------------------------------------------
-	|					          APIs	 								|								 	|
+	|																APIs	 																 	|
    ----------------------------------------------------------------------- 
 */
 
@@ -488,7 +488,7 @@ Module_Status Relay_on(uint32_t timeout)
 {	
 	Module_Status result = H0FR6_OK;	
 
-#if defined(H0FR1) || defined(H0FR7)
+#ifdef H0FR6
 	/* Turn off PWM and re-initialize GPIO if needed */
 	if (Relay_state == STATE_PWM) 
 	{
@@ -527,7 +527,7 @@ Module_Status Relay_off(void)
 {	
 	Module_Status result = H0FR6_OK;	
 
-#if defined(H0FR1) || defined(H0FR7)
+#ifdef H0FR6	
 	/* Turn off PWM and re-initialize GPIO if needed */
 	if (Relay_state == STATE_PWM) 
 	{
@@ -565,7 +565,7 @@ Module_Status Relay_toggle(void)
 	{
 		if (Relay_Oldstate == STATE_ON)
 			result = Relay_on(portMAX_DELAY);
-	#if defined(H0FR1) || defined(H0FR7)
+	#ifdef H0FR6
 		else if (Relay_Oldstate == STATE_PWM)
 			result = Relay_PWM(Relay_OldDC);
 	#endif
@@ -575,7 +575,7 @@ Module_Status Relay_toggle(void)
 }
 
 /*-----------------------------------------------------------*/
-#if defined(H0FR1) || defined(H0FR7)
+#ifdef H0FR6
 /* --- Turn-on Relay with pulse-width modulation (PWM) ---
 				dutyCycle: PWM duty cycle in precentage (0 to 100)
 */
@@ -604,17 +604,18 @@ Module_Status Relay_PWM(float dutyCycle)
 
 /*-----------------------------------------------------------*/
 #ifdef H0FR7
-/* --- Read the Current value with Analog Digital Converter (ADC) in H0FR7 ---
+/* --- Read Current value with Analog Digital Converter (ADC) ---
 */
 void Read_Current(float *result)
 {
 	*result = Current_Calculation();
+
 }
 #endif
 /*-----------------------------------------------------------*/
 
 /* -----------------------------------------------------------------------
-	|					    		Commands							|									 	|
+	|															Commands																 	|
    ----------------------------------------------------------------------- 
 */
 
@@ -761,7 +762,7 @@ portBASE_TYPE ledModeCommand( int8_t *pcWriteBuffer, size_t xWriteBufferLen, con
 }
 
 /*-----------------------------------------------------------*/
-#if defined(H0FR1) || defined(H0FR7)
+#ifdef H0FR6
 portBASE_TYPE pwmCommand( int8_t *pcWriteBuffer, size_t xWriteBufferLen, const int8_t *pcCommandString )
 {
 	Module_Status result = H0FR6_OK;

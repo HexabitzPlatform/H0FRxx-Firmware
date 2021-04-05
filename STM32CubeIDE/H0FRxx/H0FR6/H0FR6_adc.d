@@ -1,6 +1,7 @@
-H0FR6/H0FR6_adc.o: W:/Current\ work/H0FRxx-Firmware/H0FR6/H0FR6_adc.c \
- W:/Current\ work/H0FRxx-Firmware/H0FR6/H0FR6_adc.h ../../BOS/BOS.h \
- ../../BOS/BOS_MsgCodes.h \
+H0FR6/H0FR6_adc.o: \
+ C:/Users/Root/Desktop/Current\ work/H0FRxx-Firmware/H0FR6/H0FR6_adc.c \
+ C:/Users/Root/Desktop/Current\ work/H0FRxx-Firmware/H0FR6/H0FR6_adc.h \
+ ../../BOS/BOS.h ../../BOS/BOS_MsgCodes.h \
  ../../Thirdparty/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal.h \
  ../../H0FR6/stm32f0xx_hal_conf.h \
  ../../Thirdparty/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_rcc.h \
@@ -59,7 +60,7 @@ H0FR6/H0FR6_adc.o: W:/Current\ work/H0FRxx-Firmware/H0FR6/H0FR6_adc.c \
  ../../H0FR6/H0FR6_gpio.h ../../H0FR6/H0FR6_dma.h ../../H0FR6/H0FR6_adc.h \
  ../../BOS/BOS_DMA.h
 
-W:/Current\ work/H0FRxx-Firmware/H0FR6/H0FR6_adc.h:
+C:/Users/Root/Desktop/Current\ work/H0FRxx-Firmware/H0FR6/H0FR6_adc.h:
 
 ../../BOS/BOS.h:
 

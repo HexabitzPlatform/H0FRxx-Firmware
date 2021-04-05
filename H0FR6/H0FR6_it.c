@@ -47,8 +47,7 @@ extern uint8_t UARTRxBufIndex[NumOfPorts];
 
 /* External function prototypes ----------------------------------------------*/
 
-extern ADC_HandleTypeDef hadc;
-extern DMA_HandleTypeDef hdma_adc;
+
 
 
 /******************************************************************************/
@@ -150,6 +149,18 @@ void USART3_8_IRQHandler(void)
 
 
 /**
+* @brief This function handles DMA1 channel 1 interrupt (Uplink DMA 1).
+*/
+void DMA1_Ch1_IRQHandler(void)
+{
+	/* Streaming or messaging DMA on P1 */
+	DMA_IRQHandler(P1);
+	
+}
+
+/*-----------------------------------------------------------*/
+
+/**
 * @brief This function handles DMA1 channel 2 to 3 and DMA2 channel 1 to 2 interrupts.
 */
 void DMA1_Ch2_3_DMA2_Ch1_2_IRQHandler(void)
@@ -192,23 +203,6 @@ void DMA1_Ch4_7_DMA2_Ch3_5_IRQHandler(void)
 }
 
 /*-----------------------------------------------------------*/
-
-/**
-  * @brief This function handles ADC and COMP interrupts (COMP interrupts through EXTI lines 21 and 22).
-  */
-void ADC1_COMP_IRQHandler(void)
-{
-  /* USER CODE BEGIN ADC1_COMP_IRQn 0 */
-
-  /* USER CODE END ADC1_COMP_IRQn 0 */
-  HAL_ADC_IRQHandler(&hadc);
-  /* USER CODE BEGIN ADC1_COMP_IRQn 1 */
-
-  /* USER CODE END ADC1_COMP_IRQn 1 */
-}
-
-/*-----------------------------------------------------------*/
-
 
 void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)
 {
