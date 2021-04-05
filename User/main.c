@@ -94,13 +94,6 @@ void UserTask(void *argument)
   /* Infinite loop */
   for(;;)
   {
-<<<<<<< HEAD
-
-=======
-	  Relay_off();
-	  Read_Current(&val);
-	  Delay_ms(100);
->>>>>>> 78bdbae2070dfa7fe06bf033691aa322343ab346
 	}
 }
 

@@ -1,5 +1,5 @@
-H0FR6/H0FR6.o: W:/Current\ work/H0FRxx-Firmware/H0FR6/H0FR6.c \
- ../../BOS/BOS.h ../../BOS/BOS_MsgCodes.h \
+H0FR6/H0FR6.o: W:/Hexabitz/H0FRxx-Firmware/H0FR6/H0FR6.c ../../BOS/BOS.h \
+ ../../BOS/BOS_MsgCodes.h \
  ../../Thirdparty/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal.h \
  ../../H0FR6/stm32f0xx_hal_conf.h \
  ../../Thirdparty/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_rcc.h \

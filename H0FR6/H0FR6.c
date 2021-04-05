@@ -34,12 +34,7 @@ module_param_t modParam[NUM_MODULE_PARAMS] = {{.paramPtr=NULL, .paramFormat=FMT_
 extern FLASH_ProcessTypeDef pFlash;
 extern uint8_t numOfRecordedSnippets;
 
-<<<<<<< HEAD
 /* Private variables ---------------------------------------------------------*/
-=======
-#define ADC_CONVERSION 0.00595
-
->>>>>>> 78bdbae2070dfa7fe06bf033691aa322343ab346
 TIM_HandleTypeDef htim3;
 TimerHandle_t xTimerRelay = NULL;
 	
@@ -296,10 +291,6 @@ void Module_Init(void)
 	/* Relay GPIO */
 	Relay_Init();
 
-<<<<<<< HEAD
-=======
-	//HAL_ADC_Start_DMA(&hadc, &dma_buffer, 1);
->>>>>>> 78bdbae2070dfa7fe06bf033691aa322343ab346
 
 }
 
