@@ -1,5 +1,5 @@
 Thirdparty/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_can.o: \
- C:/Users/Root/Desktop/Current\ work/H0FRxx-Firmware/Thirdparty/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_can.c \
+ W:/Current\ work/H0FRxx-Firmware/Thirdparty/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_can.c \
  ../../Thirdparty/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal.h \
  ../../H0FR6/stm32f0xx_hal_conf.h \
  ../../Thirdparty/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_rcc.h \
