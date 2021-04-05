@@ -33,7 +33,7 @@ module_param_t modParam[NUM_MODULE_PARAMS] = {{.paramPtr=NULL, .paramFormat=FMT_
 extern FLASH_ProcessTypeDef pFlash;
 extern uint8_t numOfRecordedSnippets;
 
-#define adc_convertion 0.08
+#define ADC_CONVERSION 0.00595
 
 TIM_HandleTypeDef htim3;
 TimerHandle_t xTimerRelay = NULL;
@@ -41,7 +41,7 @@ TimerHandle_t xTimerRelay = NULL;
 Relay_state_t Relay_state = STATE_OFF, Relay_Oldstate = STATE_ON; uint8_t RelayindMode = 0;
 uint32_t temp32; float tempFloat, Relay_OldDC;
 
-uint32_t dma_buffer[1] = { 0 };
+uint32_t rawValues;
 float Current;
 
 /* Private variables ---------------------------------------------------------*/
@@ -294,8 +294,8 @@ void Module_Init(void)
 	/* Relay GPIO */
 	Relay_Init();
 
-	HAL_ADC_Start_DMA(&hadc, dma_buffer, 1);
-  
+	//HAL_ADC_Start_DMA(&hadc, &dma_buffer, 1);
+
 }
 
 /*-----------------------------------------------------------*/
@@ -474,7 +474,11 @@ Module_Status Set_Relay_PWM(uint32_t freq, float dutycycle)
 */
 float Current_Calculation(void)
 {
-	return Current = dma_buffer[0] * adc_convertion;
+	HAL_ADC_Start(&hadc);
+	HAL_ADC_PollForConversion(&hadc, 10);
+	rawValues = HAL_ADC_GetValue(&hadc);
+	HAL_ADC_Stop(&hadc);
+	return Current = rawValues * ADC_CONVERSION;
 }
 
 /* -----------------------------------------------------------------------

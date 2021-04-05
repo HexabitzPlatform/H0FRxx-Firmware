@@ -64,7 +64,7 @@ int main(void)
   /* Initialize all user peripherals */
 
 	/* Initialize BitzOS */
-	BOS_Init();
+  BOS_Init();
 
   /* Call init function for freertos objects (in freertos.c) */
   MX_FREERTOS_Init();
@@ -96,6 +96,7 @@ void UserTask(void *argument)
   /* Infinite loop */
   for(;;)
   {
+	  Relay_off();
 	  Read_Current(&val);
 	  Delay_ms(100);
 	}
