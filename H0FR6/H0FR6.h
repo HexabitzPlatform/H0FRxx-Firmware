@@ -4,7 +4,8 @@
 		
     File Name     : H0FR6.h
     Description   : Header file for module H0FR1 SPDT mechanical DC relay
-										and module H0FR6 Solid state AC relay (AQH3213A).
+						   , module H0FR6 Solid state AC relay (AQH3213A)
+						   , module H0FR7 Mosfet.
 */
 	
 /* Define to prevent recursive inclusion -------------------------------------*/
@@ -26,6 +27,9 @@
 #endif
 #ifdef H0FR6
 	#define	modulePN		_H0FR6
+#endif
+#ifdef H0FR7
+	#define	modulePN		_H0FR7
 #endif
 
 /* Port-related definitions */
@@ -101,7 +105,7 @@
 #endif
 
 #ifdef H0FR7
-	#define ADC_CONVERSION 0.00595
+	#define ADC_CONVERSION 0.0058
 #endif
 
 #define NUM_MODULE_PARAMS		1
@@ -171,7 +175,10 @@ extern const CLI_Command_Definition_t ledModeCommandDefinition;
 #if defined(H0FR1) || defined(H0FR7)
 	extern const CLI_Command_Definition_t pwmCommandDefinition;
 #endif
+#ifdef H0FR7
+	extern const CLI_Command_Definition_t currentCalculationCommandDefinition;
+#endif
 
-#endif /* H0FR6_H */
+#endif /* H0FR6_H & H0FR7 */
 
 /************************ (C) COPYRIGHT HEXABITZ *****END OF FILE****/

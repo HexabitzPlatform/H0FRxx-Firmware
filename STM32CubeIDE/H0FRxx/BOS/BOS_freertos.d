@@ -1,6 +1,6 @@
-BOS/BOS_freertos.o: W:/Hexabitz/H0FRxx-Firmware/BOS/BOS_freertos.c \
- W:/Hexabitz/H0FRxx-Firmware/BOS/BOS.h \
- W:/Hexabitz/H0FRxx-Firmware/BOS/BOS_MsgCodes.h \
+BOS/BOS_freertos.o: W:/Current\ work/H0FRxx-Firmware/BOS/BOS_freertos.c \
+ W:/Current\ work/H0FRxx-Firmware/BOS/BOS.h \
+ W:/Current\ work/H0FRxx-Firmware/BOS/BOS_MsgCodes.h \
  ../../Thirdparty/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal.h \
  ../../H0FR6/stm32f0xx_hal_conf.h \
  ../../Thirdparty/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_rcc.h \
@@ -53,16 +53,16 @@ BOS/BOS_freertos.o: W:/Hexabitz/H0FRxx-Firmware/BOS/BOS_freertos.c \
  ../../Thirdparty/Middleware/FreeRTOS/Source/include/event_groups.h \
  ../../Thirdparty/Middleware/FreeRTOS/Source/include/timers.h \
  ../../Thirdparty/Middleware/FreeRTOS/Source/include/FreeRTOS_CLI.h \
- W:/Hexabitz/H0FRxx-Firmware/BOS/BOS_eeprom.h \
- W:/Hexabitz/H0FRxx-Firmware/BOS/BOS_utils.h \
- W:/Hexabitz/H0FRxx-Firmware/BOS/BOS_messaging.h ../../H0FR6/H0FR6.h \
+ W:/Current\ work/H0FRxx-Firmware/BOS/BOS_eeprom.h \
+ W:/Current\ work/H0FRxx-Firmware/BOS/BOS_utils.h \
+ W:/Current\ work/H0FRxx-Firmware/BOS/BOS_messaging.h ../../H0FR6/H0FR6.h \
  ../../BOS/BOS.h ../../H0FR6/H0FR6_MemoryMap.h ../../H0FR6/H0FR6_uart.h \
  ../../H0FR6/H0FR6_gpio.h ../../H0FR6/H0FR6_dma.h ../../H0FR6/H0FR6_adc.h \
- W:/Hexabitz/H0FRxx-Firmware/BOS/BOS_DMA.h
+ W:/Current\ work/H0FRxx-Firmware/BOS/BOS_DMA.h
 
-W:/Hexabitz/H0FRxx-Firmware/BOS/BOS.h:
+W:/Current\ work/H0FRxx-Firmware/BOS/BOS.h:
 
-W:/Hexabitz/H0FRxx-Firmware/BOS/BOS_MsgCodes.h:
+W:/Current\ work/H0FRxx-Firmware/BOS/BOS_MsgCodes.h:
 
 ../../Thirdparty/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal.h:
 
@@ -168,11 +168,11 @@ W:/Hexabitz/H0FRxx-Firmware/BOS/BOS_MsgCodes.h:
 
 ../../Thirdparty/Middleware/FreeRTOS/Source/include/FreeRTOS_CLI.h:
 
-W:/Hexabitz/H0FRxx-Firmware/BOS/BOS_eeprom.h:
+W:/Current\ work/H0FRxx-Firmware/BOS/BOS_eeprom.h:
 
-W:/Hexabitz/H0FRxx-Firmware/BOS/BOS_utils.h:
+W:/Current\ work/H0FRxx-Firmware/BOS/BOS_utils.h:
 
-W:/Hexabitz/H0FRxx-Firmware/BOS/BOS_messaging.h:
+W:/Current\ work/H0FRxx-Firmware/BOS/BOS_messaging.h:
 
 ../../H0FR6/H0FR6.h:
 
@@ -188,4 +188,4 @@ W:/Hexabitz/H0FRxx-Firmware/BOS/BOS_messaging.h:
 
 ../../H0FR6/H0FR6_adc.h:
 
-W:/Hexabitz/H0FRxx-Firmware/BOS/BOS_DMA.h:
+W:/Current\ work/H0FRxx-Firmware/BOS/BOS_DMA.h:

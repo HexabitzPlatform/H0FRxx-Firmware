@@ -49,7 +49,7 @@ void RelayTimerCallback( TimerHandle_t xTimerRelay );
 Module_Status Set_Relay_PWM(uint32_t freq, float dutycycle);
 void TIM3_Init(void);
 void TIM3_DeInit(void);
-float Current_Calculation(void);
+static float Current_Calculation(void);
 void Read_Current(float *result);
 
 /* Create CLI commands --------------------------------------------------------*/
@@ -59,6 +59,9 @@ portBASE_TYPE toggleCommand( int8_t *pcWriteBuffer, size_t xWriteBufferLen, cons
 portBASE_TYPE ledModeCommand( int8_t *pcWriteBuffer, size_t xWriteBufferLen, const int8_t *pcCommandString );
 #if defined(H0FR1) || defined(H0FR7)
 	portBASE_TYPE pwmCommand( int8_t *pcWriteBuffer, size_t xWriteBufferLen, const int8_t *pcCommandString );
+#endif
+#ifdef H0FR7
+	portBASE_TYPE currentCalculationCommand( int8_t *pcWriteBuffer, size_t xWriteBufferLen, const int8_t *pcCommandString );
 #endif
 
 /* CLI command structure : on */
@@ -108,7 +111,17 @@ const CLI_Command_Definition_t pwmCommandDefinition =
 };
 #endif
 /*-----------------------------------------------------------*/
-
+#ifdef H0FR7
+/* CLI command structure : getcurrent */
+const CLI_Command_Definition_t currentCalculationCommandDefinition =
+{
+	( const int8_t * ) "getcurrent", /* The command string to type. */
+	( const int8_t * ) "getcurrent:\r\n Get the Current consumption in (Amp)\r\n\r\n",
+	currentCalculationCommand, /* The function to run. */
+	0 /* Zero parameter is expected. */
+};
+#endif
+/*-----------------------------------------------------------*/
 /* -----------------------------------------------------------------------
 	|				    	Private Functions	 						|							|
    ----------------------------------------------------------------------- 
@@ -317,12 +330,17 @@ Module_Status Module_MessagingTask(uint16_t code, uint8_t port, uint8_t src, uin
 			Relay_toggle();
 			break;
 
-#if defined(H0FR1) || defined(H0FR7)
-		case CODE_H0FR6_PWM :
-			tempFloat = (float)( ((uint64_t)cMessage[port-1][shift]<<24) + ((uint64_t)cMessage[port-1][1+shift]<<16) + ((uint64_t)cMessage[port-1][2+shift]<<8) + ((uint64_t)cMessage[port-1][3+shift]) );
-			Relay_PWM(tempFloat);
-			break;
-#endif
+		#if defined(H0FR1) || defined(H0FR7)
+			case CODE_H0FR6_PWM :
+				tempFloat = (float)( ((uint64_t)cMessage[port-1][shift]<<24) + ((uint64_t)cMessage[port-1][1+shift]<<16) + ((uint64_t)cMessage[port-1][2+shift]<<8) + ((uint64_t)cMessage[port-1][3+shift]) );
+				Relay_PWM(tempFloat);
+				break;
+		#endif
+		#ifdef H0FR7
+			case CODE_H0FR7_CURRENT :
+				Current_Calculation();
+				break;
+		#endif
 			
 		default:
 			result = H0FR6_ERR_UnknownMessage;
@@ -344,6 +362,9 @@ void RegisterModuleCLICommands(void)
 	FreeRTOS_CLIRegisterCommand( &ledModeCommandDefinition );
 #if defined(H0FR1) || defined(H0FR7)
 	FreeRTOS_CLIRegisterCommand( &pwmCommandDefinition );
+#endif
+#ifdef H0FR7
+	FreeRTOS_CLIRegisterCommand( &currentCalculationCommandDefinition );
 #endif
 }
 
@@ -468,8 +489,10 @@ Module_Status Set_Relay_PWM(uint32_t freq, float dutycycle)
 
 /* --- ADC Calculation for the Current in H0FR7 ---
 */
-float Current_Calculation(void)
+static float Current_Calculation(void)
 {
+	Relay_on(3000);
+	Delay_ms(1000);
 	HAL_ADC_Start(&hadc);
 	HAL_ADC_PollForConversion(&hadc, 10);
 	rawValues = HAL_ADC_GetValue(&hadc);
@@ -769,7 +792,7 @@ portBASE_TYPE pwmCommand( int8_t *pcWriteBuffer, size_t xWriteBufferLen, const i
 	int8_t *pcParameterString1; portBASE_TYPE xParameterStringLength1 = 0; 
 	float dutycycle = 0;
 	static const int8_t *pcOKMessage = ( int8_t * ) "Solid state relay is pulse-width modulated with %.1f%% duty cycle\r\n";
-	static const int8_t *pcWrongValue = ( int8_t * ) "Wong duty cycle value. Acceptable range is 0 to 100\r\n";
+	static const int8_t *pcWrongValue = ( int8_t * ) "Wrong duty cycle value. Acceptable range is 0 to 100\r\n";
 	
 	/* Remove compile time warnings about unused parameters, and check the
 	write buffer is not NULL.  NOTE - for simplicity, this example assumes the
@@ -806,4 +829,30 @@ portBASE_TYPE pwmCommand( int8_t *pcWriteBuffer, size_t xWriteBufferLen, const i
 #endif
 /*-----------------------------------------------------------*/
 
+#ifdef H0FR7
+portBASE_TYPE currentCalculationCommand( int8_t *pcWriteBuffer, size_t xWriteBufferLen, const int8_t *pcCommandString )
+{
+	int8_t *pcParameterString1; portBASE_TYPE xParameterStringLength1 = 0;
+	float Current = 0;
+	static const int8_t *pcOKMessage = ( int8_t * ) "Current: %.3f Amp\r\n";
+
+	/* Remove compile time warnings about unused parameters, and check the
+	write buffer is not NULL.  NOTE - for simplicity, this example assumes the
+	write buffer length is adequate, so does not check for buffer overflows. */
+	( void ) xWriteBufferLen;
+	configASSERT( pcWriteBuffer );
+
+	/* Obtain the value. */
+	Current = Current_Calculation();
+
+	/* Respond to the command */
+	sprintf( ( char * ) pcWriteBuffer, ( char * ) pcOKMessage, Current);
+
+
+	/* There is no more data to return after this single string, so return
+	pdFALSE. */
+	return pdFALSE;
+}
+#endif
+/*-----------------------------------------------------------*/
 /************************ (C) COPYRIGHT HEXABITZ *****END OF FILE****/

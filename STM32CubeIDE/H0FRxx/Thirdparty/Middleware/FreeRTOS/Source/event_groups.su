@@ -1,5 +1,5 @@
 event_groups.c:138:20:xEventGroupCreate	8	static
-event_groups.c:274:13:xEventGroupWaitBits	24	static,ignoring_inline_asm
+event_groups.c:274:13:xEventGroupWaitBits	32	static,ignoring_inline_asm
 event_groups.c:422:13:xEventGroupClearBits	16	static,ignoring_inline_asm
 event_groups.c:607:6:vEventGroupClearBitsCallback	8	static
 event_groups.c:451:13:xEventGroupClearBitsFromISR	8	static

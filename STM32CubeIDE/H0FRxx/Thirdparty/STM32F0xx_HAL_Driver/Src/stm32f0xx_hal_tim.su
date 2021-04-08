@@ -9,7 +9,7 @@ stm32f0xx_hal_tim.c:298:19:HAL_TIM_Base_Start	8	static
 stm32f0xx_hal_tim.c:321:19:HAL_TIM_Base_Stop	0	static
 stm32f0xx_hal_tim.c:344:19:HAL_TIM_Base_Start_IT	0	static
 stm32f0xx_hal_tim.c:364:19:HAL_TIM_Base_Stop_IT	0	static
-stm32f0xx_hal_tim.c:385:19:HAL_TIM_Base_Start_DMA	8	static
+stm32f0xx_hal_tim.c:385:19:HAL_TIM_Base_Start_DMA	16	static
 stm32f0xx_hal_tim.c:429:19:HAL_TIM_Base_Stop_DMA	0	static
 stm32f0xx_hal_tim.c:544:13:HAL_TIM_OC_MspInit	0	static
 stm32f0xx_hal_tim.c:556:13:HAL_TIM_OC_MspDeInit	0	static

@@ -1,5 +1,5 @@
 Thirdparty/CMSIS/Device/ST/STM32F0xx/Source/Templates/system_stm32f0xx.o: \
- W:/Hexabitz/H0FRxx-Firmware/Thirdparty/CMSIS/Device/ST/STM32F0xx/Source/Templates/system_stm32f0xx.c \
+ W:/Current\ work/H0FRxx-Firmware/Thirdparty/CMSIS/Device/ST/STM32F0xx/Source/Templates/system_stm32f0xx.c \
  ../../Thirdparty/CMSIS/Device/ST/STM32F0xx/Include/stm32f0xx.h \
  ../../Thirdparty/CMSIS/Device/ST/STM32F0xx/Include/stm32f091xc.h \
  ../../Thirdparty/CMSIS/Include/core_cm0.h \
