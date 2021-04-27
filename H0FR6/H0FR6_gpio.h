@@ -50,7 +50,7 @@
 
 extern void GPIO_Init(void);
 extern void IND_LED_Init(void);
-extern void Relay_Init(void);
+extern void Switch_Init(void);
 
 
 #ifdef __cplusplus

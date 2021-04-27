@@ -74,17 +74,17 @@ void IND_LED_Init(void)
 	HAL_GPIO_Init(_IND_LED_PORT, &GPIO_InitStruct);
 }
 
-/* --- Configure Relay GPIO --- 
+/* --- Configure Switch GPIO ---
 */
-void Relay_Init(void)
+void Switch_Init(void)
 {
 	GPIO_InitTypeDef GPIO_InitStruct;
 	
-	GPIO_InitStruct.Pin = _Relay_PIN;
+	GPIO_InitStruct.Pin = _Switch_PIN;
 	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
 	GPIO_InitStruct.Pull = GPIO_NOPULL;
 	GPIO_InitStruct.Speed = GPIO_SPEED_HIGH;
-	HAL_GPIO_Init(_Relay_PORT, &GPIO_InitStruct);
+	HAL_GPIO_Init(_Switch_PORT, &GPIO_InitStruct);
 }
 
 /* --- Check for factory reset condition: 
