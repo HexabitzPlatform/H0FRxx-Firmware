@@ -594,7 +594,7 @@ static void MosfetTask(void *argument) {
 	uint32_t t0 = 0;
 	while (1) {
 		switch (mosfetMode) {
-				case REQ_STREAM_PORT_CLI:
+				case REQ_STREAM_CLI:
 					t0 = HAL_GetTick();
 					Current = Current_Calculation();
 					SendMeasurementResult(mosfetMode, Current, 0, 0, NULL);
@@ -603,7 +603,7 @@ static void MosfetTask(void *argument) {
 					}
 					break;
 
-				case REQ_STREAM_VERBOSE_PORT_CLI:
+				case REQ_STREAM_VERBOSE_CLI:
 					t0 = HAL_GetTick();
 					Current = Current_Calculation();
 					SendMeasurementResult(mosfetMode, Current, 0, 0, NULL);
@@ -615,7 +615,7 @@ static void MosfetTask(void *argument) {
 				case REQ_STREAM_PORT:
 					t0 = HAL_GetTick();
 					Current = Current_Calculation();
-					SendMeasurementResult(mosfetMode, Current, 0, PcPort, NULL);
+					SendMeasurementResult(mosfetMode, Current, 0, mosfetPort, NULL);
 					while (HAL_GetTick() - t0 < (mosfetPeriod - 1) && !stopB) {
 						taskYIELD();
 					}
@@ -667,11 +667,11 @@ static Module_Status SendMeasurementResult(uint8_t request, float value, uint8_t
 	if (mosfetState == REQ_TIMEOUT) {
 		switch (request) {
 				case REQ_SAMPLE_CLI:
-				case REQ_STREAM_PORT_CLI:
+				case REQ_STREAM_CLI:
 					request = REQ_TIMEOUT_CLI;
 					break;
 				case REQ_SAMPLE_VERBOSE_CLI:
-				case REQ_STREAM_VERBOSE_PORT_CLI:
+				case REQ_STREAM_VERBOSE_CLI:
 					request = REQ_TIMEOUT_VERBOSE_CLI;
 					break;
 				case REQ_STREAM_BUFFER:
@@ -685,7 +685,7 @@ static Module_Status SendMeasurementResult(uint8_t request, float value, uint8_t
 	// Send the value to appropriate outlet
 	switch (mosfetMode) {
 	case REQ_SAMPLE_CLI:
-		case REQ_STREAM_PORT_CLI:
+		case REQ_STREAM_CLI:
 			sprintf((char*) pcOutputString, (char*) pcCurrentMsg, message);
 			writePxMutex(PcPort, (char*) pcOutputString,
 					strlen((char*) pcOutputString), cmd500ms, HAL_MAX_DELAY);
@@ -693,7 +693,7 @@ static Module_Status SendMeasurementResult(uint8_t request, float value, uint8_t
 			break;
 
 		case REQ_SAMPLE_VERBOSE_CLI:
-		case REQ_STREAM_VERBOSE_PORT_CLI:
+		case REQ_STREAM_VERBOSE_CLI:
 
 			sprintf((char*) pcOutputString, (char*) pcCurrentVerboseMsg, message);
 			writePxMutex(PcPort, (char*) pcOutputString,
@@ -709,7 +709,7 @@ static Module_Status SendMeasurementResult(uint8_t request, float value, uint8_t
 				temp[1] = *((__IO uint8_t*) (&message) + 2);
 				temp[2] = *((__IO uint8_t*) (&message) + 1);
 				temp[3] = *((__IO uint8_t*) (&message) + 0);
-				writePxMutex(port, (char*) &temp, 4 * sizeof(uint8_t), 10, 10);
+				writePxITMutex(port, (char*) &temp, 4 * sizeof(uint8_t), 10);
 			} else {
 				messageParams[0] = port;
 				messageParams[1] = *((__IO uint8_t*) (&message) + 3);
@@ -938,7 +938,7 @@ float Stream_To_CLI(uint32_t Period, uint32_t Timeout) {
 
 	mosfetPeriod = Period;
 	mosfetTimeout = Timeout;
-	mosfetMode = REQ_STREAM_PORT_CLI;
+	mosfetMode = REQ_STREAM_CLI;
 
 	if ((mosfetTimeout > 0) && (mosfetTimeout < 0xFFFFFFFF)) {
 		/* start software timer which will create event timeout */
@@ -963,7 +963,7 @@ float Stream_To_CLI_V(uint32_t Period, uint32_t Timeout) {
 
 	mosfetPeriod = Period;
 	mosfetTimeout = Timeout;
-	mosfetMode = REQ_STREAM_VERBOSE_PORT_CLI;
+	mosfetMode = REQ_STREAM_VERBOSE_CLI;
 
 	if ((mosfetTimeout > 0) && (mosfetTimeout < 0xFFFFFFFF)) {
 		/* start software timer which will create event timeout */

@@ -118,8 +118,8 @@
 	#define REQ_SAMPLE_PORT				  2
 	#define REQ_SAMPLE_CLI                3
 	#define REQ_SAMPLE_VERBOSE_CLI		  4
-	#define REQ_STREAM_PORT_CLI           5
-	#define REQ_STREAM_VERBOSE_PORT_CLI   6
+	#define REQ_STREAM_CLI           	  5
+	#define REQ_STREAM_VERBOSE_CLI   	  6
 	#define REQ_STREAM_PORT		          7
 	#define REQ_STREAM_BUFFER         	  8
 	#define REQ_TIMEOUT             	  9
