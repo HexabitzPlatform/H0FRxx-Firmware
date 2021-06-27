@@ -1,5 +1,0 @@
-H0FR6_gpio.c:36:6:IND_LED_Init	32	static
-H0FR6_gpio.c:22:6:GPIO_Init	32	static
-H0FR6_gpio.c:49:6:Switch_Init	32	static
-H0FR6_gpio.c:117:12:GetPortGPIOs	16	static
-H0FR6_gpio.c:63:9:IsFactoryReset	88	static

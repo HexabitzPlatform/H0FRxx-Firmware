@@ -1,4 +1,0 @@
-H0FR6_timers.c:31:6:TIM_USEC_Init	32	static
-H0FR6_timers.c:58:6:TIM_MSEC_Init	32	static
-H0FR6_timers.c:83:6:StartMicroDelay	8	static
-H0FR6_timers.c:103:6:StartMilliDelay	8	static
