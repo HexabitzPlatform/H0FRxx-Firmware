@@ -1,5 +1,5 @@
 /*
- BitzOS (BOS) V0.2.4 - Copyright (C) 2017-2021 Hexabitz
+ BitzOS (BOS) V0.2.5 - Copyright (C) 2017-2021 Hexabitz
  All rights reserved
 
  File Name     : H0FR6.c
@@ -29,10 +29,11 @@ UART_HandleTypeDef huart6;
 
 /* Module exported parameters ------------------------------------------------*/
 float H0FR6_Current = 0.0f;
+#ifdef H0FR7
 uint8_t startMeasurement = STOP_MEASUREMENT;
+#endif
 module_param_t modParam[NUM_MODULE_PARAMS] = { { .paramPtr = &H0FR6_Current,
 		.paramFormat = FMT_FLOAT, .paramName = "current" } };
-
 /* Exported variables */
 extern FLASH_ProcessTypeDef pFlash;
 extern uint8_t numOfRecordedSnippets;
@@ -318,7 +319,7 @@ uint8_t ClearROtopology(void) {
 
 /* --- (H0FR6 || H0FR7) module initialization ---
  */
-void Module_Init(void) {
+void Module_Peripheral_Init(void) {
 
 	/* Array ports */
 	MX_USART1_UART_Init();
@@ -327,9 +328,16 @@ void Module_Init(void) {
 	MX_USART5_UART_Init();
 	MX_USART6_UART_Init();
 
+#ifdef H0FR7
 	/* ADC init */
 	MX_ADC_Init();
+	ADC_Channel_config();
 
+	/* Create a Mosfet task */
+	xTaskCreate(MosfetTask, (const char* ) "MosfetTask",
+			(2*configMINIMAL_STACK_SIZE), NULL,
+			osPriorityNormal - osPriorityIdle, &MosfetHandle);
+#endif
 	/* Create a timeout timer for Switch_on() API */
 	xTimerSwitch = xTimerCreate("SwitchTimer", pdMS_TO_TICKS(1000), pdFALSE,
 			(void*) 1, SwitchTimerCallback);
@@ -337,17 +345,13 @@ void Module_Init(void) {
 	/* Switch GPIO */
 	Switch_Init();
 
-	/* Create a Mosfet task */
-	xTaskCreate(MosfetTask, (const char* ) "MosfetTask",
-			(2*configMINIMAL_STACK_SIZE), NULL,
-			osPriorityNormal - osPriorityIdle, &MosfetHandle);
+
 
 }
 
 /*-----------------------------------------------------------*/
 
-/* --- (H0FR6 || H0FR7) message processing task.
- */
+/* --- H0FRx message processing task. */
 Module_Status Module_MessagingTask(uint16_t code, uint8_t port, uint8_t src,
 		uint8_t dst, uint8_t shift) {
 	Module_Status result = H0FRx_OK;
@@ -356,10 +360,7 @@ Module_Status Module_MessagingTask(uint16_t code, uint8_t port, uint8_t src,
 
 	switch (code) {
 	case CODE_H0FRx_ON:
-		temp32 = ((uint32_t) cMessage[port - 1][shift] << 24)
-				+ ((uint32_t) cMessage[port - 1][1 + shift] << 16)
-				+ ((uint32_t) cMessage[port - 1][2 + shift] << 8)
-				+ cMessage[port - 1][3 + shift];
+		temp32 = ((uint32_t) cMessage[port - 1][shift] << 24)+ ((uint32_t) cMessage[port - 1][1 + shift] << 16)+ ((uint32_t) cMessage[port - 1][2 + shift] << 8)+ cMessage[port - 1][3 + shift];
 		Switch_on(temp32);
 		break;
 
@@ -373,10 +374,7 @@ Module_Status Module_MessagingTask(uint16_t code, uint8_t port, uint8_t src,
 
 #if defined(H0FR1) || defined(H0FR7)
 	case CODE_H0FRx_PWM:
-		tempFloat = (float) (((uint64_t) cMessage[port - 1][shift] << 24)
-				+ ((uint64_t) cMessage[port - 1][1 + shift] << 16)
-				+ ((uint64_t) cMessage[port - 1][2 + shift] << 8)
-				+ ((uint64_t) cMessage[port - 1][3 + shift]));
+		tempFloat = (float) (((uint64_t) cMessage[port - 1][shift] << 24)+ ((uint64_t) cMessage[port - 1][1 + shift] << 16)+ ((uint64_t) cMessage[port - 1][2 + shift] << 8)+ ((uint64_t) cMessage[port - 1][3 + shift]));
 		Switch_PWM(tempFloat);
 		break;
 #endif
@@ -386,25 +384,13 @@ Module_Status Module_MessagingTask(uint16_t code, uint8_t port, uint8_t src,
 		SendMeasurementResult(REQ_SAMPLE, Current, dst, port, NULL);
 		break;
 	case CODE_H0FR7_STREAM_PORT:
-		period = ((uint32_t) cMessage[port - 1][3 + shift] << 24)
-				+ ((uint32_t) cMessage[port - 1][2 + shift] << 16)
-				+ ((uint32_t) cMessage[port - 1][1 + shift] << 8)
-				+ cMessage[port - 1][shift];
-		timeout = ((uint32_t) cMessage[port - 1][7 + shift] << 24)
-				+ ((uint32_t) cMessage[port - 1][6 + shift] << 16)
-				+ ((uint32_t) cMessage[port - 1][5 + shift] << 8)
-				+ cMessage[port - 1][4 + shift];
+		period = ((uint32_t) cMessage[port - 1][3 + shift] << 24)+ ((uint32_t) cMessage[port - 1][2 + shift] << 16)+ ((uint32_t) cMessage[port - 1][1 + shift] << 8)+ cMessage[port - 1][shift];
+		timeout = ((uint32_t) cMessage[port - 1][7 + shift] << 24)+ ((uint32_t) cMessage[port - 1][6 + shift] << 16)+ ((uint32_t) cMessage[port - 1][5 + shift] << 8)+ cMessage[port - 1][4 + shift];
 		Stream_To_Port(period, timeout, port, dst);
 		break;
 	case CODE_H0FR7_STREAM_BUFFER:
-		period = ((uint32_t) cMessage[port - 1][3 + shift] << 24)
-				+ ((uint32_t) cMessage[port - 1][2 + shift] << 16)
-				+ ((uint32_t) cMessage[port - 1][1 + shift] << 8)
-				+ cMessage[port - 1][shift];
-		timeout = ((uint32_t) cMessage[port - 1][7 + shift] << 24)
-				+ ((uint32_t) cMessage[port - 1][6 + shift] << 16)
-				+ ((uint32_t) cMessage[port - 1][5 + shift] << 8)
-				+ cMessage[port - 1][4 + shift];
+		period = ((uint32_t) cMessage[port - 1][3 + shift] << 24)	+ ((uint32_t) cMessage[port - 1][2 + shift] << 16)+ ((uint32_t) cMessage[port - 1][1 + shift] << 8)+ cMessage[port - 1][shift];
+		timeout = ((uint32_t) cMessage[port - 1][7 + shift] << 24)+ ((uint32_t) cMessage[port - 1][6 + shift] << 16)+ ((uint32_t) cMessage[port - 1][5 + shift] << 8)+ cMessage[port - 1][4 + shift];
 		Stream_To_Buffer(&mosfetBuffer, period, timeout);
 		break;
 	case CODE_H0FR7_STOP_MEASUREMENT:
@@ -594,7 +580,7 @@ static void MosfetTask(void *argument) {
 	uint32_t t0 = 0;
 	while (1) {
 		switch (mosfetMode) {
-				case REQ_STREAM_CLI:
+				case REQ_STREAM_PORT_CLI:
 					t0 = HAL_GetTick();
 					Current = Current_Calculation();
 					SendMeasurementResult(mosfetMode, Current, 0, 0, NULL);
@@ -603,7 +589,7 @@ static void MosfetTask(void *argument) {
 					}
 					break;
 
-				case REQ_STREAM_VERBOSE_CLI:
+				case REQ_STREAM_VERBOSE_PORT_CLI:
 					t0 = HAL_GetTick();
 					Current = Current_Calculation();
 					SendMeasurementResult(mosfetMode, Current, 0, 0, NULL);
@@ -615,7 +601,7 @@ static void MosfetTask(void *argument) {
 				case REQ_STREAM_PORT:
 					t0 = HAL_GetTick();
 					Current = Current_Calculation();
-					SendMeasurementResult(mosfetMode, Current, 0, mosfetPort, NULL);
+					SendMeasurementResult(mosfetMode, Current, 0, PcPort, NULL);
 					while (HAL_GetTick() - t0 < (mosfetPeriod - 1) && !stopB) {
 						taskYIELD();
 					}
@@ -667,11 +653,11 @@ static Module_Status SendMeasurementResult(uint8_t request, float value, uint8_t
 	if (mosfetState == REQ_TIMEOUT) {
 		switch (request) {
 				case REQ_SAMPLE_CLI:
-				case REQ_STREAM_CLI:
+				case REQ_STREAM_PORT_CLI:
 					request = REQ_TIMEOUT_CLI;
 					break;
 				case REQ_SAMPLE_VERBOSE_CLI:
-				case REQ_STREAM_VERBOSE_CLI:
+				case REQ_STREAM_VERBOSE_PORT_CLI:
 					request = REQ_TIMEOUT_VERBOSE_CLI;
 					break;
 				case REQ_STREAM_BUFFER:
@@ -685,7 +671,7 @@ static Module_Status SendMeasurementResult(uint8_t request, float value, uint8_t
 	// Send the value to appropriate outlet
 	switch (mosfetMode) {
 	case REQ_SAMPLE_CLI:
-		case REQ_STREAM_CLI:
+		case REQ_STREAM_PORT_CLI:
 			sprintf((char*) pcOutputString, (char*) pcCurrentMsg, message);
 			writePxMutex(PcPort, (char*) pcOutputString,
 					strlen((char*) pcOutputString), cmd500ms, HAL_MAX_DELAY);
@@ -693,7 +679,7 @@ static Module_Status SendMeasurementResult(uint8_t request, float value, uint8_t
 			break;
 
 		case REQ_SAMPLE_VERBOSE_CLI:
-		case REQ_STREAM_VERBOSE_CLI:
+		case REQ_STREAM_VERBOSE_PORT_CLI:
 
 			sprintf((char*) pcOutputString, (char*) pcCurrentVerboseMsg, message);
 			writePxMutex(PcPort, (char*) pcOutputString,
@@ -709,7 +695,7 @@ static Module_Status SendMeasurementResult(uint8_t request, float value, uint8_t
 				temp[1] = *((__IO uint8_t*) (&message) + 2);
 				temp[2] = *((__IO uint8_t*) (&message) + 1);
 				temp[3] = *((__IO uint8_t*) (&message) + 0);
-				writePxITMutex(port, (char*) &temp, 4 * sizeof(uint8_t), 10);
+				writePxMutex(port, (char*) &temp, 4 * sizeof(uint8_t), 10, 10);
 			} else {
 				messageParams[0] = port;
 				messageParams[1] = *((__IO uint8_t*) (&message) + 3);
@@ -938,7 +924,7 @@ float Stream_To_CLI(uint32_t Period, uint32_t Timeout) {
 
 	mosfetPeriod = Period;
 	mosfetTimeout = Timeout;
-	mosfetMode = REQ_STREAM_CLI;
+	mosfetMode = REQ_STREAM_PORT_CLI;
 
 	if ((mosfetTimeout > 0) && (mosfetTimeout < 0xFFFFFFFF)) {
 		/* start software timer which will create event timeout */
@@ -963,7 +949,7 @@ float Stream_To_CLI_V(uint32_t Period, uint32_t Timeout) {
 
 	mosfetPeriod = Period;
 	mosfetTimeout = Timeout;
-	mosfetMode = REQ_STREAM_VERBOSE_CLI;
+	mosfetMode = REQ_STREAM_VERBOSE_PORT_CLI;
 
 	if ((mosfetTimeout > 0) && (mosfetTimeout < 0xFFFFFFFF)) {
 		/* start software timer which will create event timeout */

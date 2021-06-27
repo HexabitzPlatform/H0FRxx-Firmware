@@ -16,6 +16,14 @@
   *
   ******************************************************************************
   */
+/*
+ BitzOS (BOS) V0.2.5 - Copyright (C) 2017-2021 Hexabitz
+ All rights reserved
+
+ File Name     : H0FR6_adc.h
+ Description   : Header file provides configuration of the ADC instances.
+
+ */
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __ADC_H__
 #define __ADC_H__
@@ -38,6 +46,7 @@ extern ADC_HandleTypeDef hadc;
 /* USER CODE END Private defines */
 
 void MX_ADC_Init(void);
+void ADC_Channel_config(void);
 
 /* USER CODE BEGIN Prototypes */
 

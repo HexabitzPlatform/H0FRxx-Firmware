@@ -1,4 +1,4 @@
-BOS_freertos.c:172:6:StartDefaultTask	24	static
-BOS_freertos.c:102:6:MX_FREERTOS_Init	72	static
-BOS_freertos.c:220:6:vMainConfigureTimerForRunTimeStats	8	static
-BOS_freertos.c:228:10:ulMainGetRunTimeCounterValue	16	static
+BOS_freertos.c:146:6:StartDefaultTask	24	static
+BOS_freertos.c:66:6:MX_FREERTOS_Init	72	static
+BOS_freertos.c:189:6:vMainConfigureTimerForRunTimeStats	8	static
+BOS_freertos.c:196:10:ulMainGetRunTimeCounterValue	16	static
