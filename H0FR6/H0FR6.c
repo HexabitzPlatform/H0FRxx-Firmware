@@ -362,7 +362,7 @@ Module_Status Module_MessagingTask(uint16_t code, uint8_t port, uint8_t src,
 		break;
 #endif
 #ifdef H0FR7
-	case CODE_H0FR7_SAMPLE:
+	case CODE_H0FR7_SAMPLE_PORT:
 		Sample_current_measurement();
 		SendMeasurementResult(REQ_SAMPLE, Current, cMessage[port - 1][1+shift], cMessage[port - 1][shift], NULL);
 		break;
