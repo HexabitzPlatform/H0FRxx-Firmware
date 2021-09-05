@@ -28,7 +28,6 @@ extern ADC_HandleTypeDef hadc;
 /* USER CODE END Private defines */
 
 void MX_ADC_Init(void);
-void ADC_Channel_config(void);
 
 /* USER CODE BEGIN Prototypes */
 

@@ -18,7 +18,7 @@ ADC_HandleTypeDef hadc;
 
 
 /* ADC init function */
-void ADC_Channel_config(void)
+void HAL_ADC_MspInit(ADC_HandleTypeDef* hadc)
 {
   ADC_ChannelConfTypeDef sConfig = {0};
   GPIO_InitTypeDef GPIO_InitStruct = {0};
@@ -27,7 +27,7 @@ void ADC_Channel_config(void)
   sConfig.Channel = ADC_CHANNEL_0;
   sConfig.Rank = ADC_RANK_CHANNEL_NUMBER;
   sConfig.SamplingTime = ADC_SAMPLETIME_28CYCLES_5;
-  HAL_ADC_ConfigChannel(&hadc, &sConfig);
+  HAL_ADC_ConfigChannel(hadc, &sConfig);
 
   /**ADC GPIO Configuration
   PA0     ------> ADC_IN0

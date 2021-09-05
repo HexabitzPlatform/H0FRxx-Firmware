@@ -331,22 +331,15 @@ void Module_Peripheral_Init(void) {
 #ifdef H0FR7
 	/* ADC init */
 	MX_ADC_Init();
-	ADC_Channel_config();
 
 	/* Create a Mosfet task */
-	xTaskCreate(MosfetTask, (const char* ) "MosfetTask",
-			(2*configMINIMAL_STACK_SIZE), NULL,
-			osPriorityNormal - osPriorityIdle, &MosfetHandle);
+	xTaskCreate(MosfetTask,(const char* ) "MosfetTask",(2*configMINIMAL_STACK_SIZE),NULL,osPriorityNormal - osPriorityIdle,&MosfetHandle);
 #endif
 	/* Create a timeout timer for Switch_on() API */
-	xTimerSwitch = xTimerCreate("SwitchTimer", pdMS_TO_TICKS(1000), pdFALSE,
-			(void*) 1, SwitchTimerCallback);
+	xTimerSwitch =xTimerCreate("SwitchTimer",pdMS_TO_TICKS(1000),pdFALSE,(void* )1,SwitchTimerCallback);
 
 	/* Switch GPIO */
 	Switch_Init();
-
-
-
 }
 
 /*-----------------------------------------------------------*/
@@ -369,8 +362,8 @@ Module_Status Module_MessagingTask(uint16_t code, uint8_t port, uint8_t src,
 		break;
 
 	case CODE_H0FRx_TOGGLE:
-		Switch_toggle();
-		break;
+			Switch_toggle();
+			break;
 
 #if defined(H0FR1) || defined(H0FR7)
 	case CODE_H0FRx_PWM:
