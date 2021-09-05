@@ -2,7 +2,7 @@
     BitzOS (BOS) V0.2.5 - Copyright (C) 2017-2021 Hexabitz
     All rights reserved
 
-    File Name     : topology_1.h
+    File Name     : topology.h
     Description   : Array topology definition.
 */
 
@@ -32,7 +32,7 @@ static uint16_t array[__N][7] = {
 
 // Configurations for duplex serial ports
 #if ( _module == 1 )
-	#define	H0BR4	1
+	#define	H0FR1	1
 	#define	_P1pol_normal	1
 	#define	_P2pol_normal	1
 	#define	_P3pol_normal	1
@@ -53,7 +53,7 @@ static uint16_t array[__N][7] = {
 #ifdef __cplusplus
 }
 #endif
-#endif /*__ topology_1_H */
+#endif /*__ topology_H */
 
 
 /************************ (C) COPYRIGHT HEXABITZ *****END OF FILE****/

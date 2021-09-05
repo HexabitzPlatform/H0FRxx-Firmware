@@ -89,7 +89,7 @@
 #define	USART6_AF			GPIO_AF5_USART6
 
 /* Module-specific Definitions */
-#if defined(H0FR1) || defined(H0FR7)
+#if defined(H0FR6)
 	#define	_Switch_PIN						GPIO_PIN_0
 	#define	_Switch_PORT						GPIOB
 	#define _Switch_GPIO_CLK()				__GPIOB_CLK_ENABLE();
