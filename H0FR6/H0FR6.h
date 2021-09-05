@@ -192,19 +192,19 @@ extern uint8_t SwitchindMode;
    ----------------------------------------------------------------------- 
 */
 
-extern Module_Status Switch_on(uint32_t timeout);
-extern Module_Status Switch_off(void);
-extern Module_Status Switch_toggle(void);
+extern Module_Status Output_on(uint32_t timeout);
+extern Module_Status Output_off(void);
+extern Module_Status Output_toggle(void);
 #if defined(H0FR1) || defined(H0FR7)
-	extern Module_Status Switch_PWM(float dutyCycle);
+	extern Module_Status Output_PWM(float dutyCycle);
 #endif
 #ifdef H0FR7
-	extern float Sample_Mosfet(void);
-	extern float Stream_To_Port(uint8_t Port, uint8_t Module, uint32_t Period, uint32_t Timeout);
-	extern float Stream_To_CLI_V(uint32_t Period, uint32_t Timeout);
-	extern float Stream_To_CLI(uint32_t Period, uint32_t Timeout);
-	extern float Stream_To_Buffer(float *Buffer, uint32_t Period, uint32_t Timeout);
-	extern Module_Status Stop_Mosfet(void);
+	extern float Sample_current_measurement(void);
+	extern float Stream_current_To_Port(uint8_t Port, uint8_t Module, uint32_t Period, uint32_t Timeout);
+	extern float Stream_current_To_CLI_V(uint32_t Period, uint32_t Timeout);
+	extern float Stream_current_To_CLI(uint32_t Period, uint32_t Timeout);
+	extern float Stream_current_To_Buffer(float *Buffer, uint32_t Period, uint32_t Timeout);
+	extern Module_Status Stop_current_measurement(void);
 #endif
 
 /* -----------------------------------------------------------------------
