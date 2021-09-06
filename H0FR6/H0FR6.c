@@ -540,12 +540,22 @@ Module_Status Set_Switch_PWM(uint32_t freq, float dutycycle) {
 #ifdef H0FR7
 /* --- ADC Calculation for the Current in H0FR7 (Mosfet)---*/
 static float Current_Calculation(void) {
+	ADC_ChannelConfTypeDef sConfig ={0};
+
+	sConfig.Channel = ADC_CHANNEL_0;
+	sConfig.Rank = ADC_RANK_CHANNEL_NUMBER;
+	sConfig.SamplingTime = ADC_SAMPLETIME_28CYCLES_5;
+	HAL_ADC_ConfigChannel(&hadc,&sConfig);
 	Output_on(3000);
 	Delay_ms(1000);
 	HAL_ADC_Start(&hadc);
-	HAL_ADC_PollForConversion(&hadc, 10);
-	rawValues = HAL_ADC_GetValue(&hadc);
+	HAL_ADC_PollForConversion(&hadc,10);
+	rawValues =HAL_ADC_GetValue(&hadc);
 	HAL_ADC_Stop(&hadc);
+	sConfig.Channel = ADC_CHANNEL_0;
+	sConfig.Rank = ADC_RANK_NONE;
+	sConfig.SamplingTime = ADC_SAMPLETIME_28CYCLES_5;
+	HAL_ADC_ConfigChannel(&hadc,&sConfig);
 	return (rawValues * ADC_CONVERSION);
 }
 /*-----------------------------------------------------------*/
@@ -560,6 +570,7 @@ static void mosfetStopMeasurement(void) {
 
 /* --- Definition of Mosfet Prime Task ---*/
 static void MosfetTask(void *argument) {
+
 	uint32_t t0 = 0;
 	while (1) {
 		switch (mosfetMode) {
