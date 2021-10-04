@@ -245,7 +245,7 @@ void vApplicationStackOverflowHook( xTaskHandle pxTask, signed char *pcTaskName 
 	for( ;; );
 }
 /*-----------------------------------------------------------*/
-
+//pvPortMalloc()
 void vApplicationMallocFailedHook( void )
 {
 	/* vApplicationMallocFailedHook() will only be called if

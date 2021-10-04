@@ -27,8 +27,9 @@ int main(void){
 /* User Task */
 void UserTask(void *argument){
 
-	// put your code here, to run repeatedly.
+
 	while(1){
+
 
 	}
 }

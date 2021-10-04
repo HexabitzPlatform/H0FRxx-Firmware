@@ -89,12 +89,12 @@
 #define	USART6_AF			GPIO_AF5_USART6
 
 /* Module-specific Definitions */
-#if defined(H0FR6)
+#if defined(H0FR1)
 	#define	_Switch_PIN						GPIO_PIN_0
 	#define	_Switch_PORT						GPIOB
 	#define _Switch_GPIO_CLK()				__GPIOB_CLK_ENABLE();
 #endif
-#if defined(H0FR1) || defined(H0FR7)
+#if defined(H0FR6) || defined(H0FR7)
 	#define	_Switch_PIN						GPIO_PIN_0
 	#define	_Switch_PORT						GPIOB
 	#define _Switch_TIM_CH					TIM_CHANNEL_3
@@ -195,7 +195,7 @@ extern uint8_t SwitchindMode;
 extern Module_Status Output_on(uint32_t timeout);
 extern Module_Status Output_off(void);
 extern Module_Status Output_toggle(void);
-#if defined(H0FR1) || defined(H0FR7)
+#if defined(H0FR6) || defined(H0FR7)
 	extern Module_Status Output_PWM(float dutyCycle);
 #endif
 #ifdef H0FR7
