@@ -100,7 +100,7 @@
 	#define _Switch_TIM_CH					TIM_CHANNEL_3
 	#define _Switch_GPIO_CLK()				__GPIOB_CLK_ENABLE();
 	#define PWM_TIMER_CLOCK					16000000
-	#define Switch_PWM_DEF_FREQ				24000
+	#define Switch_PWM_DEF_FREQ				980
 	#define Switch_PWM_DEF_PERIOD			((float) (1/Switch_PWM_FREQ) )
 #endif
 
@@ -216,7 +216,7 @@ extern const CLI_Command_Definition_t onCommandDefinition;
 extern const CLI_Command_Definition_t offCommandDefinition;
 extern const CLI_Command_Definition_t toggleCommandDefinition;
 extern const CLI_Command_Definition_t ledModeCommandDefinition;
-#if defined(H0FR1) || defined(H0FR7)
+#if defined(H0FR6) || defined(H0FR7)
 	extern const CLI_Command_Definition_t pwmCommandDefinition;
 #endif
 #ifdef H0FR7
