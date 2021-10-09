@@ -1,4 +1,5 @@
-H0FR6/H0FR6_uart.o: D:/Hexabitz\ release/H0FRxx/H0FR6/H0FR6_uart.c \
+H0FR6/H0FR6_uart.o: \
+ D:/Hexabitz/for\ Release/Modules\ firmware/H0FRxx/H0FR6/H0FR6_uart.c \
  ../../BOS/BOS.h ../../BOS/BOS_MsgCodes.h \
  ../../Thirdparty/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal.h \
  ../../H0FR6/stm32f0xx_hal_conf.h \

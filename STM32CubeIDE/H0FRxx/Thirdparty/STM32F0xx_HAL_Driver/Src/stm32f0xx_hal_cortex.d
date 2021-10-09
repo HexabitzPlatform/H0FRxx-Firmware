@@ -1,5 +1,5 @@
 Thirdparty/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_cortex.o: \
- D:/Hexabitz\ release/H0FRxx/Thirdparty/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_cortex.c \
+ D:/Hexabitz/for\ Release/Modules\ firmware/H0FRxx/Thirdparty/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_cortex.c \
  ../../Thirdparty/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal.h \
  ../../H0FR6/stm32f0xx_hal_conf.h \
  ../../Thirdparty/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_rcc.h \

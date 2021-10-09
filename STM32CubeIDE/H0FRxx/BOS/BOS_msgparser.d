@@ -1,6 +1,7 @@
-BOS/BOS_msgparser.o: D:/Hexabitz\ release/H0FRxx/BOS/BOS_msgparser.c \
- D:/Hexabitz\ release/H0FRxx/BOS/BOS.h \
- D:/Hexabitz\ release/H0FRxx/BOS/BOS_MsgCodes.h \
+BOS/BOS_msgparser.o: \
+ D:/Hexabitz/for\ Release/Modules\ firmware/H0FRxx/BOS/BOS_msgparser.c \
+ D:/Hexabitz/for\ Release/Modules\ firmware/H0FRxx/BOS/BOS.h \
+ D:/Hexabitz/for\ Release/Modules\ firmware/H0FRxx/BOS/BOS_MsgCodes.h \
  ../../Thirdparty/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal.h \
  ../../H0FR6/stm32f0xx_hal_conf.h \
  ../../Thirdparty/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_rcc.h \
@@ -53,19 +54,19 @@ BOS/BOS_msgparser.o: D:/Hexabitz\ release/H0FRxx/BOS/BOS_msgparser.c \
  ../../Thirdparty/Middleware/FreeRTOS/Source/include/event_groups.h \
  ../../Thirdparty/Middleware/FreeRTOS/Source/include/timers.h \
  ../../Thirdparty/Middleware/FreeRTOS/Source/include/FreeRTOS_CLI.h \
- D:/Hexabitz\ release/H0FRxx/BOS/BOS_eeprom.h \
- D:/Hexabitz\ release/H0FRxx/BOS/BOS_utils.h \
- D:/Hexabitz\ release/H0FRxx/BOS/BOS_messaging.h \
- D:/Hexabitz\ release/H0FRxx/BOS/BOS_inputs.h \
+ D:/Hexabitz/for\ Release/Modules\ firmware/H0FRxx/BOS/BOS_eeprom.h \
+ D:/Hexabitz/for\ Release/Modules\ firmware/H0FRxx/BOS/BOS_utils.h \
+ D:/Hexabitz/for\ Release/Modules\ firmware/H0FRxx/BOS/BOS_messaging.h \
+ D:/Hexabitz/for\ Release/Modules\ firmware/H0FRxx/BOS/BOS_inputs.h \
  ../../Thirdparty/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_adc_ex.h \
  ../../H0FR6/H0FR6.h ../../BOS/BOS.h ../../H0FR6/H0FR6_MemoryMap.h \
  ../../H0FR6/H0FR6_uart.h ../../H0FR6/H0FR6_gpio.h \
  ../../H0FR6/H0FR6_dma.h ../../H0FR6/H0FR6_adc.h \
- D:/Hexabitz\ release/H0FRxx/BOS/BOS_DMA.h
+ D:/Hexabitz/for\ Release/Modules\ firmware/H0FRxx/BOS/BOS_DMA.h
 
-D:/Hexabitz\ release/H0FRxx/BOS/BOS.h:
+D:/Hexabitz/for\ Release/Modules\ firmware/H0FRxx/BOS/BOS.h:
 
-D:/Hexabitz\ release/H0FRxx/BOS/BOS_MsgCodes.h:
+D:/Hexabitz/for\ Release/Modules\ firmware/H0FRxx/BOS/BOS_MsgCodes.h:
 
 ../../Thirdparty/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal.h:
 
@@ -171,13 +172,13 @@ D:/Hexabitz\ release/H0FRxx/BOS/BOS_MsgCodes.h:
 
 ../../Thirdparty/Middleware/FreeRTOS/Source/include/FreeRTOS_CLI.h:
 
-D:/Hexabitz\ release/H0FRxx/BOS/BOS_eeprom.h:
+D:/Hexabitz/for\ Release/Modules\ firmware/H0FRxx/BOS/BOS_eeprom.h:
 
-D:/Hexabitz\ release/H0FRxx/BOS/BOS_utils.h:
+D:/Hexabitz/for\ Release/Modules\ firmware/H0FRxx/BOS/BOS_utils.h:
 
-D:/Hexabitz\ release/H0FRxx/BOS/BOS_messaging.h:
+D:/Hexabitz/for\ Release/Modules\ firmware/H0FRxx/BOS/BOS_messaging.h:
 
-D:/Hexabitz\ release/H0FRxx/BOS/BOS_inputs.h:
+D:/Hexabitz/for\ Release/Modules\ firmware/H0FRxx/BOS/BOS_inputs.h:
 
 ../../Thirdparty/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_adc_ex.h:
 
@@ -195,4 +196,4 @@ D:/Hexabitz\ release/H0FRxx/BOS/BOS_inputs.h:
 
 ../../H0FR6/H0FR6_adc.h:
 
-D:/Hexabitz\ release/H0FRxx/BOS/BOS_DMA.h:
+D:/Hexabitz/for\ Release/Modules\ firmware/H0FRxx/BOS/BOS_DMA.h:
