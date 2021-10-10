@@ -1,5 +1,4 @@
-H0FR6/H0FR6_it.o: \
- D:/Hexabitz/for\ Release/Modules\ firmware/H0FRxx/H0FR6/H0FR6_it.c \
+H0FR6/H0FR6_it.o: D:/Hexabitz\ release/H0FRxx/H0FR6/H0FR6_it.c \
  ../../BOS/BOS.h ../../BOS/BOS_MsgCodes.h \
  ../../Thirdparty/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal.h \
  ../../H0FR6/stm32f0xx_hal_conf.h \

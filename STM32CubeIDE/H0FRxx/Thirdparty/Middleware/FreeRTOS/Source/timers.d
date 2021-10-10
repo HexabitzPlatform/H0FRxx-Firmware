@@ -1,5 +1,5 @@
 Thirdparty/Middleware/FreeRTOS/Source/timers.o: \
- D:/Hexabitz/for\ Release/Modules\ firmware/H0FRxx/Thirdparty/Middleware/FreeRTOS/Source/timers.c \
+ D:/Hexabitz\ release/H0FRxx/Thirdparty/Middleware/FreeRTOS/Source/timers.c \
  ../../Thirdparty/Middleware/FreeRTOS/Source/include/FreeRTOS.h \
  ../../BOS/FreeRTOSConfig.h \
  ../../Thirdparty/Middleware/FreeRTOS/Source/include/projdefs.h \

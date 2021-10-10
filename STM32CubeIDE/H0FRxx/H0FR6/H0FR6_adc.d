@@ -1,7 +1,6 @@
-H0FR6/H0FR6_adc.o: \
- D:/Hexabitz/for\ Release/Modules\ firmware/H0FRxx/H0FR6/H0FR6_adc.c \
- D:/Hexabitz/for\ Release/Modules\ firmware/H0FRxx/H0FR6/H0FR6_adc.h \
- ../../BOS/BOS.h ../../BOS/BOS_MsgCodes.h \
+H0FR6/H0FR6_adc.o: D:/Hexabitz\ release/H0FRxx/H0FR6/H0FR6_adc.c \
+ D:/Hexabitz\ release/H0FRxx/H0FR6/H0FR6_adc.h ../../BOS/BOS.h \
+ ../../BOS/BOS_MsgCodes.h \
  ../../Thirdparty/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal.h \
  ../../H0FR6/stm32f0xx_hal_conf.h \
  ../../Thirdparty/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_rcc.h \
@@ -61,7 +60,7 @@ H0FR6/H0FR6_adc.o: \
  ../../H0FR6/H0FR6_uart.h ../../H0FR6/H0FR6_gpio.h \
  ../../H0FR6/H0FR6_dma.h ../../H0FR6/H0FR6_adc.h ../../BOS/BOS_DMA.h
 
-D:/Hexabitz/for\ Release/Modules\ firmware/H0FRxx/H0FR6/H0FR6_adc.h:
+D:/Hexabitz\ release/H0FRxx/H0FR6/H0FR6_adc.h:
 
 ../../BOS/BOS.h:
 

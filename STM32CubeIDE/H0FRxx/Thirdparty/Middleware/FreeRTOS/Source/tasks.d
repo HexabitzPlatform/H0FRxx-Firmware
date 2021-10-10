@@ -1,5 +1,5 @@
 Thirdparty/Middleware/FreeRTOS/Source/tasks.o: \
- D:/Hexabitz/for\ Release/Modules\ firmware/H0FRxx/Thirdparty/Middleware/FreeRTOS/Source/tasks.c \
+ D:/Hexabitz\ release/H0FRxx/Thirdparty/Middleware/FreeRTOS/Source/tasks.c \
  ../../Thirdparty/Middleware/FreeRTOS/Source/include/FreeRTOS.h \
  ../../BOS/FreeRTOSConfig.h \
  ../../Thirdparty/Middleware/FreeRTOS/Source/include/projdefs.h \
