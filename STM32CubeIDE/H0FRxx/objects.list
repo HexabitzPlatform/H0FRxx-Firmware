@@ -8,6 +8,7 @@
 "BOS/BOS_messaging.o"
 "BOS/BOS_msgparser.o"
 "H0FR6/H0FR6.o"
+"H0FR6/H0FR6_adc.o"
 "H0FR6/H0FR6_dma.o"
 "H0FR6/H0FR6_gpio.o"
 "H0FR6/H0FR6_it.o"

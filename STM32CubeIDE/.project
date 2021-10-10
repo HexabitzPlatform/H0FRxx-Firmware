@@ -62,11 +62,6 @@
 			<locationURI>PARENT-1-PROJECT_LOC/BOS/BOS.c</locationURI>
 		</link>
 		<link>
-			<name>BOS/BOS.c.orig</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/BOS/BOS.c.orig</locationURI>
-		</link>
-		<link>
 			<name>BOS/BOS.h</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/BOS/BOS.h</locationURI>
@@ -162,6 +157,16 @@
 			<locationURI>PARENT-1-PROJECT_LOC/H0FR6/H0FR6_MemoryMap.h</locationURI>
 		</link>
 		<link>
+			<name>H0FR6/H0FR6_adc.c</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/H0FR6/H0FR6_adc.c</locationURI>
+		</link>
+		<link>
+			<name>H0FR6/H0FR6_adc.h</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/H0FR6/H0FR6_adc.h</locationURI>
+		</link>
+		<link>
 			<name>H0FR6/H0FR6_dma.c</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/H0FR6/H0FR6_dma.c</locationURI>
@@ -252,9 +257,9 @@
 			<locationURI>PARENT-1-PROJECT_LOC/User/project.h</locationURI>
 		</link>
 		<link>
-			<name>User/topology_1.h</name>
+			<name>User/topology.h</name>
 			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/User/topology_1.h</locationURI>
+			<locationURI>PARENT-1-PROJECT_LOC/User/topology.h</locationURI>
 		</link>
 		<link>
 			<name>Thirdparty/CMSIS/Device</name>
@@ -1097,15 +1102,4 @@
 			<locationURI>PARENT-1-PROJECT_LOC/Thirdparty/Middleware/FreeRTOS/Source/portable/GCC/ARM_CM0/portmacro.h</locationURI>
 		</link>
 	</linkedResources>
-	<filteredResources>
-		<filter>
-			<id>1614855689358</id>
-			<name></name>
-			<type>10</type>
-			<matcher>
-				<id>org.eclipse.ui.ide.multiFilter</id>
-				<arguments>1.0-name-matches-false-false-H0FRxx</arguments>
-			</matcher>
-		</filter>
-	</filteredResources>
 </projectDescription>
