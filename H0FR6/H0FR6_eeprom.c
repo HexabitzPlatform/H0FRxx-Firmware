@@ -792,7 +792,7 @@ BOS_Status EraseSector(uint32_t sector ) {
 		FLASH_EraseInitTypeDef erase;
 		uint32_t eraseError;
 		erase.TypeErase = FLASH_TYPEERASE_PAGES;
-		erase.PageAddress = temp32;
+		erase.PageAddress = sector;
 		erase.NbPages =1;
 		status =HAL_FLASHEx_Erase(&erase,&eraseError);
 		if(status != HAL_OK || eraseError != 0xFFFFFFFF)
