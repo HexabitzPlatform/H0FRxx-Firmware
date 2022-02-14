@@ -21,11 +21,11 @@ C_DEPS :=
 SUBDIRS := \
 BOS \
 H0FR6 \
-Thirdparty/CMSIS/Device/ST/STM32F0xx/Source/Templates \
-Thirdparty/Middleware/FreeRTOS/Source/CMSIS_RTOS \
-Thirdparty/Middleware/FreeRTOS/Source \
-Thirdparty/Middleware/FreeRTOS/Source/portable/GCC/ARM_CM0 \
-Thirdparty/Middleware/FreeRTOS/Source/portable/MemMang \
+Thirdparty/CMSIS/STM32F0xx/Device/ST/STM32F0xx/Source/Templates \
+Thirdparty/Middleware/STM32F0xx/FreeRTOS/Source/CMSIS_RTOS \
+Thirdparty/Middleware/STM32F0xx/FreeRTOS/Source \
+Thirdparty/Middleware/STM32F0xx/FreeRTOS/Source/portable/GCC/ARM_CM0 \
+Thirdparty/Middleware/STM32F0xx/FreeRTOS/Source/portable/MemMang \
 Thirdparty/STM32F0xx_HAL_Driver/Src \
 User \
 

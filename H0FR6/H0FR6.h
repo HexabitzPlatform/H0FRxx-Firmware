@@ -19,8 +19,9 @@
 #include "H0FR6_gpio.h"	
 #include "H0FR6_dma.h"
 #include "H0FR6_adc.h"
-	
-	
+#include "H0FR6_eeprom.h"
+#include "H0FR6_inputs.h"
+
 /* Exported definitions -------------------------------------------------------*/
 #ifdef H0FR1
 	#define	modulePN		_H0FR1
@@ -207,6 +208,8 @@ extern Module_Status Output_toggle(void);
 	extern Module_Status Stop_current_measurement(void);
 #endif
 
+void SetupPortForRemoteBootloaderUpdate(uint8_t port);
+void remoteBootloaderUpdate(uint8_t src,uint8_t dst,uint8_t inport,uint8_t outport);
 /* -----------------------------------------------------------------------
 	|			    			 Commands								|								 	|
    ----------------------------------------------------------------------- 
