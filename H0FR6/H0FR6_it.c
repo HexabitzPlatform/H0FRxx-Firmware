@@ -22,6 +22,7 @@ extern uint8_t UARTRxBufIndex[NumOfPorts];
 extern ADC_HandleTypeDef hadc;
 extern DMA_HandleTypeDef hdma_adc;
 
+extern TaskHandle_t xCommandConsoleTaskHandle; // CLI Task handler.
 
 /******************************************************************************/
 /*            Cortex-M0 Processor Interruption and Exception Handlers         */ 
