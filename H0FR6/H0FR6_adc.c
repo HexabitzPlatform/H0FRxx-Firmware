@@ -14,7 +14,7 @@
 
 /* USER CODE END 0 */
 
-ADC_HandleTypeDef hadc;
+//ADC_HandleTypeDef hadc;
 
 
 /* ADC init function */
