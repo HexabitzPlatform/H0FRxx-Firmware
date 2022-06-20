@@ -414,7 +414,7 @@ Module_Status Module_MessagingTask(uint16_t code, uint8_t port, uint8_t src,
 
 	switch (code) {
 	case CODE_H0FRx_ON:
-		temp32 = ((uint32_t) cMessage[port - 1][shift] << 24)+ ((uint32_t) cMessage[port - 1][1 + shift] << 16)+ ((uint32_t) cMessage[port - 1][2 + shift] << 8)+ cMessage[port - 1][3 + shift];
+		temp32 = cMessage[port - 1][shift] + ((uint32_t) cMessage[port - 1][1 + shift] << 8)+ ((uint32_t) cMessage[port - 1][2 + shift] << 16)+ ((uint32_t)cMessage[port - 1][3 + shift]<< 24);
 		Output_on(temp32);
 		break;
 
@@ -428,7 +428,8 @@ Module_Status Module_MessagingTask(uint16_t code, uint8_t port, uint8_t src,
 
 #if defined(H0FR6) || defined(H0FR7)
 	case CODE_H0FRx_PWM:
-		tempFloat = (float) (((uint64_t) cMessage[port - 1][shift] << 24)+ ((uint64_t) cMessage[port - 1][1 + shift] << 16)+ ((uint64_t) cMessage[port - 1][2 + shift] << 8)+ ((uint64_t) cMessage[port - 1][3 + shift]));
+		tempFloat = (float)cMessage[port - 1][shift];
+//		tempFloat = (float) (((uint64_t) cMessage[port - 1][shift] )+ ((uint64_t) cMessage[port - 1][1 + shift] << 8)+ ((uint64_t) cMessage[port - 1][2 + shift] << 16)+ ((uint64_t) cMessage[port - 1][3 + shift] <<24));
 		Output_PWM(tempFloat);
 		break;
 #endif
